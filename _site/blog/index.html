@@ -9,25 +9,41 @@
   <body>
     <header class="site-header">
       <div class="site-title"><a href="/">Your Name</a></div>
-      <nav class="site-nav">
-        <a href="/">Home</a>
-        <a href="/about/">About</a>
-        <a href="/projects/">Projects</a>
-        <a href="/blog/">Blog</a>
-        <a href="/contact/">Contact</a>
-      </nav>
+      <div class="site-right">
+        <nav class="site-nav">
+          <a href="/">Home</a>
+          <a href="/about/">About</a>
+          <a href="/projects/">Projects</a>
+          <a href="/blog/">Blog</a>
+          <a href="/contact/">Contact</a>
+        </nav>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" aria-pressed="false">
+          <span class="knob" aria-hidden="true"></span>
+        </button>
+      </div>
     </header>
 
     <main class="site-main">
-      <h1 id="blog">Blog</h1>
-<ul>
-  <li>
-    <p><a href="/2025/12/19/example-post.html">Example Post — Getting Started</a> — December 19, 2025</p>
-  </li>
-  <li>
-    <p><a href="/2025/12/19/welcome-to-my-blog.html">Welcome to my blog</a> — December 19, 2025</p>
-  </li>
-</ul>
+      <h1>Blog</h1>
+<div class="blog-list">
+
+<article class="post-item">
+  <h2 class="post-title"><a href="/2025/12/19/example-post.html">Example Post — Getting Started</a></h2>
+  <div class="post-meta">December 19, 2025</div>
+  <p class="post-excerpt">Welcome to this example blog post. This demonstrates the post layout, metadata, and how content renders in your new Jekyll site.
+</p>
+  <a class="read-more" href="/2025/12/19/example-post.html">Read More</a>
+</article>
+
+<article class="post-item">
+  <h2 class="post-title"><a href="/2025/12/19/welcome-to-my-blog.html">Welcome to my blog</a></h2>
+  <div class="post-meta">December 19, 2025</div>
+  <p class="post-excerpt">This is the first sample post. Replace this with your own content.
+</p>
+  <a class="read-more" href="/2025/12/19/welcome-to-my-blog.html">Read More</a>
+</article>
+
+</div>
 
 
     </main>
@@ -35,5 +51,34 @@
     <footer class="site-footer">
       &copy; 2025 Your Name
     </footer>
+    <script>
+      (function(){
+        var root = document.documentElement;
+        var toggle = document.getElementById('theme-toggle');
+        if(!toggle) return;
+
+        function applyTheme(theme){
+          if(theme === 'dark') root.classList.add('dark');
+          else root.classList.remove('dark');
+        }
+
+        var stored = localStorage.getItem('theme');
+        if(stored) applyTheme(stored);
+        else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) applyTheme('dark');
+
+        function updateToggleState(){
+          var isDark = root.classList.contains('dark');
+          toggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+        }
+
+        updateToggleState();
+
+        toggle.addEventListener('click', function(){
+          var isDark = root.classList.toggle('dark');
+          localStorage.setItem('theme', isDark ? 'dark' : 'light');
+          updateToggleState();
+        });
+      })();
+    </script>
   </body>
 </html>

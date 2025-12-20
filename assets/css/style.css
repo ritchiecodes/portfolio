@@ -20,6 +20,36 @@ body {
   border-bottom: 1px solid #eee;
 }
 
+.site-right { display:flex; align-items:center; gap:0.75rem; }
+
+.theme-toggle {
+  width: 48px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: #e6e6e6;
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+}
+.theme-toggle:focus { box-shadow: 0 0 0 3px rgba(10,88,202,0.14); outline: none; }
+.theme-toggle .knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+  transition: transform 220ms cubic-bezier(.2,.9,.3,1), background 220ms;
+}
+/* when dark, move knob to right and change track color */
+/* make the switch track dark in dark mode (instead of blue) */
+html.dark .theme-toggle { background: #424242; }
+html.dark .theme-toggle .knob { transform: translateX(20px); background: #fafafa; }
+
 .site-title a {
   text-decoration: none;
   font-weight: 700;
@@ -40,6 +70,9 @@ body {
   padding: 0 1rem;
 }
 
+/* smooth theme transitions */
+html { transition: background-color 220ms ease, color 220ms ease; }
+
 .site-footer {
   padding: 2rem 1rem;
   text-align: center;
@@ -50,6 +83,29 @@ body {
 /* Post styles */
 .post-title { margin: 0 0 0.2rem 0; }
 .post-meta { color: #777; font-size: 0.9rem; margin-bottom: 1rem; }
+
+/* Blog index: snippets and read-more button */
+.blog-list { margin-top: 1rem; }
+.post-item { padding: 1.25rem 0; border-bottom: 1px solid #eee; }
+.post-item:last-child { border-bottom: none; }
+.post-item .post-title { font-size: 1.15rem; margin-bottom: 0.25rem; }
+.post-excerpt { color: #666; margin: 0.5rem 0 0.75rem; }
+.read-more {
+  display: inline-block;
+  padding: 0.45rem 0.7rem;
+  border-radius: 6px;
+  background: transparent;
+  border: 1px solid #ddd;
+  color: inherit;
+  text-decoration: none;
+  font-weight: 600;
+}
+.read-more:hover { background: rgba(0,0,0,0.04); }
+
+/* Dark mode adjustments for read-more and metadata */
+html.dark .post-item { border-color: rgba(255,255,255,0.06); }
+html.dark .post-excerpt { color: #cfcfcf; }
+html.dark .read-more { border-color: rgba(255,255,255,0.08); }
 
 /* Pagination */
 .pagination { display:flex; gap:0.5rem; justify-content:center; align-items:center; margin-top:2rem; }
@@ -66,4 +122,13 @@ body {
   margin: 1rem 0;
   border-radius: 6px;
 }
+
+/* Dark mode variables */
+html.dark {
+  --bg: #1f1f1f;
+  --text: #e6e6e6;
+  --accent: #6bb0ff;
+}
+
+body { background: var(--bg); color: var(--text); }
 
