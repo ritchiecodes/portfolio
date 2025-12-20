@@ -81,13 +81,28 @@ html { transition: background-color 220ms ease, color 220ms ease; }
 }
 
 /* Post styles */
-.post-title { margin: 0 0 0.2rem 0; }
+.post-title { margin: 0 0 0.5rem 0; font-weight: 700; letter-spacing: -0.5px; text-decoration: none; color: inherit; }
+.post-title a { color: inherit; text-decoration: none; }
+.post-title a:hover { text-decoration: underline; }
 .post-meta { color: #777; font-size: 0.9rem; margin-bottom: 1rem; }
 
 /* Blog index: snippets and read-more button */
-.blog-list { margin-top: 1rem; }
-.post-item { padding: 1.25rem 0; border-bottom: 1px solid #eee; display: flex; flex-direction: column; }
-.post-item:last-child { border-bottom: none; }
+.blog-list { margin-top: 1rem; display: flex; flex-direction: column; gap: 1rem; }
+.post-item {
+  padding: 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fafafa;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  transition: all 220ms ease;
+}
+.post-item:hover {
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+  border-color: #bbb;
+}
 .post-item .post-title { font-size: 1.15rem; margin-bottom: 0.25rem; }
 .post-excerpt { color: #666; margin: 0.5rem 0 0.75rem; }
 .read-more {
@@ -105,10 +120,12 @@ html { transition: background-color 220ms ease, color 220ms ease; }
 }
 .read-more:hover { background: rgba(0,0,0,0.04); }
 
-/* Dark mode adjustments for read-more and metadata */
-html.dark .post-item { border-color: rgba(255,255,255,0.06); }
+/* Dark mode adjustments for cards and read-more */
+html.dark .post-item { background: #2a2a2a; border-color: #3a3a3a; }
+html.dark .post-item:hover { border-color: #555; box-shadow: 0 8px 16px rgba(0,0,0,0.3); }
 html.dark .post-excerpt { color: #cfcfcf; }
-html.dark .read-more { border-color: rgba(255,255,255,0.08); }
+html.dark .read-more { border-color: rgba(255,255,255,0.15); }
+html.dark .read-more:hover { background: rgba(255,255,255,0.06); }
 
 /* Pagination */
 .pagination { display:flex; gap:0.5rem; justify-content:center; align-items:center; margin-top:2rem; }
@@ -116,6 +133,82 @@ html.dark .read-more { border-color: rgba(255,255,255,0.08); }
 .pagination .current { background:#f0f0f0; font-weight:600; }
 .pagination .prev, .pagination .next { font-weight:600; }
 
+
+/* Projects showcase on homepage */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+.project-card {
+  padding: 2rem 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fafafa;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  transition: all 220ms ease;
+  display: flex;
+  flex-direction: column;
+  min-height: 280px;
+}
+.project-card:hover {
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+  border-color: #bbb;
+}
+.project-card h3 { margin: 0 0 0.5rem 0; font-size: 1rem; font-weight: 700; }
+.project-card h3 a { color: inherit; text-decoration: none; }
+.project-card h3 a:hover { text-decoration: underline; }
+.project-card p { margin: 0; color: #666; font-size: 0.95rem; }
+
+html.dark .project-card { background: #2a2a2a; border-color: #3a3a3a; }
+html.dark .project-card:hover { border-color: #555; box-shadow: 0 8px 16px rgba(0,0,0,0.3); }
+html.dark .project-card p { color: #cfcfcf; }
+
+/* Recent posts on homepage */
+.recent-posts { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #ddd; display: flex; flex-direction: column; gap: 1rem; }
+.recent-post-item {
+  padding: 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fafafa;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  transition: all 220ms ease;
+  display: flex;
+  flex-direction: column;
+}
+.recent-post-item:hover {
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+  border-color: #bbb;
+}
+.recent-post-item h3 { margin: 0 0 0.25rem 0; font-size: 1.1rem; font-weight: 700; }
+.recent-post-item h3 a { color: inherit; text-decoration: none; }
+.recent-post-item h3 a:hover { text-decoration: underline; }
+.recent-post-item .post-date { color: #777; font-size: 0.85rem; margin-bottom: 0.5rem; }
+.recent-post-item p { margin: 0.5rem 0 0; color: #666; font-size: 0.95rem; }
+.recent-post-item .read-more {
+  display: inline-block;
+  padding: 0.3rem 0.5rem;
+  border-radius: 4px;
+  background: transparent;
+  border: 1px solid #ddd;
+  color: inherit;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-top: auto;
+  align-self: flex-end;
+}
+.recent-post-item .read-more:hover { background: rgba(0,0,0,0.04); }
+
+html.dark .recent-post-item { background: #2a2a2a; border-color: #3a3a3a; }
+html.dark .recent-post-item:hover { border-color: #555; box-shadow: 0 8px 16px rgba(0,0,0,0.3); }
+html.dark .recent-post-item .post-date { color: #999; }
+html.dark .recent-post-item p { color: #cfcfcf; }
+html.dark .recent-post-item .read-more { border-color: rgba(255,255,255,0.15); }
+html.dark .recent-post-item .read-more:hover { background: rgba(255,255,255,0.06); }
 
 /* Image styling inside posts */
 .post-content img, .post-content svg {
