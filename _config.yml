@@ -11,6 +11,12 @@ plugins:
 paginate: 5
 paginate_path: "/blog/page:num/"
 
+# Exclude these from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - .jekyll-metadata
+
 # If posts are dated in the future relative to build time, disable publishing them during build
 future: true
 # Set site timezone (IANA timezone for Melbourne, Australia)
