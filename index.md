@@ -7,6 +7,7 @@ title: Home
 
 Welcome to my portfolio — replace this text with a short intro.
 
+<div class="projects-section">
 <h2>Projects</h2>
 
 <div class="projects-grid">
@@ -23,6 +24,7 @@ Welcome to my portfolio — replace this text with a short intro.
     <p>A brief description of your third project. Replace with your actual project details.</p>
   </div>
 </div>
+  </div>
 
 <div class="recent-posts">
 <h2>Latest Posts</h2>
