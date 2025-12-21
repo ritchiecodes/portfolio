@@ -13,7 +13,7 @@ Welcome to this example blog post. This demonstrates the `post` layout, metadata
 - Add images by placing them in `assets/images/` and linking them here.
 - Add more posts to see pagination in action on the Blog index.
 
-![Sample hero image]({{ '/assets/images/arduino.png' | relative_url }})
+![Sample hero image]({{ '/assets/images/sample-hero.svg' | relative_url }})
 
 - Add more posts to see pagination in action on the Blog index.
 

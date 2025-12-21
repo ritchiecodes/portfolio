@@ -1,11 +1,10 @@
 /* Homepage-specific styles */
 
 /* Projects section on homepage */
-.projects-section { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #ddd; display: flex; flex-direction: column; gap: 1rem; }
+.projects-section { margin-top: 3rem; padding-top: 2rem; display: flex; flex-direction: column; gap: 1rem; }
 
 /* explicit section separator (used on homepage) */
-.section-separator { display:block; height:1px; border:0; background:#ddd; margin:2rem 0; }
-.section-separator + .projects-section { margin-top: 0; padding-top: 1rem; }
+.section-separator { display: none; }
 
 html.dark .section-separator { background: rgba(255,255,255,0.06); }
 
@@ -42,7 +41,7 @@ html.dark .project-card:hover { border-color: #555; box-shadow: 0 8px 16px rgba(
 html.dark .project-card p { color: #cfcfcf; }
 
 /* Recent posts on homepage */
-.recent-posts { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #ddd; display: flex; flex-direction: column; gap: 1rem; }
+.recent-posts { margin-top: 3rem; padding-top: 2rem; display: flex; flex-direction: column; gap: 1rem; }
 .recent-post-item {
   padding: 1.5rem;
   border: 1px solid #ddd;
@@ -51,13 +50,43 @@ html.dark .project-card p { color: #cfcfcf; }
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
   transition: all 220ms ease;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  gap: 1.5rem;
 }
 .recent-post-item:hover {
   box-shadow: 0 8px 16px rgba(0,0,0,0.1);
   transform: translateY(-2px);
   border-color: #bbb;
   cursor: pointer;
+}
+.recent-post-item .post-content-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  order: 1;
+}
+.recent-post-item .post-thumbnail {
+  width: 150px;
+  min-width: 150px;
+  height: 150px;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  order: 2;
+}
+.recent-post-item .post-thumbnail a {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.recent-post-item .post-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 .recent-post-item h3 { margin: 0 0 0.25rem 0; font-size: 1.1rem; font-weight: 700; }
 .recent-post-item h3 a { color: inherit; text-decoration: none; }
@@ -75,7 +104,7 @@ html.dark .project-card p { color: #cfcfcf; }
   font-weight: 600;
   font-size: 0.85rem;
   margin-top: auto;
-  align-self: flex-end;
+  align-self: flex-start;
 }
 .recent-post-item .read-more:hover { background: rgba(0,0,0,0.04); }
 
@@ -83,5 +112,6 @@ html.dark .recent-post-item { background: #2a2a2a; border-color: #3a3a3a; }
 html.dark .recent-post-item:hover { border-color: #555; box-shadow: 0 8px 16px rgba(0,0,0,0.3); }
 html.dark .recent-post-item .post-date { color: #999; }
 html.dark .recent-post-item p { color: #cfcfcf; }
+html.dark .recent-post-item .post-thumbnail { background: #333; }
 html.dark .recent-post-item .read-more { border-color: rgba(255,255,255,0.15); }
 html.dark .recent-post-item .read-more:hover { background: rgba(255,255,255,0.06); }

@@ -7,6 +7,8 @@ title: Home
 
 Welcome to my portfolio — replace this text with a short intro.
 
+<hr class="section-separator">
+
 <div class="projects-section">
 <h2>Projects</h2>
 
@@ -31,10 +33,23 @@ Welcome to my portfolio — replace this text with a short intro.
 
 {% for post in site.posts limit:3 %}
   <div class="recent-post-item">
-    <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-    <div class="post-date">{{ post.date | date: "%B %d, %Y" }}</div>
-    <p>{{ post.excerpt | strip_html | truncatewords: 20 }}</p>
-    <a class="read-more" href="{{ post.url | relative_url }}">Read More</a>
+    <div class="post-content-wrapper">
+      <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+      <div class="post-date">{{ post.date | date: "%B %d, %Y" }}</div>
+      <p>{{ post.excerpt | strip_html | truncatewords: 20 }}</p>
+      <a class="read-more" href="{{ post.url | relative_url }}">Read More</a>
+    </div>
+    {% if post.content contains '<img' %}
+      {% assign img_start = post.content | split: '<img ' | last | split: 'src="' %}
+      {% if img_start[1] %}
+        {% assign img_src = img_start[1] | split: '"' | first %}
+        <div class="post-thumbnail">
+          <a href="{{ post.url | relative_url }}">
+            <img src="{{ img_src }}" alt="{{ post.title }}" loading="lazy">
+          </a>
+        </div>
+      {% endif %}
+    {% endif %}
   </div>
 {% endfor %}
 </div>
