@@ -6,6 +6,9 @@ url: "https://ritchiecaruso.com"
 
 plugins:
   - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-feed
+  - jekyll-seo-tag
 
 # Pagination: number of posts per page for /blog/
 paginate: 5

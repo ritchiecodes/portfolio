@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://ritchiecaruso.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ritchiecaruso.com/" rel="alternate" type="text/html" /><updated>2025-12-23T20:55:47+11:00</updated><id>https://ritchiecaruso.com/feed.xml</id><title type="html">Ritchie Caruso</title><subtitle>A simple Jekyll site</subtitle><entry><title type="html">Example Post — Getting Started</title><link href="https://ritchiecaruso.com/2025/12/19/example-post-copy-2.html" rel="alternate" type="text/html" title="Example Post — Getting Started" /><published>2025-12-19T19:00:00+11:00</published><updated>2025-12-19T19:00:00+11:00</updated><id>https://ritchiecaruso.com/2025/12/19/example-post%20copy%202</id><content type="html" xml:base="https://ritchiecaruso.com/2025/12/19/example-post-copy-2.html"><![CDATA[<p>Welcome to this example blog post. This demonstrates the <code class="language-plaintext highlighter-rouge">post</code> layout, metadata, and how content renders in your new Jekyll site.</p>
+
+<h2 id="what-you-can-do-next">What you can do next</h2>
+
+<ul>
+  <li>Edit this file at <code class="language-plaintext highlighter-rouge">_posts/2025-12-19-example-post.md</code> and replace the content.</li>
+  <li>Add images by placing them in <code class="language-plaintext highlighter-rouge">assets/images/</code> and linking them here.</li>
+  <li>Add more posts to see pagination in action on the Blog index.</li>
+</ul>
+
+<p><img src="/assets/images/arduino.png" alt="Sample hero image" /></p>
+
+<ul>
+  <li>Add more posts to see pagination in action on the Blog index.</li>
+</ul>
+
+<p>Thanks for trying out the starter site — happy blogging!</p>]]></content><author><name></name></author><category term="example" /><category term="welcome" /><summary type="html"><![CDATA[Welcome to this example blog post. This demonstrates the post layout, metadata, and how content renders in your new Jekyll site.]]></summary></entry><entry><title type="html">Example Post — Getting Started</title><link href="https://ritchiecaruso.com/2025/12/19/example-post-copy-3.html" rel="alternate" type="text/html" title="Example Post — Getting Started" /><published>2025-12-19T19:00:00+11:00</published><updated>2025-12-19T19:00:00+11:00</updated><id>https://ritchiecaruso.com/2025/12/19/example-post%20copy%203</id><content type="html" xml:base="https://ritchiecaruso.com/2025/12/19/example-post-copy-3.html"><![CDATA[<p>Welcome to this example blog post. This demonstrates the <code class="language-plaintext highlighter-rouge">post</code> layout, metadata, and how content renders in your new Jekyll site.</p>
+
+<h2 id="what-you-can-do-next">What you can do next</h2>
+
+<ul>
+  <li>Edit this file at <code class="language-plaintext highlighter-rouge">_posts/2025-12-19-example-post.md</code> and replace the content.</li>
+  <li>Add images by placing them in <code class="language-plaintext highlighter-rouge">assets/images/</code> and linking them here.</li>
+  <li>Add more posts to see pagination in action on the Blog index.</li>
+</ul>
+
+<p><img src="/assets/images/sample-hero.svg" alt="Sample hero image" /></p>
+
+<ul>
+  <li>Add more posts to see pagination in action on the Blog index.</li>
+</ul>
+
+<p>Thanks for trying out the starter site — happy blogging!</p>]]></content><author><name></name></author><category term="example" /><category term="welcome" /><summary type="html"><![CDATA[Welcome to this example blog post. This demonstrates the post layout, metadata, and how content renders in your new Jekyll site.]]></summary></entry><entry><title type="html">Example Post — Getting Started</title><link href="https://ritchiecaruso.com/2025/12/19/example-post-copy-4.html" rel="alternate" type="text/html" title="Example Post — Getting Started" /><published>2025-12-19T19:00:00+11:00</published><updated>2025-12-19T19:00:00+11:00</updated><id>https://ritchiecaruso.com/2025/12/19/example-post%20copy%204</id><content type="html" xml:base="https://ritchiecaruso.com/2025/12/19/example-post-copy-4.html"><![CDATA[<p>Welcome to this example blog post. This demonstrates the <code class="language-plaintext highlighter-rouge">post</code> layout, metadata, and how content renders in your new Jekyll site.</p>
+
+<h2 id="what-you-can-do-next">What you can do next</h2>
+
+<ul>
+  <li>Edit this file at <code class="language-plaintext highlighter-rouge">_posts/2025-12-19-example-post.md</code> and replace the content.</li>
+  <li>Add images by placing them in <code class="language-plaintext highlighter-rouge">assets/images/</code> and linking them here.</li>
+  <li>Add more posts to see pagination in action on the Blog index.</li>
+</ul>
+
+<p><img src="/assets/images/sample-hero.svg" alt="Sample hero image" /></p>
+
+<ul>
+  <li>Add more posts to see pagination in action on the Blog index.</li>
+</ul>
+
+<p>Thanks for trying out the starter site — happy blogging!</p>]]></content><author><name></name></author><category term="example" /><category term="welcome" /><summary type="html"><![CDATA[Welcome to this example blog post. This demonstrates the post layout, metadata, and how content renders in your new Jekyll site.]]></summary></entry><entry><title type="html">Example Post — Getting Started</title><link href="https://ritchiecaruso.com/2025/12/19/example-post-copy-5.html" rel="alternate" type="text/html" title="Example Post — Getting Started" /><published>2025-12-19T19:00:00+11:00</published><updated>2025-12-19T19:00:00+11:00</updated><id>https://ritchiecaruso.com/2025/12/19/example-post%20copy%205</id><content type="html" xml:base="https://ritchiecaruso.com/2025/12/19/example-post-copy-5.html"><![CDATA[<p>Welcome to this example blog post. This demonstrates the <code class="language-plaintext highlighter-rouge">post</code> layout, metadata, and how content renders in your new Jekyll site.</p>
+
+<h2 id="what-you-can-do-next">What you can do next</h2>
+
+<ul>
+  <li>Edit this file at <code class="language-plaintext highlighter-rouge">_posts/2025-12-19-example-post.md</code> and replace the content.</li>
+  <li>Add images by placing them in <code class="language-plaintext highlighter-rouge">assets/images/</code> and linking them here.</li>
+  <li>Add more posts to see pagination in action on the Blog index.</li>
+</ul>
+
+<p><img src="/assets/images/sample-hero.svg" alt="Sample hero image" /></p>
+
+<ul>
+  <li>Add more posts to see pagination in action on the Blog index.</li>
+</ul>
+
+<p>Thanks for trying out the starter site — happy blogging!</p>]]></content><author><name></name></author><category term="example" /><category term="welcome" /><summary type="html"><![CDATA[Welcome to this example blog post. This demonstrates the post layout, metadata, and how content renders in your new Jekyll site.]]></summary></entry><entry><title type="html">Example Post — Getting Started</title><link href="https://ritchiecaruso.com/2025/12/19/example-post-copy-6.html" rel="alternate" type="text/html" title="Example Post — Getting Started" /><published>2025-12-19T19:00:00+11:00</published><updated>2025-12-19T19:00:00+11:00</updated><id>https://ritchiecaruso.com/2025/12/19/example-post%20copy%206</id><content type="html" xml:base="https://ritchiecaruso.com/2025/12/19/example-post-copy-6.html"><![CDATA[<p>Welcome to this example blog post. This demonstrates the <code class="language-plaintext highlighter-rouge">post</code> layout, metadata, and how content renders in your new Jekyll site.</p>
+
+<h2 id="what-you-can-do-next">What you can do next</h2>
+
+<ul>
+  <li>Edit this file at <code class="language-plaintext highlighter-rouge">_posts/2025-12-19-example-post.md</code> and replace the content.</li>
+  <li>Add images by placing them in <code class="language-plaintext highlighter-rouge">assets/images/</code> and linking them here.</li>
+  <li>Add more posts to see pagination in action on the Blog index.</li>
+</ul>
+
+<p><img src="/assets/images/sample-hero.svg" alt="Sample hero image" /></p>
+
+<ul>
+  <li>Add more posts to see pagination in action on the Blog index.</li>
+</ul>
+
+<p>Thanks for trying out the starter site — happy blogging!</p>]]></content><author><name></name></author><category term="example" /><category term="welcome" /><summary type="html"><![CDATA[Welcome to this example blog post. This demonstrates the post layout, metadata, and how content renders in your new Jekyll site.]]></summary></entry><entry><title type="html">Example Post — Getting Started</title><link href="https://ritchiecaruso.com/2025/12/19/example-post-copy.html" rel="alternate" type="text/html" title="Example Post — Getting Started" /><published>2025-12-19T19:00:00+11:00</published><updated>2025-12-19T19:00:00+11:00</updated><id>https://ritchiecaruso.com/2025/12/19/example-post%20copy</id><content type="html" xml:base="https://ritchiecaruso.com/2025/12/19/example-post-copy.html"><![CDATA[<p>Welcome to this example blog post. This demonstrates the <code class="language-plaintext highlighter-rouge">post</code> layout, metadata, and how content renders in your new Jekyll site.</p>
+
+<h2 id="what-you-can-do-next">What you can do next</h2>
+
+<ul>
+  <li>Edit this file at <code class="language-plaintext highlighter-rouge">_posts/2025-12-19-example-post.md</code> and replace the content.</li>
+  <li>Add images by placing them in <code class="language-plaintext highlighter-rouge">assets/images/</code> and linking them here.</li>
+  <li>Add more posts to see pagination in action on the Blog index.</li>
+</ul>
+
+<p><img src="/assets/images/sample-hero.svg" alt="Sample hero image" /></p>
+
+<ul>
+  <li>Add more posts to see pagination in action on the Blog index.</li>
+</ul>
+
+<p>Thanks for trying out the starter site — happy blogging!</p>]]></content><author><name></name></author><category term="example" /><category term="welcome" /><summary type="html"><![CDATA[Welcome to this example blog post. This demonstrates the post layout, metadata, and how content renders in your new Jekyll site.]]></summary></entry><entry><title type="html">Example Post — Getting Started</title><link href="https://ritchiecaruso.com/2025/12/19/example-post.html" rel="alternate" type="text/html" title="Example Post — Getting Started" /><published>2025-12-19T19:00:00+11:00</published><updated>2025-12-19T19:00:00+11:00</updated><id>https://ritchiecaruso.com/2025/12/19/example-post</id><content type="html" xml:base="https://ritchiecaruso.com/2025/12/19/example-post.html"><![CDATA[<p>Welcome to this example blog post. This demonstrates the <code class="language-plaintext highlighter-rouge">post</code> layout, metadata, and how content renders in your new Jekyll site.</p>
+
+<h2 id="what-you-can-do-next">What you can do next</h2>
+
+<ul>
+  <li>Edit this file at <code class="language-plaintext highlighter-rouge">_posts/2025-12-19-example-post.md</code> and replace the content.</li>
+  <li>Add images by placing them in <code class="language-plaintext highlighter-rouge">assets/images/</code> and linking them here.</li>
+  <li>Add more posts to see pagination in action on the Blog index.</li>
+</ul>
+
+<p><img src="/assets/images/sample-hero.svg" alt="Sample hero image" /></p>
+
+<ul>
+  <li>Add more posts to see pagination in action on the Blog index.</li>
+</ul>
+
+<p>Thanks for trying out the starter site — happy blogging!</p>]]></content><author><name></name></author><category term="example" /><category term="welcome" /><summary type="html"><![CDATA[Welcome to this example blog post. This demonstrates the post layout, metadata, and how content renders in your new Jekyll site.]]></summary></entry><entry><title type="html">Welcome to my blog</title><link href="https://ritchiecaruso.com/2025/12/19/welcome-to-my-blog.html" rel="alternate" type="text/html" title="Welcome to my blog" /><published>2025-12-19T17:00:00+11:00</published><updated>2025-12-19T17:00:00+11:00</updated><id>https://ritchiecaruso.com/2025/12/19/welcome-to-my-blog</id><content type="html" xml:base="https://ritchiecaruso.com/2025/12/19/welcome-to-my-blog.html"><![CDATA[<p>This is the first sample post. Replace this with your own content.</p>]]></content><author><name></name></author><category term="welcome" /><category term="intro" /><summary type="html"><![CDATA[This is the first sample post. Replace this with your own content.]]></summary></entry></feed>
