@@ -6,6 +6,8 @@ permalink: /contact/
 
 # Contact
 
-You can reach me via email: yourname@example.com
+You can reach me via email: ritchiecodes@gmail.com
 
-Alternatively, link to social profiles or add a contact form integration.
+[![Github](https://skillicons.dev/icons?i=github)](https://github.com/ritchiecodes)
+[![LinkedIn](https://skillicons.dev/icons?i=linkedin)](https://github.com/ritchiecodes)
+[![Discord](https://skillicons.dev/icons?i=discord)](https://github.com/ritchiecodes)

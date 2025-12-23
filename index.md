@@ -3,9 +3,15 @@ layout: default
 title: Home
 ---
 
-# Hi, I'm Ritchie
-
-I’m an ICT professional who loves making things. I automate workflows, build gizmos, and experiment in my homelab—constantly exploring how technology works by breaking it (legally, of course) and rebuilding it to be faster, better and more secure.
+<div class="bio-section">
+  <a href="{{ '/about/' | relative_url }}" class="profile-link">
+    <img src="{{ '/assets/images/profile-pic.png' | relative_url }}" alt="Ritchie Caruso" class="profile-pic">
+  </a>
+  <div class="bio-text">
+    <h1>Hi, I'm Ritchie</h1>
+    <p>I'm an ICT professional who loves making things. I automate workflows, build gizmos, and experiment in my homelab—constantly exploring how technology works by breaking it (legally, of course) and rebuilding it to be faster, better and more secure.</p>
+  </div>
+</div>
 
 <hr class="section-separator">
 
