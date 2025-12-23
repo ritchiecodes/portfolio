@@ -4,11 +4,14 @@ title: About
 permalink: /about/
 ---
 
-# About Me
-
-I work in ICT with a broad technical skill set spanning operating systems, programming, automation, infrastructure, networking and security. I enjoy learning through hands-on experimentation, whether that’s configuring systems, writing scripts, or working with small-scale hardware projects, always with an eye toward performance, reliability, and security.
-
-Much of my experience comes from both professional work and practical exploration in my homelab, where I implement projects, refine workflows, and deepen my understanding of how infrastructure and networks interact. I approach technology with a mindset of continuous improvement and resilience.
+<div class="bio-section">
+  <div class="bio-text">
+    <h1>About Me</h1>
+    <p>I work in ICT with a broad technical skill set spanning operating systems, programming, automation, infrastructure, networking and security. I enjoy learning through hands-on experimentation, whether that's configuring systems, writing scripts, or working with small-scale hardware projects, always with an eye toward performance, reliability, and security.</p>
+    <p>Much of my experience comes from both professional work and practical exploration in my homelab, where I implement projects, refine workflows, and deepen my understanding of how infrastructure and networks interact. I approach technology with a mindset of continuous improvement and resilience.</p>
+  </div>
+  <img src="{{ '/assets/images/profile-pic.png' | relative_url }}" alt="Ritchie Caruso" class="profile-pic-static">
+</div>
 
 ## Operating Systems
 [![Operating Systems](https://skillicons.dev/icons?i=windows,apple,linux)](https://skillicons.dev)

@@ -43,7 +43,7 @@ body {
 }
 
 .hamburger.active span:nth-child(1) {
-  transform: rotate(45deg) translate(7px, 7px);
+  transform: rotate(45deg) translate(6px, 6px);
 }
 
 .hamburger.active span:nth-child(2) {
@@ -51,7 +51,7 @@ body {
 }
 
 .hamburger.active span:nth-child(3) {
-  transform: rotate(-45deg) translate(7px, -7px);
+  transform: rotate(-45deg) translate(6px, -6px);
 }
 
 .site-right { display:flex; align-items:center; gap:1.25rem; }
@@ -102,6 +102,31 @@ html.dark .theme-toggle .knob { transform: translateX(20px); background: #fafafa
 .site-nav a.active {
   color: var(--accent);
   font-weight: 600;
+}
+
+/* Bio section with profile picture (used on about page) */
+.bio-section {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.profile-pic-static {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 40%;
+  flex-shrink: 0;
+  border: 3px solid var(--accent);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  opacity: 1;
+  background: transparent;
+}
+
+.bio-text h1 {
+  margin-top: 0;
 }
 
 .site-main {
@@ -293,10 +318,12 @@ body { background: var(--bg); color: var(--text); }
 
   .site-nav a {
     margin: 0;
-    padding: 0.75rem 0;
+    padding: 1rem 0;
     width: 100%;
     border-bottom: 1px solid rgba(0,0,0,0.1);
-    font-size: 1rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+    display: block;
   }
 
   html.dark .site-nav a {
@@ -305,6 +332,17 @@ body { background: var(--bg); color: var(--text); }
 
   .theme-toggle {
     margin-top: 1rem;
+  }
+
+  /* Bio section - stack vertically on mobile */
+  .bio-section {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .profile-pic-static {
+    width: 150px;
+    height: 150px;
   }
 
   .site-main {
@@ -368,6 +406,16 @@ body { background: var(--bg); color: var(--text); }
 
   .post-meta, .post-excerpt {
     font-size: 0.85rem;
+  }
+
+  /* Bio section - smaller profile picture */
+  .bio-section {
+    gap: 1rem;
+  }
+
+  .profile-pic-static {
+    width: 100px;
+    height: 100px;
   }
 }
 
