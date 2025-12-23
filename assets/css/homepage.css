@@ -115,3 +115,72 @@ html.dark .recent-post-item p { color: #cfcfcf; }
 html.dark .recent-post-item .post-thumbnail { background: #333; }
 html.dark .recent-post-item .read-more { border-color: rgba(255,255,255,0.15); }
 html.dark .recent-post-item .read-more:hover { background: rgba(255,255,255,0.06); }
+
+/* Mobile responsive styles for homepage */
+@media (max-width: 768px) {
+  /* Project cards - 2 columns on tablet */
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .project-card {
+    padding: 1.5rem 1rem;
+    min-height: 240px;
+  }
+
+  /* Recent posts - stack vertically */
+  .recent-post-item {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .recent-post-item .post-thumbnail {
+    width: 100%;
+    min-width: 100%;
+    height: 200px;
+    order: 1;
+  }
+
+  .recent-post-item .post-content-wrapper {
+    order: 2;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Project cards - single column on mobile */
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-card {
+    padding: 1.25rem 1rem;
+    min-height: 200px;
+  }
+
+  .project-card h3 {
+    font-size: 0.95rem;
+  }
+
+  .project-card p {
+    font-size: 0.9rem;
+  }
+
+  .recent-posts {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+  }
+
+  .recent-post-item {
+    padding: 0.75rem;
+  }
+
+  .recent-post-item h3 {
+    font-size: 1rem;
+  }
+
+  .recent-post-item .post-date,
+  .recent-post-item p {
+    font-size: 0.85rem;
+  }
+}

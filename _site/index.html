@@ -10,6 +10,11 @@
   <body>
     <header class="site-header">
       <div class="site-title"><a href="/">Ritchie Caruso</a></div>
+      <button id="hamburger" class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
       <div class="site-right">
         <nav class="site-nav">
           <a href="/" class="active">Home</a>
@@ -147,6 +152,41 @@
           var isDark = root.classList.toggle('dark');
           localStorage.setItem('theme', isDark ? 'dark' : 'light');
           updateToggleState();
+        });
+      })();
+
+      // Hamburger menu toggle
+      (function(){
+        var hamburger = document.getElementById('hamburger');
+        var siteRight = document.querySelector('.site-right');
+        if(!hamburger || !siteRight) return;
+
+        hamburger.addEventListener('click', function(){
+          var isExpanded = siteRight.classList.toggle('active');
+          hamburger.classList.toggle('active');
+          hamburger.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e){
+          if(!hamburger.contains(e.target) && !siteRight.contains(e.target)){
+            siteRight.classList.remove('active');
+            hamburger.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+          }
+        });
+
+        // Close menu on window resize above mobile breakpoint
+        var resizeTimer;
+        window.addEventListener('resize', function(){
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(function(){
+            if(window.innerWidth > 768){
+              siteRight.classList.remove('active');
+              hamburger.classList.remove('active');
+              hamburger.setAttribute('aria-expanded', 'false');
+            }
+          }, 250);
         });
       })();
     </script>
