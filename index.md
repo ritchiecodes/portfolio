@@ -3,9 +3,9 @@ layout: default
 title: Home
 ---
 
-# Hi, I'm Your Name
+# Hi, I'm Ritchie
 
-Welcome to my portfolio — replace this text with a short intro.
+I’m an ICT professional who loves making things. I automate workflows, build gizmos, and experiment in my homelab—constantly exploring how technology works by breaking it (legally, of course) and rebuilding it to be faster, better and more secure.
 
 <hr class="section-separator">
 

@@ -2,7 +2,7 @@ title: "Ritchie Caruso"
 email: "ritchiecaruso7@gmail.com"
 description: "A simple Jekyll site"
 baseurl: ""
-url: ""
+url: "https://ritchiecaruso.com"
 
 plugins:
   - jekyll-paginate
