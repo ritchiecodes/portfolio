@@ -319,6 +319,10 @@ html.dark {
   --accent: #6bb0ff;
 }
 
+html.dark .site-header {
+  border-bottom-color: #333;
+}
+
 body { background: var(--bg); color: var(--text); }
 
 /* Mobile responsive styles */
