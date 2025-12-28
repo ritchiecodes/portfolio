@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://ritchiecaruso.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ritchiecaruso.com/" rel="alternate" type="text/html" /><updated>2025-12-28T16:24:51+11:00</updated><id>https://ritchiecaruso.com/feed.xml</id><title type="html">Ritchie Caruso</title><subtitle>A simple Jekyll site</subtitle><entry><title type="html">Why Build a Home Server in a Cloud-First World?</title><link href="https://ritchiecaruso.com/2023/11/10/nas-build.html" rel="alternate" type="text/html" title="Why Build a Home Server in a Cloud-First World?" /><published>2023-11-10T00:00:00+11:00</published><updated>2023-11-10T00:00:00+11:00</updated><id>https://ritchiecaruso.com/2023/11/10/nas-build</id><content type="html" xml:base="https://ritchiecaruso.com/2023/11/10/nas-build.html"><![CDATA[<p>Cloud computing is everywhere. It’s fast, convenient, and generally affordable. So why would anyone bother building their own server to store data and files?</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-12-28T20:03:12+11:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Ritchie Caruso</title><subtitle>A simple Jekyll site</subtitle><entry><title type="html">Why Build a Home Server in a Cloud-First World?</title><link href="http://localhost:4000/2023/11/10/nas-build.html" rel="alternate" type="text/html" title="Why Build a Home Server in a Cloud-First World?" /><published>2023-11-10T00:00:00+11:00</published><updated>2023-11-10T00:00:00+11:00</updated><id>http://localhost:4000/2023/11/10/nas-build</id><content type="html" xml:base="http://localhost:4000/2023/11/10/nas-build.html"><![CDATA[<p>Cloud computing is everywhere. It’s fast, convenient, and generally affordable. So why would anyone bother building their own server to store data and files?</p>
 
 <p>For me, the answer came down to a few key reasons:</p>
 
@@ -245,7 +245,7 @@
 
 <ul>
   <li>Weekly Docker container backups (configurations included)</li>
-  <li>Full NAS backup using <strong>Veeam</strong> from a Windows machine</li>
+  <li>Full NAS backup using <strong>Veeam</strong> on a Windows machine</li>
 </ul>
 
 <h3 id="offsite-backups">Offsite Backups</h3>
@@ -290,6 +290,6 @@
   </li>
   <li>
     <p>Losing any data on this NAS would be detrimental therefore it is not ideal for homelab activites such as cybersecurity and networking labs. 
-My next build project will be a Homelab running Proxmox to facilitate cybersecurity labs, recreating vulnerabilites, exploring the effects of malware on systems and exploring advanced networking configurations.</p>
+My next build project will be a Homelab running Proxmox to facilitate cybersecurity labs, recreating vulnerabilites, exploring the effects of malware on systems and building advanced networking configurations.</p>
   </li>
 </ul>]]></content><author><name></name></author><category term="nas" /><category term="unraid" /><category term="docker" /><category term="raid" /><summary type="html"><![CDATA[Cloud computing is everywhere. It’s fast, convenient, and generally affordable. So why would anyone bother building their own server to store data and files?]]></summary></entry></feed>
