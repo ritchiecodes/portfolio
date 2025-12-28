@@ -8,6 +8,7 @@
 - **Pages**: root Markdown pages (home, about, projects, contact) use the `default` layout. The homepage ([index.md](index.md)) conditionally loads extra CSS when `page.title == 'Home'`.
 - **Blog index**: [blog/index.md](blog/index.md) loops `site.posts`; pagination works when `jekyll-paginate` is installed, otherwise the included fallback still lists posts. Per-page count is driven by `_config.yml`.
 - **Posts** live under [_posts/](_posts/) with dated filenames. Use front matter with `layout: post`, `title`, `date`, and optional `tags`. Example: [_posts/2025-12-19-example-post.md](_posts/2025-12-19-example-post.md) shows layout: post with an image; the welcome sample uses `layout: default` but lacks post metadata display.
+- **Drafts** live under [_drafts/](_drafts/) without date prefixes. Preview with `bundle exec jekyll serve --drafts`. When ready to publish, move to `_posts/` and add date prefix `YYYY-MM-DD-filename.md`.
 - **Assets**: shared styles in [assets/css/style.css](assets/css/style.css); homepage extras in [assets/css/homepage.css](assets/css/homepage.css). Images go in [assets/images/](assets/images/); reference them via `{{ '/assets/images/...' | relative_url }}`.
 - **Navigation** is duplicated in both layouts; update both if you add/remove top-level pages.
 - **Build/serve** locally with Bundler: `bundle install` then `bundle exec jekyll serve --livereload`. Add `--future` only if you toggle `future: false` later; it's already true here.

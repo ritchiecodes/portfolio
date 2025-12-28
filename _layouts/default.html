@@ -13,7 +13,7 @@
     <meta name="apple-mobile-web-app-title" content="Ritchie" />
     <link rel="manifest" href="{{ '/assets/images/site.webmanifest' | relative_url }}" />
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-    {% if page.title == 'Home' %}<link rel="stylesheet" href="{{ '/assets/css/homepage.css' | relative_url }}">{% endif %}
+    {% if page.title == 'Home' or page.title == 'Projects' %}<link rel="stylesheet" href="{{ '/assets/css/homepage.css' | relative_url }}">{% endif %}
   </head>
   <body>
     <header class="site-header">

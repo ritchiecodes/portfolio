@@ -27,7 +27,13 @@ This fallback lists `site.posts` so posts appear without pagination. Install the
     <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
     <a class="read-more" href="{{ post.url | relative_url }}">Read More</a>
   </div>
-  {% if post.content contains '<img' %}
+  {% if post.thumbnail %}
+    <div class="post-thumbnail">
+      <a href="{{ post.url | relative_url }}">
+        <img src="{{ post.thumbnail | relative_url }}" alt="{{ post.title }}" loading="lazy">
+      </a>
+    </div>
+  {% elsif post.content contains '<img' %}
     {% assign img_start = post.content | split: '<img ' | last | split: 'src="' %}
     {% if img_start[1] %}
       {% assign img_src = img_start[1] | split: '"' | first %}
