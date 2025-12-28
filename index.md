@@ -28,8 +28,9 @@ title: Home
     <p>A brief description of your second project. Replace with your actual project details.</p>
   </div>
   <div class="project-card">
-    <h3><a href="#">Project Three</a></h3>
-    <p>A brief description of your third project. Replace with your actual project details.</p>
+    <img src="{{ '/assets/images/nas-blog/bench-test.webp' | relative_url }}" alt="NAS Server Build">
+    <h3><a href="{{ '/2023/11/10/nas-build.html' | relative_url }}">Home NAS Server Build</a></h3>
+    <p>Built a custom NAS server from scratch using Unraid, featuring 8x2TB drives in RAID configuration, Docker containers, support for VMs, Photoprism, Pi-hole and more.</p>
   </div>
 </div>
   </div>
@@ -45,7 +46,13 @@ title: Home
       <p>{{ post.excerpt | strip_html | truncatewords: 20 }}</p>
       <a class="read-more" href="{{ post.url | relative_url }}">Read More</a>
     </div>
-    {% if post.content contains '<img' %}
+    {% if post.thumbnail %}
+      <div class="post-thumbnail">
+        <a href="{{ post.url | relative_url }}">
+          <img src="{{ post.thumbnail | relative_url }}" alt="{{ post.title }}" loading="lazy">
+        </a>
+      </div>
+    {% elsif post.content contains '<img' %}
       {% assign img_start = post.content | split: '<img ' | last | split: 'src="' %}
       {% if img_start[1] %}
         {% assign img_src = img_start[1] | split: '"' | first %}

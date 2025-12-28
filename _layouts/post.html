@@ -47,6 +47,11 @@
           {% endfor %}
         </div>
         {% endif %}
+        {% if page.thumbnail %}
+        <div class="post-hero-image">
+          <img src="{{ page.thumbnail | relative_url }}" alt="{{ page.title }}">
+        </div>
+        {% endif %}
         <div class="post-content">
           {{ content }}
         </div>

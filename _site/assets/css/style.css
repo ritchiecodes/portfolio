@@ -169,7 +169,18 @@ html.dark .tag-count { color:#b8c8e8; }
 .tag-posts .post-meta { color:#777; font-size:0.9rem; margin-left:0.35rem; }
 html.dark .tag-section { background:#2a2a2a; border-color:#3a3a3a; }
 html.dark .tag-posts .post-meta { color:#b0b0b0; }
-
+/* Post hero image */
+.post-hero-image {
+  margin: 1.5rem 0 2rem 0;
+}
+.post-hero-image img {
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+}
 /* Blog index: snippets and read-more button */
 .blog-list { margin-top: 1rem; display: flex; flex-direction: column; gap: 1rem; }
 .post-item {
@@ -182,6 +193,8 @@ html.dark .tag-posts .post-meta { color:#b0b0b0; }
   gap: 1.5rem;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
   transition: all 220ms ease;
+  position: relative;
+  cursor: pointer;
 }
 .post-item:hover {
   box-shadow: 0 8px 16px rgba(0,0,0,0.1);
@@ -189,6 +202,18 @@ html.dark .tag-posts .post-meta { color:#b0b0b0; }
   border-color: #bbb;
 }
 .post-item .post-title { font-size: 1.15rem; margin-bottom: 0.25rem; }
+.post-item .post-title a::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.post-item .tag-badge, .post-item .read-more {
+  position: relative;
+  z-index: 2;
+}
 .post-excerpt { color: #666; margin: 0.5rem 0 0.75rem; }
 
 /* Post thumbnail styling */
@@ -264,6 +289,27 @@ html.dark .pagination .current { background:#2a2a2a; }
   display: block;
   margin: 1rem 0;
   border-radius: 6px;
+}
+
+figure {
+  display: table;
+  margin: 1rem auto;
+  max-width: 100%;
+}
+
+figcaption {
+  background: #f5f5f5;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+  color: #666;
+  text-align: center;
+  margin-top: -0.5rem;
+  border-radius: 0 0 6px 6px;
+}
+
+html.dark figcaption {
+  background: #2a2a2a;
+  color: #aaa;
 }
 
 /* Dark mode variables */
