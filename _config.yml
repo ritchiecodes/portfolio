@@ -4,6 +4,10 @@ description: "A simple Jekyll site"
 baseurl: ""
 url: "https://ritchiecaruso.com"
 
+# Syntax highlighting
+markdown: kramdown
+highlighter: rouge
+
 plugins:
   - jekyll-paginate
   - jekyll-sitemap
