@@ -288,13 +288,18 @@ html.dark .pagination .current { background:#2a2a2a; }
   height: auto;
   display: block;
   margin: 1rem 0;
+  margin-left: 0;
   border-radius: 6px;
 }
 
 figure {
-  display: table;
-  margin: 1rem auto;
+  display: inline-block;
+  margin: 0;
   max-width: 100%;
+}
+
+figure img {
+  margin: 0px;
 }
 
 figcaption {
@@ -307,10 +312,79 @@ figcaption {
   border-radius: 0 0 6px 6px;
 }
 
+/* Center captions for side-by-side images */
+.side-by-side {
+  display: flex;
+  justify-content: center;
+  gap: 2%;
+  flex-wrap: wrap;
+}
+
+.side-by-side img {
+  max-width: 49%;
+  height: auto;
+}
+
 html.dark figcaption {
   background: #2a2a2a;
   color: #aaa;
 }
+
+/* Code block styling */
+pre {
+  background: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 1rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+code {
+  background: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  padding: 0.2rem 0.4rem;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9em;
+}
+
+pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+}
+
+html.dark pre {
+  background: #2a2a2a;
+  border-color: #3a3a3a;
+}
+
+html.dark code {
+  background: #2a2a2a;
+  border-color: #3a3a3a;
+}
+
+/* Syntax highlighting with Rouge */
+.highlight { color: #333; }
+.highlight .c, .highlight .c1, .highlight .cm { color: #008000; font-style: italic; } /* Comments */
+.highlight .k, .highlight .kd, .highlight .kn { color: #0000ff; font-weight: bold; } /* Keywords */
+.highlight .s, .highlight .s1, .highlight .s2, .highlight .sb { color: #a31515; } /* Strings */
+.highlight .nv, .highlight .no, .highlight .vi { color: #001080; } /* Variables */
+.highlight .nb, .highlight .nc, .highlight .nf { color: #795e26; } /* Functions/cmdlets */
+.highlight .m, .highlight .mi, .highlight .mf { color: #098658; } /* Numbers */
+.highlight .o { color: #000000; } /* Operators */
+
+/* Dark mode syntax highlighting */
+html.dark .highlight { color: #d4d4d4; }
+html.dark .highlight .c, html.dark .highlight .c1, html.dark .highlight .cm { color: #6a9955; }
+html.dark .highlight .k, html.dark .highlight .kd, html.dark .highlight .kn { color: #569cd6; }
+html.dark .highlight .s, html.dark .highlight .s1, html.dark .highlight .s2, html.dark .highlight .sb { color: #ce9178; }
+html.dark .highlight .nv, html.dark .highlight .no, html.dark .highlight .vi { color: #9cdcfe; }
+html.dark .highlight .nb, html.dark .highlight .nc, html.dark .highlight .nf { color: #dcdcaa; }
+html.dark .highlight .m, html.dark .highlight .mi, html.dark .highlight .mf { color: #b5cea8; }
+html.dark .highlight .o { color: #d4d4d4; }
 
 /* Dark mode variables */
 html.dark {

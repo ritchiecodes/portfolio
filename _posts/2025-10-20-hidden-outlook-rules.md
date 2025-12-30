@@ -32,31 +32,45 @@ In this post, I’ll walk through:
 - How to detect hidden rules  
 - How to remove them at scale across an organisation  
 
+<br>
 
 ## The Attack
 
 ### How Is the Attack Executed?
-
-![Hidden Rule Attack Steps](/assets/images/hidden-rules/hidden-rule-attack.webp)
+<figure>
+  <img 
+    src="/assets/images/hidden-rules/hidden-rule-attack.webp"
+    alt="Hidden Rule Attack Steps"
+    width="250">
+  <figcaption>Hidden Rule Attack Steps</figcaption>
+</figure>
 
 In our environment, external email forwarding was blocked. Instead of forwarding messages, the attacker created a rule that silently moved emails out of sight — buying time before the user realised their account had been compromised.
 
 These actions are well suited to scripting and automation—particularly the creation of the malicious rule and the subsequent steps to conceal it from Outlook clients.
 
-For simplicity, we’ll assume the attacker has already completed steps 1 and 2:
+For simplicity, we’ll assume the attacker has already **completed steps 1 and 2**:
 
 1. Obtained valid credentials  
 2. Logged into the victim’s mailbox via Outlook  
+
+<br>
 
 ### Step 3: Create a Malicious Inbox Rule
 
 The attacker creates an inbox rule that forwards or moves emails — for example, to the attackers email.
 
-![Creating an inbox rule in Outlook](/assets/images/hidden-rules/create-rule.png)
+<figure>
+  <img 
+    src="/assets/images/hidden-rules/create-rule.png"
+    alt="Creating Outlook rule"
+    width="400">
+  <figcaption>Creating Outlook rule</figcaption>
+</figure>
 
 At this stage, the rule is still visible in the **Rules and Alerts** window.
 
-
+<br>
 
 ### Step 4: Hide the Rule
 
@@ -68,7 +82,13 @@ To demonstrate, I used **MFCMapi**, a Microsoft-provided diagnostic tool availab
 
 In this example, the rule moves emails with the subject *“Hidden Test”* to the Archive folder.
 
-![Rule that will be hidden](/assets/images/hidden-rules/rule-demonstration.png)
+<figure>
+  <img 
+    src="/assets/images/hidden-rules/rule-demonstration.png"
+    alt="Rule that will be hidden"
+    width="400">
+  <figcaption>Rule that will be hidden</figcaption>
+</figure>   
 
 #### Hiding the Rule with MFCMapi
 
@@ -76,30 +96,48 @@ In this example, the rule moves emails with the subject *“Hidden Test”* to t
 2. Navigate to **Folder → View → Hidden Contents**  
 3. Locate messages with the class `IPM.Rule.Version2.Message`  
 4. Open the rule and locate the following properties:  
-   - `PR_RULE_MSG_NAME`  
-   - `PR_RULE_MSG_PROVIDER`  
+- `PR_RULE_MSG_NAME`
+- `PR_RULE_MSG_PROVIDER`
 5. **Clear the value fields** for both properties  
 
-![Rule opened in MFCMapi](/assets/images/hidden-rules/mfcmapi-investigation.png)
+<figure>
+  <img 
+    src="/assets/images/hidden-rules/mfcmapi-changes.png"
+    alt="Tampering with rule properties"
+    width="600">
+  <figcaption>Tampering with rule properties</figcaption>
+</figure>
 
-![Tampering with rule properties](/assets/images/hidden-rules/mfcmapi-changes.png)
 
 Once modified, the rule no longer appears in Outlook or standard administrative interfaces.
 
+<br>
 
 ## Detecting Hidden Inbox Rules
 
 After hiding the rule, the **Rules and Alerts** window appears empty:
 
-![No rules visible in Outlook](/assets/images/hidden-rules/rule-is-hidden.png)
+<figure>
+  <img 
+    src="/assets/images/hidden-rules/rule-is-hidden.png"
+    alt="No rules visible in Outlook"
+    width="600">
+  <figcaption>No rules visible in Outlook</figcaption>
+</figure>
 
 However, the rule is still active.
 
 After sending a test email that meets the rule’s criteria, the message is silently moved to the Archive folder:
 
-![Email moved by hidden rule](/assets/images/hidden-rules/email-in-archive.png)
+<figure>
+  <img 
+    src="/assets/images/hidden-rules/email-in-archive.png"
+    alt="Email moved by hidden rule"
+    width="600">
+  <figcaption>Email moved by hidden rule</figcaption>
+</figure>
 
-
+<br>
 
 ## Detecting Hidden Rules with PowerShell
 
@@ -116,7 +154,16 @@ Then query inbox rules, including hidden ones:
 Get-InboxRule -Mailbox example@example.com -IncludeHidden
 ```
 Hidden rules appear with a numeric string.
-![Detecting hidden rule in Powershell](/assets/images/hidden-rules/Get-InboxRule.png)
+
+<figure>
+  <img 
+    src="/assets/images/hidden-rules/Get-InboxRule.png"
+    alt="Detecting hidden rule in Powershell"
+    width="600">
+  <figcaption>Detecting hidden rule in Powershell</figcaption>
+</figure>
+
+<br>
 
 ## Removing Hidden Rules
 There are two effective removal methods.
@@ -125,15 +172,30 @@ There are two effective removal methods.
 ```powershell
 Remove-InboxRule -Mailbox example@work.com -Identity "RULE_ID"
 ```
-![Removing hidden rule in Powershell](/assets/images/hidden-rules/remove-rule.png)
+
+<figure>
+  <img 
+    src="/assets/images/hidden-rules/remove-rule.png"
+    alt="Removing hidden rule in Powershell"
+    width="800">
+  <figcaption>Removing hidden rule in Powershell</figcaption>
+</figure>
 
 ### Option 2: Outlook Clean Rules Flag
 ```text
 outlook.exe /cleanrules
 ```
-![Cleaning Outlook Rules](/assets/images/hidden-rules/clean-rules.png)
+<figure>
+  <img 
+    src="/assets/images/hidden-rules/clean-rules.png"
+    alt="Cleaning Outlook Rules"
+    width="400">
+  <figcaption>Cleaning Outlook Rules</figcaption>
+</figure>
 
 ⚠️ Warning: This removes all inbox rules for the user.
+
+<br>
 
 ## Scanning the Entire Organisation
 To ensure no hidden rules remain across the tenant, I wrote the following PowerShell script:
@@ -163,6 +225,8 @@ $output | Export-Csv "OUTPUT_PATH.csv" -NoTypeInformation
 ```
 This produces a list of mailboxes with suspicious hidden rules.
 
+<br>
+
 ## Inspecting Rule Behaviour
 To understand what a hidden rule actually does:
 ```powershell
@@ -180,7 +244,17 @@ foreach ($rule in $rules) {
 
 $output | Export-Csv "OUTPUT_PATH.csv" -NoTypeInformation
 ```
+
+<figure>
+  <img 
+    src="/assets/images/hidden-rules/description-output.png"
+    alt="Rule Description Output"
+    width="1000">
+  <figcaption>Rule Description Output</figcaption>
+</figure>
 This allows you to determine whether the rule is malicious or benign.
+
+<br>
 
 ## Final Thoughts
 A compromised account cannot always be considered secure after a password reset and session token revocation alone.
