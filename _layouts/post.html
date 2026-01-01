@@ -124,6 +124,50 @@
           }, 250);
         });
       })();
+
+      // Copy code button functionality
+      (function(){
+        function wrapCodeBlocks(){
+          var pres = document.querySelectorAll('pre');
+          pres.forEach(function(pre){
+            if(pre.parentElement.classList.contains('code-block-wrapper')) return;
+            
+            var wrapper = document.createElement('div');
+            wrapper.className = 'code-block-wrapper';
+            pre.parentNode.insertBefore(wrapper, pre);
+            wrapper.appendChild(pre);
+            
+            var button = document.createElement('button');
+            button.className = 'copy-code-button';
+            button.textContent = 'Copy';
+            button.setAttribute('aria-label', 'Copy code to clipboard');
+            
+            button.addEventListener('click', function(){
+              var code = pre.querySelector('code') || pre;
+              var text = code.textContent;
+              
+              navigator.clipboard.writeText(text).then(function(){
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
+                setTimeout(function(){
+                  button.textContent = 'Copy';
+                  button.classList.remove('copied');
+                }, 2000);
+              }).catch(function(err){
+                console.error('Failed to copy:', err);
+              });
+            });
+            
+            wrapper.appendChild(button);
+          });
+        }
+        
+        if(document.readyState === 'loading'){
+          document.addEventListener('DOMContentLoaded', wrapCodeBlocks);
+        } else {
+          wrapCodeBlocks();
+        }
+      })();
     </script>
   </body>
 </html>
