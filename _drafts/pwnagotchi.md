@@ -7,7 +7,13 @@ thumbnail: /assets/images/pwnagotchi.jpg
 
 If you grew up in the late 90's or the early 2000's then you probably remember Tamagotchis. The little handheld digital pet from Bandai was a huge hit, you took care of the little creature by feeding it, playing games etc using 3 small buttons.
 
-![Tamagotchi](/assets/images/pwnagotchi/tamagotchi.jpeg)
+<figure>
+  <img 
+    src="/assets/images/pwnagotchi/tamagotchi.jpeg"
+    alt="Bandai Tamagotchi"
+    width="250">
+  <figcaption>Bandai Tamagotchi</figcaption>
+</figure>
 
 To my delight I stumbled across a fantastic open source project called Pwnagotchi, a nod to Tamagotchis but with a focus on cybersecurity and hacking.
 This cute little device is a DIY build with multiple options for the components, though generally the brains of the operation are handled by a raspberry pi.
