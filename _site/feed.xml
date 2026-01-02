@@ -1,4 +1,346 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://ritchiecaruso.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ritchiecaruso.com/" rel="alternate" type="text/html" /><updated>2026-01-01T15:02:53+11:00</updated><id>https://ritchiecaruso.com/feed.xml</id><title type="html">Ritchie Caruso</title><subtitle>A simple Jekyll site</subtitle><entry><title type="html">How Bad Actors Can Hide Outlook &amp;amp; Exchange Inbox Rules</title><link href="https://ritchiecaruso.com/2025/10/20/hidden-outlook-rules.html" rel="alternate" type="text/html" title="How Bad Actors Can Hide Outlook &amp;amp; Exchange Inbox Rules" /><published>2025-10-20T00:00:00+11:00</published><updated>2025-10-20T00:00:00+11:00</updated><id>https://ritchiecaruso.com/2025/10/20/hidden-outlook-rules</id><content type="html" xml:base="https://ritchiecaruso.com/2025/10/20/hidden-outlook-rules.html"><![CDATA[<p>It was a typical Monday morning. I sat down at my desk, ready to start the day, when I received a Microsoft Teams message from our cybersecurity department. Over the weekend, a breach had occurred that impacted several users.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-01-02T23:17:04+11:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Ritchie Caruso</title><subtitle>A simple Jekyll site</subtitle><entry><title type="html">Tamagotchi for Hackers: Building a Pwnagotchi</title><link href="http://localhost:4000/2026/01/02/pwnagotchi-edit.html" rel="alternate" type="text/html" title="Tamagotchi for Hackers: Building a Pwnagotchi" /><published>2026-01-02T23:17:04+11:00</published><updated>2026-01-02T23:17:04+11:00</updated><id>http://localhost:4000/2026/01/02/pwnagotchi-edit</id><content type="html" xml:base="http://localhost:4000/2026/01/02/pwnagotchi-edit.html"><![CDATA[<p>If you grew up in the late ’90s or early 2000s, chances are you remember Tamagotchis—the small handheld digital pets from Bandai that demanded constant attention through feeding, games, and care via three tiny buttons.</p>
+
+<figure> 
+    <img src="/assets/images/pwnagotchi/tamagotchi.jpeg" alt="Bandai Tamagotchi" width="250" /> <figcaption>Bandai Tamagotchi</figcaption> 
+</figure>
+
+<p>Recently, I stumbled across a fantastic open-source project called Pwnagotchi.</p>
+
+<p>As the name suggests, it’s a playful nod to Tamagotchis—but with a cybersecurity twist. Instead of feeding a digital pet, you’re training a small device to passively observe and learn from Wi-Fi environments.</p>
+
+<p>As someone with a background in cybersecurity and a growing interest in electronics, this felt like the perfect project to take on.</p>
+
+<h2 id="what-is-a-pwnagotchi">What Is a Pwnagotchi?</h2>
+
+<p>A Pwnagotchi is a DIY, battery-powered device built around a Raspberry Pi. It uses bettercap under the hood to monitor Wi-Fi traffic and capture handshakes, all while displaying a charming “face” that evolves based on its activity.</p>
+
+<p>The project is surprisingly beginner-friendly. With some basic Linux and Raspberry Pi knowledge, you can get one up and running without soldering or advanced electronics experience.</p>
+
+<h2 id="hardware-selection">Hardware Selection</h2>
+
+<p>After some research, I settled on a portable configuration featuring an e-ink display and internal battery. This keeps power consumption low and gives the device a very authentic Tamagotchi-like feel.</p>
+
+<h3 id="parts-list">Parts List</h3>
+
+<p>Here’s the hardware I used for my build:</p>
+
+<ul>
+  <li>
+    <p>Raspberry Pi Zero 2 W (with header pins)</p>
+  </li>
+  <li>
+    <p>Waveshare v4 2.13” E-Ink Display HAT</p>
+  </li>
+  <li>
+    <p>PiSugar 3 (1200mAh) Battery</p>
+  </li>
+  <li>
+    <p>32GB MicroSD Card (plus USB adapter or card reader)</p>
+  </li>
+  <li>
+    <p>Micro-USB to USB-A Cable</p>
+  </li>
+  <li>
+    <p>3D-Printed Case</p>
+  </li>
+</ul>
+
+<p>The case isn’t strictly necessary, but since I already own an FDM 3D printer, it was an easy decision.</p>
+
+<figure> 
+    <img src="/assets/images/pwnagotchi/parts.jfif" alt="Pwnagotchi Parts" width="600" />
+    <figcaption>Pwnagotchi Parts</figcaption> 
+</figure>
+<h2 id="assembly">Assembly</h2>
+
+<p>One of the biggest advantages of this build is that it’s completely solderless:</p>
+
+<ul>
+  <li>
+    <p>The Waveshare e-ink display slots directly onto the Raspberry Pi header pins.</p>
+  </li>
+  <li>
+    <p>The PiSugar battery mounts to the back of the Pi using four screws.</p>
+  </li>
+</ul>
+
+<figure> 
+    <div class="side-by-side"> 
+        <img src="/assets/images/pwnagotchi/waveshare.jfif" alt="Waveshare Screen" /> 
+        <img src="/assets/images/pwnagotchi/pwnagotchi-side.jfif" alt="Side view of Pwnagotchi" /> 
+    </div> 
+    <figcaption>Pwnagotchi Build</figcaption> 
+</figure>
+
+<p>The entire assembly process took only a few minutes.</p>
+
+<h2 id="software-installation">Software Installation</h2>
+
+<p>Rather than repeating everything in the documentation here, I’ll link the guide I followed:</p>
+
+<p><a href="https://pwnagotchi.org/getting-started/index.html">Getting Started Guide</a></p>
+
+<p><a href="https://pwnagotchi.ai/">Official Pwnagotchi Website</a></p>
+
+<p>Installation involves flashing a custom Pwnagotchi image to the microSD card using Raspberry Pi Imager, inserting it into the device, and connecting the Pi to your computer via USB.</p>
+
+<h2 id="initial-setup-windows">Initial Setup (Windows)</h2>
+
+<p>I completed the setup on a Windows laptop:</p>
+
+<ol>
+  <li>
+    <p>Installed the RNDIS driver so Windows could recognize the Pwnagotchi as a USB Ethernet device.</p>
+  </li>
+  <li>
+    <p>Assigned a static IP address as recommended in the guide.</p>
+  </li>
+  <li>
+    <p>Connected via SSH and immediately changed the default password (highly recommended).</p>
+  </li>
+</ol>
+
+<p>Initial configuration is handled via an interactive wizard:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo pwnagotchi --wizard
+</code></pre></div></div>
+
+<p>Once complete, the device is technically ready—b
+Below are the key settings I recommend enabling or modifying:</p>
+
+<p>ut a few important security and usability settings should be configured first.</p>
+
+<h2 id="web-ui-and-configuration">Web UI and Configuration</h2>
+
+<p>The main configuration file lives at:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/etc/pwnagotchi/config.toml
+</code></pre></div></div>
+
+<p>While this can be edited manually, the web UI provides a much more user-friendly experience.</p>
+
+<h3 id="enabling-the-web-ui">Enabling the Web UI</h3>
+
+<p>With the device connected to your PC, navigate to:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://10.0.0.2:8080
+</code></pre></div></div>
+
+<p>Once inside the web UI:</p>
+
+<ol>
+  <li>
+    <p>Go to Plugins</p>
+  </li>
+  <li>
+    <p>Enable the webcfg plugin</p>
+  </li>
+</ol>
+
+<p>From here, all configuration can be handled through the browser.</p>
+
+<h2 id="recommended-configuration-settings">Recommended Configuration Settings</h2>
+
+<p>Below are the key settings I recommend enabling or modifying:</p>
+
+<div class="language-toml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Opt out of PwnGrid data sharing</span>
+<span class="n">main</span><span class="p">.</span><span class="n">plugins</span><span class="p">.</span><span class="n">grid</span><span class="p">.</span><span class="n">enabled</span> <span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+<span class="n">main</span><span class="p">.</span><span class="n">plugins</span><span class="p">.</span><span class="n">grid</span><span class="p">.</span><span class="n">report</span> <span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+
+<span class="c"># Disable deauthentication packets</span>
+<span class="n">personality</span><span class="p">.</span><span class="n">deauth</span> <span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+
+<span class="c"># Enable and secure the web UI</span>
+<span class="n">ui</span><span class="p">.</span><span class="n">web</span><span class="p">.</span><span class="n">enabled</span> <span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">ui</span><span class="p">.</span><span class="n">web</span><span class="p">.</span><span class="n">auth</span> <span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">ui</span><span class="p">.</span><span class="n">web</span><span class="p">.</span><span class="n">username</span> <span class="o">=</span><span class="w"> </span><span class="s">"USERNAME"</span>
+<span class="n">ui</span><span class="p">.</span><span class="n">web</span><span class="p">.</span><span class="n">password</span> <span class="o">=</span><span class="w"> </span><span class="s">"</span><span class="err">
+</span><span class="n">Below</span> <span class="n">are</span> <span class="n">the</span> <span class="n">key</span> <span class="n">settings</span> <span class="n">I</span> <span class="n">recommend</span> <span class="n">enabling</span> <span class="n">or</span> <span class="n">modifying</span><span class="err">:</span>
+
+<span class="n">PASSWORD</span><span class="s">"</span><span class="err">
+</span></code></pre></div></div>
+
+<p>Disabling deauthentication is especially important to avoid disrupting nearby networks and potential legal issues.</p>
+
+<h2 id="securing-bettercap">Securing Bettercap</h2>
+
+<p>Pwnagotchi relies on bettercap for packet capture and analysis. bettercap has its own web interface, accessible at:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://pwnagotchi.local
+</code></pre></div></div>
+
+<p>(Default credentials: <code class="language-plaintext highlighter-rouge">pwnagotchi / pwnagotchi</code>)</p>
+
+<h3 id="changing-the-bettercap-credentials">Changing the Bettercap Credentials</h3>
+
+<ol>
+  <li>
+    <p>SSH into the Pwnagotchi</p>
+  </li>
+  <li>Edit:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/local/share/bettercap/caplets/pwnagotchi-auto.cap
+</code></pre></div>    </div>
+    <p>Update:</p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set api.rest.username "USERNAME"
+set api.rest.password "PASSWORD"
+</code></pre></div>    </div>
+  </li>
+  <li>Edit:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/etc/pwnagotchi/config.toml
+</code></pre></div>    </div>
+    <p>Update:</p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bettercap.username = "USERNAME"
+bettercap.password = "PASSWORD"
+</code></pre></div>    </div>
+  </li>
+  <li>Reboot:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo reboot
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>⚠️ Note: These credentials are stored in plain text. Do not reuse sensitive passwords.</p>
+
+<h2 id="testing-the-device">Testing the Device</h2>
+
+<p>After rebooting, I unplugged the device and tested it on my home network. The Pwnagotchi successfully captured a handshake, which was clearly indicated on the display.</p>
+
+<p>Handshake files can be found at:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/home/pi/handshakes
+</code></pre></div></div>
+
+<p>While my Wi-Fi password proved too strong to crack (as it should), the device worked exactly as intended.</p>
+
+<figure> <img src="/assets/images/pwnagotchi/pwnagotchi.jfif" alt="Completed Pwnagotchi" width="600" /> <figcaption>Completed Pwnagotchi</figcaption> </figure>
+<h2 id="final-thoughts">Final Thoughts</h2>
+
+<p>The Pwnagotchi is a fun, educational project that blends nostalgia with practical cybersecurity concepts. It’s an excellent way to learn more about wireless security, Linux, and embedded devices.</p>
+
+<p>If you’re interested in hardware hacking, wireless security, or just enjoy nostalgic tech projects, building a Pwnagotchi is absolutely worth your time.</p>]]></content><author><name></name></author><category term="cybersecurity" /><category term="raspberry pi" /><category term="hacking" /><category term="wifi" /><category term="electronics" /><summary type="html"><![CDATA[If you grew up in the late ’90s or early 2000s, chances are you remember Tamagotchis—the small handheld digital pets from Bandai that demanded constant attention through feeding, games, and care via three tiny buttons.]]></summary></entry><entry><title type="html">Tamagotchi for Hackers!</title><link href="http://localhost:4000/2026/01/02/pwnagotchi.html" rel="alternate" type="text/html" title="Tamagotchi for Hackers!" /><published>2026-01-02T22:54:47+11:00</published><updated>2026-01-02T22:54:47+11:00</updated><id>http://localhost:4000/2026/01/02/pwnagotchi</id><content type="html" xml:base="http://localhost:4000/2026/01/02/pwnagotchi.html"><![CDATA[<p>If you grew up in the late 90’s or the early 2000’s then you probably remember Tamagotchis. The little handheld digital pet from Bandai was a huge hit, you took care of the little creature by feeding it, playing games etc using 3 small buttons.</p>
+
+<figure>
+  <img src="/assets/images/pwnagotchi/tamagotchi.jpeg" alt="Bandai Tamagotchi" width="250" />
+  <figcaption>Bandai Tamagotchi</figcaption>
+</figure>
+
+<p>To my delight I stumbled across a fantastic open source project called Pwnagotchi, a nod to Tamagotchis but with a focus on cybersecurity and hacking.
+This cute little device is a DIY build with multiple options for the components, though generally the brains of the operation are handled by a raspberry pi.
+After some research I settled on a battery powered version with a 2.13inch E-Ink Display (like Amazon Kindles Screen) powered by a Raspberry Pi Zero 2W.</p>
+
+<p>As I have recently taken an interest in building electronics paired with my knowledge of cyber security this was the perfect project for me to undertake.
+Thankfully, the Pwnagotchi build is very beginner friendly, only some basic linux and raspberry pi knowledge is required to get it up and running.</p>
+
+<p>Here is a list of the parts I used:</p>
+<ul>
+  <li>Raspberry Pi Zero 2 W with Header Pins</li>
+  <li>Waveshare v4 2.13inch E-Ink Display Hat</li>
+  <li>PiSugar 3 1200mAh Battery</li>
+  <li>32GB MicroSD Card (and a USB adaptor or card reader to connect it to your PC)</li>
+  <li>Micro USB to USB-A cable</li>
+  <li><a href="https://cults3d.com/en/3d-model/gadget/coque-pwnagotchi-waveshare3-pisugar3-et-protection-d-ecran-plexiglass">3D Case I Printed</a></li>
+</ul>
+
+<p>The case is not entirely necessary but as I already own a FDM 3D printer it was a no-brainer.</p>
+
+<figure>
+  <img src="/assets/images/pwnagotchi/parts.jfif" alt="Pwnagotchi Parts" width="600" />
+  <figcaption>Pwnagotchi Parts</figcaption>
+</figure>
+
+<p>Instead of going over the installation steps, I will provide the guide I used for anyone that would like to tackle this project themselves: <a href="https://pwnagotchi.org/getting-started/index.html">Guide I Used</a></p>
+
+<p>There is also some good information here as well:
+<a href="https://pwnagotchi.ai/">Pwnagotchi Website</a></p>
+
+<p>The build process was actually quite straightforward, and being a solderless build is a bonus for anyone yet to venture into soldering.</p>
+
+<p>The Waveshare screen clicks into the pins on the raspberry pi and the PiSugar battery connects via the back of the raspberry pi using 4 mounting screws.</p>
+
+<figure>
+  <div class="side-by-side">
+    <img src="/assets/images/pwnagotchi/waveshare.jfif" alt="Waveshare Screen" />
+    <img src="/assets/images/pwnagotchi/pwnagotchi-side.jfif" alt="Side view of Pwnagotchi" />
+  </div>
+  <figcaption>Pwnagotchi Build</figcaption>
+</figure>
+
+<p>After putting the device together I proceeded with the installation of the Pwnagotchi software. This is done by flashing a custom image from the <a href="https://pwnagotchi.org/getting-started/index.html">guide</a> to the micro sd card via the Raspberry Pi Imager software.</p>
+
+<p>After the imaging process, it was time to insert the sdcard into our newly build Pwnagotchi and connect it to the computer.</p>
+
+<p>The guide is thorough enough to show the process for Windows, Linux and MacOS but since I already had my Windows laptop in front of me as I followed the guide, I decided to continue the process with it.</p>
+
+<p>To get the Pwnagotchi to be recognised as a USB Ethernet device in Windows I was required to install the RNDIS driver, the setup was simple and the PC detected the pwnagotchi as a network device.</p>
+
+<p>I assigned a static IP to the ethernet device as per the <a href="https://pwnagotchi.org/getting-started/index.html">guide</a> so it would be easy to ssh into and access the web gui.</p>
+
+<p>I recommend changing the SSH password as the first thing you do after logging into it. From a security standpoint, using a default password to login to any device is always a big no.</p>
+
+<p>Configuring the device was simple using the provided wizard which can be accessed using <code class="language-plaintext highlighter-rouge">sudo pwnagotchi --wizard</code></p>
+
+<p>After going through the prompts and completing the configuration your Pwnagotchi is technically ready to start capturing wifi handshakes but there are still some important configurations I would setup first.</p>
+
+<p>Now, you can edit the configuration file manually, it is located on the device at <code class="language-plaintext highlighter-rouge">/etc/pwnagotchi/config.toml</code> but there is a simpler more user friendly way to edit this config with the web gui.</p>
+
+<p>You can access the web gui of the pwnagotchi by having it connected to the PC and navigating in a browser to the IP address on port 8080. for eg. <code class="language-plaintext highlighter-rouge">http://10.0.0.2:8080</code>. (If this doesn’t work, continue reading the recommended settings in the next section.)
+If successful, you will see your cute little Pwnagotchi face inside your web browser now. Next, I clicked on Plugins and enabled the webcfg plugin.
+Now I can edit all the settings via the web gui instead of needing to ssh into the device each time I want to make a change.</p>
+
+<p>Here is a list of option I recommend setting:</p>
+<div class="language-toml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Opt Out of PwnGrid reporting (Opt Out of sharing data publicly, used for leaderboards etc)</span>
+<span class="n">main</span><span class="p">.</span><span class="n">plugins</span><span class="p">.</span><span class="n">grid</span><span class="p">.</span><span class="n">enabled</span> <span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+<span class="n">main</span><span class="p">.</span><span class="n">plugins</span><span class="p">.</span><span class="n">grid</span><span class="p">.</span><span class="n">report</span> <span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+
+<span class="c"># Turn off sending deauthentication packets (so your neighbours dont hate you.)</span>
+<span class="n">personality</span><span class="p">.</span><span class="n">deauth</span> <span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+
+<span class="c"># Changing the web gui password (and enabling the web gui if it hasn't been enabled already)</span>
+<span class="n">ui</span><span class="p">.</span><span class="n">web</span><span class="p">.</span><span class="n">enabled</span> <span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">ui</span><span class="p">.</span><span class="n">web</span><span class="p">.</span><span class="n">auth</span> <span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">ui</span><span class="p">.</span><span class="n">web</span><span class="p">.</span><span class="n">username</span> <span class="o">=</span><span class="w"> </span><span class="s">"USERNAME"</span>
+<span class="n">ui</span><span class="p">.</span><span class="n">web</span><span class="p">.</span><span class="n">password</span> <span class="o">=</span><span class="w"> </span><span class="s">"PASSWORD"</span>
+</code></pre></div></div>
+
+<p>Pwangotchi runs bettercap under the hood to handle packet capturing. bettercap in itself is a very powerful and capable piece of software which can be accessed via a web gui just like the pwnagotchi screen can. Try <code class="language-plaintext highlighter-rouge">pwnagotchi.local</code> in your web browser (replace pwnagotchi with the name you gave your device) to access bettercap. (The default credentials are <code class="language-plaintext highlighter-rouge">pwnagotchi</code> for the username and password.)</p>
+
+<p>I recommend changing the bettercap password from the default as well, this is a little trickier to change but I will explain the steps I took:</p>
+
+<ol>
+  <li>SSH into your Pwnagotchi</li>
+  <li>Go to <code class="language-plaintext highlighter-rouge">/usr/local/share/bettercap/caplets/pwnagotchi-auto.cap</code></li>
+  <li>Edit these options:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set api.rest.username "ENTER USERNAME"
+set api.rest.password "ENTER PASSWORD"
+</code></pre></div>    </div>
+  </li>
+  <li>Go to <code class="language-plaintext highlighter-rouge">/etc/pwnagotchi/config.toml</code></li>
+  <li>Edit these options:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bettercap.username = "USERNAME"
+bettercap.password = "PASSWORD"
+</code></pre></div>    </div>
+  </li>
+  <li>Restart your Pwnagotchi with <code class="language-plaintext highlighter-rouge">sudo reboot</code></li>
+</ol>
+
+<p>Now when you head to the bettercap web gui you should be able to use your new credentials.</p>
+
+<p>Please Note: These credentials are stored in plain text so don’t use a password that would be dangerous if compromised (Like your banking password.)</p>
+
+<figure>
+  <img src="/assets/images/pwnagotchi/pwnagotchi.jfif" alt="Completed Pwnagotchi" width="600" />
+  <figcaption>Completed Pwnagotchi</figcaption>
+</figure>
+
+<p>After the reboot, I unplugged my Pwnagotchi and tested it on my home network.
+It captured the handhshake succesfully. This will be indicated on the screen, you can head <a href="https://pwnagotchi.ai/usage/">here</a> for more information on the Pwnagotchi GUI.</p>
+
+<p>Now the Pwnagotchi merely captures wifi hanshakes, they still require more work and software to crack the password. You can access the capture files by connecting your Pwnagotchi to your PC, sshing into the device and going to <code class="language-plaintext highlighter-rouge">/home/pi/handshakes</code>
+Thankfully, my wifi password was too strong to crack but alas, the Pwnagotchi has done its job.</p>
+
+<p>IMPORTANT</p>
+<ul>
+  <li>Turn off Deauthentication before booting, otherwise your poor neighbours and anyone else around you will have a horrible time being kicked off their wifi networks. (Not to mention the legality issues with deauthentication packets)</li>
+  <li>Change the SSH password for the device</li>
+  <li>Change the Web GUI password</li>
+  <li>Change the bettercap Password</li>
+</ul>]]></content><author><name></name></author><category term="cybersecurity" /><category term="microsoft" /><category term="exchange" /><category term="outlook" /><category term="incident-response" /><summary type="html"><![CDATA[If you grew up in the late 90’s or the early 2000’s then you probably remember Tamagotchis. The little handheld digital pet from Bandai was a huge hit, you took care of the little creature by feeding it, playing games etc using 3 small buttons.]]></summary></entry><entry><title type="html">Rgb Stage</title><link href="http://localhost:4000/2025/12/28/rgb-stage.html" rel="alternate" type="text/html" title="Rgb Stage" /><published>2025-12-28T16:24:46+11:00</published><updated>2025-12-28T16:24:46+11:00</updated><id>http://localhost:4000/2025/12/28/rgb-stage</id><content type="html" xml:base="http://localhost:4000/2025/12/28/rgb-stage.html"><![CDATA[]]></content><author><name></name></author><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Homelab Build</title><link href="http://localhost:4000/2025/12/28/homelab-build.html" rel="alternate" type="text/html" title="Homelab Build" /><published>2025-12-28T16:24:23+11:00</published><updated>2025-12-28T16:24:23+11:00</updated><id>http://localhost:4000/2025/12/28/homelab-build</id><content type="html" xml:base="http://localhost:4000/2025/12/28/homelab-build.html"><![CDATA[]]></content><author><name></name></author><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Home Network</title><link href="http://localhost:4000/2025/12/28/home-network.html" rel="alternate" type="text/html" title="Home Network" /><published>2025-12-28T16:24:16+11:00</published><updated>2025-12-28T16:24:16+11:00</updated><id>http://localhost:4000/2025/12/28/home-network</id><content type="html" xml:base="http://localhost:4000/2025/12/28/home-network.html"><![CDATA[]]></content><author><name></name></author><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Password Sync App</title><link href="http://localhost:4000/2025/12/28/password-sync-app.html" rel="alternate" type="text/html" title="Password Sync App" /><published>2025-12-28T16:24:03+11:00</published><updated>2025-12-28T16:24:03+11:00</updated><id>http://localhost:4000/2025/12/28/password-sync-app</id><content type="html" xml:base="http://localhost:4000/2025/12/28/password-sync-app.html"><![CDATA[]]></content><author><name></name></author><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Account Creation Automation</title><link href="http://localhost:4000/2025/12/28/account-creation-automation.html" rel="alternate" type="text/html" title="Account Creation Automation" /><published>2025-12-28T16:23:54+11:00</published><updated>2025-12-28T16:23:54+11:00</updated><id>http://localhost:4000/2025/12/28/account-creation-automation</id><content type="html" xml:base="http://localhost:4000/2025/12/28/account-creation-automation.html"><![CDATA[]]></content><author><name></name></author><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Klipper</title><link href="http://localhost:4000/2025/12/28/klipper.html" rel="alternate" type="text/html" title="Klipper" /><published>2025-12-28T16:23:43+11:00</published><updated>2025-12-28T16:23:43+11:00</updated><id>http://localhost:4000/2025/12/28/klipper</id><content type="html" xml:base="http://localhost:4000/2025/12/28/klipper.html"><![CDATA[]]></content><author><name></name></author><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">How Bad Actors Can Hide Outlook &amp;amp; Exchange Inbox Rules</title><link href="http://localhost:4000/2025/10/20/hidden-outlook-rules.html" rel="alternate" type="text/html" title="How Bad Actors Can Hide Outlook &amp;amp; Exchange Inbox Rules" /><published>2025-10-20T00:00:00+11:00</published><updated>2025-10-20T00:00:00+11:00</updated><id>http://localhost:4000/2025/10/20/hidden-outlook-rules</id><content type="html" xml:base="http://localhost:4000/2025/10/20/hidden-outlook-rules.html"><![CDATA[<p>It was a typical Monday morning. I sat down at my desk, ready to start the day, when I received a Microsoft Teams message from our cybersecurity department. Over the weekend, a breach had occurred that impacted several users.</p>
 
 <p>Without going into sensitive detail, the attacker had gained access to user accounts and distributed a phishing campaign via a SharePoint file.</p>
 
@@ -244,7 +586,7 @@
 
 <p>What began as a routine Monday quickly turned into a deep investigation, remediation effort, and a reminder that mailbox persistence techniques can be subtle yet highly effective.</p>
 
-<p>Stay vigilant — and don’t rely on the Rules GUI alone.</p>]]></content><author><name></name></author><category term="cybersecurity" /><category term="microsoft" /><category term="exchange" /><category term="outlook" /><category term="incident-response" /><summary type="html"><![CDATA[It was a typical Monday morning. I sat down at my desk, ready to start the day, when I received a Microsoft Teams message from our cybersecurity department. Over the weekend, a breach had occurred that impacted several users.]]></summary></entry><entry><title type="html">Why Build a Home Server in a Cloud-First World?</title><link href="https://ritchiecaruso.com/2023/11/10/nas-build.html" rel="alternate" type="text/html" title="Why Build a Home Server in a Cloud-First World?" /><published>2023-11-10T00:00:00+11:00</published><updated>2023-11-10T00:00:00+11:00</updated><id>https://ritchiecaruso.com/2023/11/10/nas-build</id><content type="html" xml:base="https://ritchiecaruso.com/2023/11/10/nas-build.html"><![CDATA[<p>Cloud computing is everywhere. It’s fast, convenient, and generally affordable. So why would anyone bother building their own server to store data and files?</p>
+<p>Stay vigilant — and don’t rely on the Rules GUI alone.</p>]]></content><author><name></name></author><category term="cybersecurity" /><category term="microsoft" /><category term="exchange" /><category term="outlook" /><category term="incident-response" /><summary type="html"><![CDATA[It was a typical Monday morning. I sat down at my desk, ready to start the day, when I received a Microsoft Teams message from our cybersecurity department. Over the weekend, a breach had occurred that impacted several users.]]></summary></entry><entry><title type="html">Why Build a Home Server in a Cloud-First World?</title><link href="http://localhost:4000/2023/11/10/nas-build.html" rel="alternate" type="text/html" title="Why Build a Home Server in a Cloud-First World?" /><published>2023-11-10T00:00:00+11:00</published><updated>2023-11-10T00:00:00+11:00</updated><id>http://localhost:4000/2023/11/10/nas-build</id><content type="html" xml:base="http://localhost:4000/2023/11/10/nas-build.html"><![CDATA[<p>Cloud computing is everywhere. It’s fast, convenient, and generally affordable. So why would anyone bother building their own server to store data and files?</p>
 
 <p>For me, the answer came down to a few key reasons:</p>
 

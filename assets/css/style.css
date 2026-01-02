@@ -404,9 +404,11 @@ code {
   background: #f5f5f5;
   border: 1px solid #ddd;
   border-radius: 3px;
-  padding: 0.2rem 0.4rem;
+  padding: 0 0.4rem;
   font-family: 'Courier New', Courier, monospace;
-  font-size: 0.9em;
+  font-size: 0.85em;
+  line-height: 1.2;
+  vertical-align: baseline;
 }
 
 pre code {
@@ -445,6 +447,27 @@ html.dark .highlight .nv, html.dark .highlight .no, html.dark .highlight .vi { c
 html.dark .highlight .nb, html.dark .highlight .nc, html.dark .highlight .nf { color: #dcdcaa; }
 html.dark .highlight .m, html.dark .highlight .mi, html.dark .highlight .mf { color: #b5cea8; }
 html.dark .highlight .o { color: #d4d4d4; }
+
+/* Post content links */
+.post-content a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: rgba(10, 88, 202, 0.3);
+  text-underline-offset: 2px;
+  transition: text-decoration-color 180ms ease;
+}
+
+.post-content a:hover {
+  text-decoration-color: var(--accent);
+}
+
+html.dark .post-content a {
+  text-decoration-color: rgba(107, 176, 255, 0.3);
+}
+
+html.dark .post-content a:hover {
+  text-decoration-color: var(--accent);
+}
 
 /* Dark mode variables */
 html.dark {
