@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Tamagotchi for Hackers!</title>
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Tamagotchi for Hackers! | Ritchie Caruso</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Tamagotchi for Hackers!" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="If you grew up in the late 90’s or the early 2000’s then you probably remember Tamagotchis. The little handheld digital pet from Bandai was a huge hit, you took care of the little creature by feeding it, playing games etc using 3 small buttons." />
+<meta property="og:description" content="If you grew up in the late 90’s or the early 2000’s then you probably remember Tamagotchis. The little handheld digital pet from Bandai was a huge hit, you took care of the little creature by feeding it, playing games etc using 3 small buttons." />
+<link rel="canonical" href="http://localhost:4000/2026/01/02/pwnagotchi.html" />
+<meta property="og:url" content="http://localhost:4000/2026/01/02/pwnagotchi.html" />
+<meta property="og:site_name" content="Ritchie Caruso" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-01-02T22:54:47+11:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Tamagotchi for Hackers!" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-01-02T22:54:47+11:00","datePublished":"2026-01-02T22:54:47+11:00","description":"If you grew up in the late 90’s or the early 2000’s then you probably remember Tamagotchis. The little handheld digital pet from Bandai was a huge hit, you took care of the little creature by feeding it, playing games etc using 3 small buttons.","headline":"Tamagotchi for Hackers!","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2026/01/02/pwnagotchi.html"},"url":"http://localhost:4000/2026/01/02/pwnagotchi.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Ritchie Caruso" />
+    <link rel="icon" type="image/png" href="/assets/images/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg" />
+    <link rel="shortcut icon" href="/assets/images/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Ritchie" />
+    <link rel="manifest" href="/assets/images/site.webmanifest" />
+    <link rel="stylesheet" href="/assets/css/style.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-title"><a href="/">Ritchie Caruso</a></div>
+      <button id="hamburger" class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="site-right">
+        <nav class="site-nav">
+          <a href="/" >Home</a>
+          <a href="/about/" >About</a>
+          <a href="/projects/" >Projects</a>
+          <a href="/blog/" class="active">Blog</a>
+          <a href="/contact/" >Contact</a>
+        </nav>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" aria-pressed="false">
+          <span class="knob" aria-hidden="true"></span>
+        </button>
+      </div>
+    </header>
+
+    <main class="site-main post-main">
+      <article class="post">
+        <h1 class="post-title">Tamagotchi for Hackers!</h1>
+        <div class="post-meta">January 02, 2026</div>
+        
+        <div class="post-tags" aria-label="Tags">
+          
+          <a class="tag-badge" href="/tags/#cybersecurity">cybersecurity</a>
+          
+          <a class="tag-badge" href="/tags/#microsoft">microsoft</a>
+          
+          <a class="tag-badge" href="/tags/#exchange">exchange</a>
+          
+          <a class="tag-badge" href="/tags/#outlook">outlook</a>
+          
+          <a class="tag-badge" href="/tags/#incident-response">incident-response</a>
+          
+        </div>
+        
+        
+        <div class="post-hero-image">
+          <img src="/assets/images/pwnagotchi/tamagotchi.jpeg" alt="Tamagotchi for Hackers!">
+        </div>
+        
+        <div class="post-content">
+          <p>If you grew up in the late 90’s or the early 2000’s then you probably remember Tamagotchis. The little handheld digital pet from Bandai was a huge hit, you took care of the little creature by feeding it, playing games etc using 3 small buttons.</p>
+
+<figure>
+  <img src="/assets/images/pwnagotchi/tamagotchi.jpeg" alt="Bandai Tamagotchi" width="250" />
+  <figcaption>Bandai Tamagotchi</figcaption>
+</figure>
+
+<p>To my delight I stumbled across a fantastic open source project called Pwnagotchi, a nod to Tamagotchis but with a focus on cybersecurity and hacking.
+This cute little device is a DIY build with multiple options for the components, though generally the brains of the operation are handled by a raspberry pi.
+After some research I settled on a battery powered version with a 2.13inch E-Ink Display (like Amazon Kindles Screen) powered by a Raspberry Pi Zero 2W.</p>
+
+<p>As I have recently taken an interest in building electronics paired with my knowledge of cyber security this was the perfect project for me to undertake.
+Thankfully, the Pwnagotchi build is very beginner friendly, only some basic linux and raspberry pi knowledge is required to get it up and running.</p>
+
+<p>Here is a list of the parts I used:</p>
+<ul>
+  <li>Raspberry Pi Zero 2 W with Header Pins</li>
+  <li>Waveshare v4 2.13inch E-Ink Display Hat</li>
+  <li>PiSugar 3 1200mAh Battery</li>
+  <li>32GB MicroSD Card (and a USB adaptor or card reader to connect it to your PC)</li>
+  <li>Micro USB to USB-A cable</li>
+  <li><a href="https://cults3d.com/en/3d-model/gadget/coque-pwnagotchi-waveshare3-pisugar3-et-protection-d-ecran-plexiglass">3D Case I Printed</a></li>
+</ul>
+
+<p>The case is not entirely necessary but as I already own a FDM 3D printer it was a no-brainer.</p>
+
+<figure>
+  <img src="/assets/images/pwnagotchi/parts.jfif" alt="Pwnagotchi Parts" width="600" />
+  <figcaption>Pwnagotchi Parts</figcaption>
+</figure>
+
+<p>Instead of going over the installation steps, I will provide the guide I used for anyone that would like to tackle this project themselves: <a href="https://pwnagotchi.org/getting-started/index.html">Guide I Used</a></p>
+
+<p>There is also some good information here as well:
+<a href="https://pwnagotchi.ai/">Pwnagotchi Website</a></p>
+
+<p>The build process was actually quite straightforward, and being a solderless build is a bonus for anyone yet to venture into soldering.</p>
+
+<p>The Waveshare screen clicks into the pins on the raspberry pi and the PiSugar battery connects via the back of the raspberry pi using 4 mounting screws.</p>
+
+<figure>
+  <div class="side-by-side">
+    <img src="/assets/images/pwnagotchi/waveshare.jfif" alt="Waveshare Screen" />
+    <img src="/assets/images/pwnagotchi/pwnagotchi-side.jfif" alt="Side view of Pwnagotchi" />
+  </div>
+  <figcaption>Pwnagotchi Build</figcaption>
+</figure>
+
+<p>After putting the device together I proceeded with the installation of the Pwnagotchi software. This is done by flashing a custom image from the <a href="https://pwnagotchi.org/getting-started/index.html">guide</a> to the micro sd card via the Raspberry Pi Imager software.</p>
+
+<p>After the imaging process, it was time to insert the sdcard into our newly build Pwnagotchi and connect it to the computer.</p>
+
+<p>The guide is thorough enough to show the process for Windows, Linux and MacOS but since I already had my Windows laptop in front of me as I followed the guide, I decided to continue the process with it.</p>
+
+<p>To get the Pwnagotchi to be recognised as a USB Ethernet device in Windows I was required to install the RNDIS driver, the setup was simple and the PC detected the pwnagotchi as a network device.</p>
+
+<p>I assigned a static IP to the ethernet device as per the <a href="https://pwnagotchi.org/getting-started/index.html">guide</a> so it would be easy to ssh into and access the web gui.</p>
+
+<p>I recommend changing the SSH password as the first thing you do after logging into it. From a security standpoint, using a default password to login to any device is always a big no.</p>
+
+<p>Configuring the device was simple using the provided wizard which can be accessed using <code class="language-plaintext highlighter-rouge">sudo pwnagotchi --wizard</code></p>
+
+<p>After going through the prompts and completing the configuration your Pwnagotchi is technically ready to start capturing wifi handshakes but there are still some important configurations I would setup first.</p>
+
+<p>Now, you can edit the configuration file manually, it is located on the device at <code class="language-plaintext highlighter-rouge">/etc/pwnagotchi/config.toml</code> but there is a simpler more user friendly way to edit this config with the web gui.</p>
+
+<p>You can access the web gui of the pwnagotchi by having it connected to the PC and navigating in a browser to the IP address on port 8080. for eg. <code class="language-plaintext highlighter-rouge">http://10.0.0.2:8080</code>. (If this doesn’t work, continue reading the recommended settings in the next section.)
+If successful, you will see your cute little Pwnagotchi face inside your web browser now. Next, I clicked on Plugins and enabled the webcfg plugin.
+Now I can edit all the settings via the web gui instead of needing to ssh into the device each time I want to make a change.</p>
+
+<p>Here is a list of option I recommend setting:</p>
+<div class="language-toml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Opt Out of PwnGrid reporting (Opt Out of sharing data publicly, used for leaderboards etc)</span>
+<span class="n">main</span><span class="p">.</span><span class="n">plugins</span><span class="p">.</span><span class="n">grid</span><span class="p">.</span><span class="n">enabled</span> <span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+<span class="n">main</span><span class="p">.</span><span class="n">plugins</span><span class="p">.</span><span class="n">grid</span><span class="p">.</span><span class="n">report</span> <span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+
+<span class="c"># Turn off sending deauthentication packets (so your neighbours dont hate you.)</span>
+<span class="n">personality</span><span class="p">.</span><span class="n">deauth</span> <span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+
+<span class="c"># Changing the web gui password (and enabling the web gui if it hasn't been enabled already)</span>
+<span class="n">ui</span><span class="p">.</span><span class="n">web</span><span class="p">.</span><span class="n">enabled</span> <span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">ui</span><span class="p">.</span><span class="n">web</span><span class="p">.</span><span class="n">auth</span> <span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">ui</span><span class="p">.</span><span class="n">web</span><span class="p">.</span><span class="n">username</span> <span class="o">=</span><span class="w"> </span><span class="s">"USERNAME"</span>
+<span class="n">ui</span><span class="p">.</span><span class="n">web</span><span class="p">.</span><span class="n">password</span> <span class="o">=</span><span class="w"> </span><span class="s">"PASSWORD"</span>
+</code></pre></div></div>
+
+<p>Pwangotchi runs bettercap under the hood to handle packet capturing. bettercap in itself is a very powerful and capable piece of software which can be accessed via a web gui just like the pwnagotchi screen can. Try <code class="language-plaintext highlighter-rouge">pwnagotchi.local</code> in your web browser (replace pwnagotchi with the name you gave your device) to access bettercap. (The default credentials are <code class="language-plaintext highlighter-rouge">pwnagotchi</code> for the username and password.)</p>
+
+<p>I recommend changing the bettercap password from the default as well, this is a little trickier to change but I will explain the steps I took:</p>
+
+<ol>
+  <li>SSH into your Pwnagotchi</li>
+  <li>Go to <code class="language-plaintext highlighter-rouge">/usr/local/share/bettercap/caplets/pwnagotchi-auto.cap</code></li>
+  <li>Edit these options:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set api.rest.username "ENTER USERNAME"
+set api.rest.password "ENTER PASSWORD"
+</code></pre></div>    </div>
+  </li>
+  <li>Go to <code class="language-plaintext highlighter-rouge">/etc/pwnagotchi/config.toml</code></li>
+  <li>Edit these options:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bettercap.username = "USERNAME"
+bettercap.password = "PASSWORD"
+</code></pre></div>    </div>
+  </li>
+  <li>Restart your Pwnagotchi with <code class="language-plaintext highlighter-rouge">sudo reboot</code></li>
+</ol>
+
+<p>Now when you head to the bettercap web gui you should be able to use your new credentials.</p>
+
+<p>Please Note: These credentials are stored in plain text so don’t use a password that would be dangerous if compromised (Like your banking password.)</p>
+
+<figure>
+  <img src="/assets/images/pwnagotchi/pwnagotchi.jfif" alt="Completed Pwnagotchi" width="600" />
+  <figcaption>Completed Pwnagotchi</figcaption>
+</figure>
+
+<p>After the reboot, I unplugged my Pwnagotchi and tested it on my home network.
+It captured the handhshake succesfully. This will be indicated on the screen, you can head <a href="https://pwnagotchi.ai/usage/">here</a> for more information on the Pwnagotchi GUI.</p>
+
+<p>Now the Pwnagotchi merely captures wifi hanshakes, they still require more work and software to crack the password. You can access the capture files by connecting your Pwnagotchi to your PC, sshing into the device and going to <code class="language-plaintext highlighter-rouge">/home/pi/handshakes</code>
+Thankfully, my wifi password was too strong to crack but alas, the Pwnagotchi has done its job.</p>
+
+<p>IMPORTANT</p>
+<ul>
+  <li>Turn off Deauthentication before booting, otherwise your poor neighbours and anyone else around you will have a horrible time being kicked off their wifi networks. (Not to mention the legality issues with deauthentication packets)</li>
+  <li>Change the SSH password for the device</li>
+  <li>Change the Web GUI password</li>
+  <li>Change the bettercap Password</li>
+</ul>
+
+
+        </div>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      &copy; 2026 Ritchie Caruso
+    </footer>
+    <script>
+      (function(){
+        var root = document.documentElement;
+        var toggle = document.getElementById('theme-toggle');
+        if(!toggle) return;
+
+        function applyTheme(theme){
+          if(theme === 'dark') root.classList.add('dark');
+          else root.classList.remove('dark');
+        }
+
+        var stored = localStorage.getItem('theme');
+        if(stored) applyTheme(stored);
+        else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) applyTheme('dark');
+
+        function updateToggleState(){
+          var isDark = root.classList.contains('dark');
+          toggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+        }
+
+        updateToggleState();
+
+        toggle.addEventListener('click', function(){
+          var isDark = root.classList.toggle('dark');
+          localStorage.setItem('theme', isDark ? 'dark' : 'light');
+          updateToggleState();
+        });
+      })();
+
+      // Hamburger menu toggle
+      (function(){
+        var hamburger = document.getElementById('hamburger');
+        var siteRight = document.querySelector('.site-right');
+        if(!hamburger || !siteRight) return;
+
+        hamburger.addEventListener('click', function(){
+          var isExpanded = siteRight.classList.toggle('active');
+          hamburger.classList.toggle('active');
+          hamburger.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e){
+          if(!hamburger.contains(e.target) && !siteRight.contains(e.target)){
+            siteRight.classList.remove('active');
+            hamburger.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+          }
+        });
+
+        // Close menu on window resize above mobile breakpoint
+        var resizeTimer;
+        window.addEventListener('resize', function(){
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(function(){
+            if(window.innerWidth > 768){
+              siteRight.classList.remove('active');
+              hamburger.classList.remove('active');
+              hamburger.setAttribute('aria-expanded', 'false');
+            }
+          }, 250);
+        });
+      })();
+
+      // Copy code button functionality
+      (function(){
+        function wrapCodeBlocks(){
+          var pres = document.querySelectorAll('pre');
+          pres.forEach(function(pre){
+            if(pre.parentElement.classList.contains('code-block-wrapper')) return;
+            
+            var wrapper = document.createElement('div');
+            wrapper.className = 'code-block-wrapper';
+            pre.parentNode.insertBefore(wrapper, pre);
+            wrapper.appendChild(pre);
+            
+            var button = document.createElement('button');
+            button.className = 'copy-code-button';
+            button.textContent = 'Copy';
+            button.setAttribute('aria-label', 'Copy code to clipboard');
+            
+            button.addEventListener('click', function(){
+              var code = pre.querySelector('code') || pre;
+              var text = code.textContent;
+              
+              navigator.clipboard.writeText(text).then(function(){
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
+                setTimeout(function(){
+                  button.textContent = 'Copy';
+                  button.classList.remove('copied');
+                }, 2000);
+              }).catch(function(err){
+                console.error('Failed to copy:', err);
+              });
+            });
+            
+            wrapper.appendChild(button);
+          });
+        }
+        
+        if(document.readyState === 'loading'){
+          document.addEventListener('DOMContentLoaded', wrapCodeBlocks);
+        } else {
+          wrapCodeBlocks();
+        }
+      })();
+    </script>
+  </body>
+</html>

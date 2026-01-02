@@ -2,7 +2,7 @@
 layout: post  
 title: "Tamagotchi for Hackers!"  
 tags: [cybersecurity, microsoft, exchange, outlook, incident-response]  
-thumbnail: /assets/images/pwnagotchi.jpg
+thumbnail: /assets/images/pwnagotchi/tamagotchi.jpeg
 ---
 
 If you grew up in the late 90's or the early 2000's then you probably remember Tamagotchis. The little handheld digital pet from Bandai was a huge hit, you took care of the little creature by feeding it, playing games etc using 3 small buttons.
@@ -32,6 +32,14 @@ Here is a list of the parts I used:
 
 The case is not entirely necessary but as I already own a FDM 3D printer it was a no-brainer.
 
+<figure>
+  <img 
+    src="/assets/images/pwnagotchi/parts.jfif"
+    alt="Pwnagotchi Parts"
+    width="600">
+  <figcaption>Pwnagotchi Parts</figcaption>
+</figure>
+
 Instead of going over the installation steps, I will provide the guide I used for anyone that would like to tackle this project themselves: [Guide I Used](https://pwnagotchi.org/getting-started/index.html)
 
 There is also some good information here as well:
@@ -41,13 +49,26 @@ The build process was actually quite straightforward, and being a solderless bui
 
 The Waveshare screen clicks into the pins on the raspberry pi and the PiSugar battery connects via the back of the raspberry pi using 4 mounting screws.
 
+
+<figure>
+  <div class="side-by-side">
+    <img 
+      src="/assets/images/pwnagotchi/waveshare.jfif"
+      alt="Waveshare Screen">
+    <img 
+      src="/assets/images/pwnagotchi/pwnagotchi-side.jfif"
+      alt="Side view of Pwnagotchi">
+  </div>
+  <figcaption>Pwnagotchi Build</figcaption>
+</figure>
+
 After putting the device together I proceeded with the installation of the Pwnagotchi software. This is done by flashing a custom image from the [guide](https://pwnagotchi.org/getting-started/index.html) to the micro sd card via the Raspberry Pi Imager software.
 
 After the imaging process, it was time to insert the sdcard into our newly build Pwnagotchi and connect it to the computer.
 
 The guide is thorough enough to show the process for Windows, Linux and MacOS but since I already had my Windows laptop in front of me as I followed the guide, I decided to continue the process with it.
 
-To get the Pwnagotchi to be recognised as a USB Ethernet device in windows I was required to install the RNDIS driver, the setup was simple and the PC detected the pwnagotchi as a network device.
+To get the Pwnagotchi to be recognised as a USB Ethernet device in Windows I was required to install the RNDIS driver, the setup was simple and the PC detected the pwnagotchi as a network device.
 
 I assigned a static IP to the ethernet device as per the [guide](https://pwnagotchi.org/getting-started/index.html) so it would be easy to ssh into and access the web gui.
 
@@ -73,28 +94,46 @@ main.plugins.grid.report = false
 personality.deauth = false
 
 # Changing the web gui password (and enabling the web gui if it hasn't been enabled already)
-
-
-
+ui.web.enabled = true
+ui.web.auth = true
+ui.web.username = "USERNAME"
+ui.web.password = "PASSWORD"
 ```
 
-Pwangotchi runs bettercap under the hood to handle packet capturing. bettercap in itself is a very powerful and capable piece of software which can be accessed via a web gui just like the pwnagotchi screen can. Try `pwnagotchi.local` in your web browser to access bettercap. (The default credentials are `pwnagotchi` for the username and password.)
+Pwangotchi runs bettercap under the hood to handle packet capturing. bettercap in itself is a very powerful and capable piece of software which can be accessed via a web gui just like the pwnagotchi screen can. Try `pwnagotchi.local` in your web browser (replace pwnagotchi with the name you gave your device) to access bettercap. (The default credentials are `pwnagotchi` for the username and password.)
 
 I recommend changing the bettercap password from the default as well, this is a little trickier to change but I will explain the steps I took:
 
 1. SSH into your Pwnagotchi
-2. Go to `/usr/local/share/bettercap/caplets/pwnagotchi-*.cap,`
+2. Go to `/usr/local/share/bettercap/caplets/pwnagotchi-auto.cap`
 3. Edit these options: 
+```
+set api.rest.username "ENTER USERNAME"
+set api.rest.password "ENTER PASSWORD"
+```
 4. Go to `/etc/pwnagotchi/config.toml`
 5. Edit these options:
+```
+bettercap.username = "USERNAME"
+bettercap.password = "PASSWORD"
+```
+
 6. Restart your Pwnagotchi with `sudo reboot`
 
 Now when you head to the bettercap web gui you should be able to use your new credentials.
 
 Please Note: These credentials are stored in plain text so don't use a password that would be dangerous if compromised (Like your banking password.)
 
+<figure>
+  <img 
+    src="/assets/images/pwnagotchi/pwnagotchi.jfif"
+    alt="Completed Pwnagotchi"
+    width="600">
+  <figcaption>Completed Pwnagotchi</figcaption>
+</figure>
+
 After the reboot, I unplugged my Pwnagotchi and tested it on my home network.
-It captured the handhshake succesfully. This will be indicated on the screen, you can head here for more information on the Pwnagotchi GUI.
+It captured the handhshake succesfully. This will be indicated on the screen, you can head [here](https://pwnagotchi.ai/usage/) for more information on the Pwnagotchi GUI.
 
 Now the Pwnagotchi merely captures wifi hanshakes, they still require more work and software to crack the password. You can access the capture files by connecting your Pwnagotchi to your PC, sshing into the device and going to `/home/pi/handshakes`
 Thankfully, my wifi password was too strong to crack but alas, the Pwnagotchi has done its job.
