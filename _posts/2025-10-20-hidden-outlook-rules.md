@@ -62,7 +62,7 @@ The attacker creates an inbox rule that forwards or moves emails — for example
 
 <figure>
   <img 
-    src="/assets/images/hidden-rules/create-rule.png"
+    src="/assets/images/hidden-rules/create-rule.webp"
     alt="Creating Outlook rule"
     width="400">
   <figcaption>Creating Outlook rule</figcaption>
@@ -84,7 +84,7 @@ In this example, the rule moves emails with the subject *“Hidden Test”* to t
 
 <figure>
   <img 
-    src="/assets/images/hidden-rules/rule-demonstration.png"
+    src="/assets/images/hidden-rules/rule-demonstration.webp"
     alt="Rule that will be hidden"
     width="400">
   <figcaption>Rule that will be hidden</figcaption>
@@ -102,7 +102,7 @@ In this example, the rule moves emails with the subject *“Hidden Test”* to t
 
 <figure>
   <img 
-    src="/assets/images/hidden-rules/mfcmapi-changes.png"
+    src="/assets/images/hidden-rules/mfcmapi-changes.webp"
     alt="Tampering with rule properties"
     width="600">
   <figcaption>Tampering with rule properties</figcaption>
@@ -119,7 +119,7 @@ After hiding the rule, the **Rules and Alerts** window appears empty:
 
 <figure>
   <img 
-    src="/assets/images/hidden-rules/rule-is-hidden.png"
+    src="/assets/images/hidden-rules/rule-is-hidden.webp"
     alt="No rules visible in Outlook"
     width="600">
   <figcaption>No rules visible in Outlook</figcaption>
@@ -131,7 +131,7 @@ After sending a test email that meets the rule’s criteria, the message is sile
 
 <figure>
   <img 
-    src="/assets/images/hidden-rules/email-in-archive.png"
+    src="/assets/images/hidden-rules/email-in-archive.webp"
     alt="Email moved by hidden rule"
     width="600">
   <figcaption>Email moved by hidden rule</figcaption>
@@ -157,7 +157,7 @@ Hidden rules appear with a numeric string.
 
 <figure>
   <img 
-    src="/assets/images/hidden-rules/Get-InboxRule.png"
+    src="/assets/images/hidden-rules/Get-InboxRule.webp"
     alt="Detecting hidden rule in Powershell"
     width="600">
   <figcaption>Detecting hidden rule in Powershell</figcaption>
@@ -175,7 +175,7 @@ Remove-InboxRule -Mailbox example@work.com -Identity "RULE_ID"
 
 <figure>
   <img 
-    src="/assets/images/hidden-rules/remove-rule.png"
+    src="/assets/images/hidden-rules/remove-rule.webp"
     alt="Removing hidden rule in Powershell"
     width="800">
   <figcaption>Removing hidden rule in Powershell</figcaption>
@@ -187,7 +187,7 @@ outlook.exe /cleanrules
 ```
 <figure>
   <img 
-    src="/assets/images/hidden-rules/clean-rules.png"
+    src="/assets/images/hidden-rules/clean-rules.webp"
     alt="Cleaning Outlook Rules"
     width="400">
   <figcaption>Cleaning Outlook Rules</figcaption>
@@ -247,7 +247,7 @@ $output | Export-Csv "OUTPUT_PATH.csv" -NoTypeInformation
 
 <figure>
   <img 
-    src="/assets/images/hidden-rules/description-output.png"
+    src="/assets/images/hidden-rules/description-output.webp"
     alt="Rule Description Output"
     width="1000">
   <figcaption>Rule Description Output</figcaption>
