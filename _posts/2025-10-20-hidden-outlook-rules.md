@@ -2,7 +2,7 @@
 layout: post  
 title: "How Bad Actors Can Hide Outlook & Exchange Inbox Rules"  
 tags: [cybersecurity, microsoft, exchange, outlook, incident-response]  
-thumbnail: /assets/images/hidden-rules/hidden-rule-banner.jpg
+thumbnail: /assets/images/hidden-rules/hidden-rule-banner.webp
 ---
 
 It was a typical Monday morning. I sat down at my desk, ready to start the day, when I received a Microsoft Teams message from our cybersecurity department. Over the weekend, a breach had occurred that impacted several users.
