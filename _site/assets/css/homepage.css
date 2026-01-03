@@ -165,7 +165,7 @@ html.dark .project-card p { color: #cfcfcf; }
   text-decoration: none;
   font-weight: 600;
   font-size: 0.85rem;
-  margin-top: auto;
+  margin-top: 1rem;
   align-self: flex-start;
   position: relative;
   z-index: 2;
