@@ -23,7 +23,7 @@ permalink: /projects/
     <p>Built a custom NAS server from scratch using Unraid, featuring 8x2TB drives in RAID configuration, Docker containers, support for VMs, Photoprism, Pi-hole and more.</p>
   </div>
   
-  <div class="project-card">
+  <!-- <div class="project-card">
     <img src="{{ '/assets/images/placeholder.webp' | relative_url }}" alt="Project 4">
     <h3><a href="#">Project Title</a></h3>
     <p>Project description coming soon.</p>
@@ -37,9 +37,9 @@ permalink: /projects/
     <img src="{{ '/assets/images/placeholder.webp' | relative_url }}" alt="Project 6">
     <h3><a href="#">Project Title</a></h3>
     <p>Project description coming soon.</p>
-  </div>
+  </div> -->
   
-  <div class="project-card">
+  <!-- <div class="project-card">
     <img src="{{ '/assets/images/placeholder.webp' | relative_url }}" alt="Project 7">
     <h3><a href="#">Project Title</a></h3>
     <p>Project description coming soon.</p>
@@ -54,4 +54,4 @@ permalink: /projects/
     <h3><a href="#">Project Title</a></h3>
     <p>Project description coming soon.</p>
   </div>
-</div>
+</div> -->
