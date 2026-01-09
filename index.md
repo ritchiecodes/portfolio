@@ -35,6 +35,10 @@ title: Home
     <p>Built a custom NAS server from scratch using Unraid, featuring 8x2TB drives in RAID configuration, Docker containers, support for VMs, Photoprism, Pi-hole and more.</p>
   </div>
 </div>
+
+<div style="text-align: center; margin-top: 2rem;">
+  <a href="{{ '/projects/' | relative_url }}" style="display: inline-block; padding: 0.75rem 2rem; background: var(--accent, #0066cc); color: white; text-decoration: none; border-radius: 4px; font-weight: 500;">View All Projects</a>
+</div>
   </div>
 
 <div class="recent-posts">
@@ -67,4 +71,8 @@ title: Home
     {% endif %}
   </div>
 {% endfor %}
+
+<div style="text-align: center; margin-top: 2rem;">
+  <a href="{{ '/blog/' | relative_url }}" style="display: inline-block; padding: 0.75rem 2rem; background: var(--accent, #0066cc); color: white; text-decoration: none; border-radius: 4px; font-weight: 500;">View All Posts</a>
+</div>
 </div>

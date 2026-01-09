@@ -1,4 +1,422 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-01-09T14:01:12+11:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Ritchie Caruso</title><subtitle>A simple Jekyll site</subtitle><entry><title type="html">Tamagotchi for Hackers: Building a Pwnagotchi</title><link href="http://localhost:4000/2025/12/27/pwnagotchi.html" rel="alternate" type="text/html" title="Tamagotchi for Hackers: Building a Pwnagotchi" /><published>2025-12-27T00:00:00+11:00</published><updated>2025-12-27T00:00:00+11:00</updated><id>http://localhost:4000/2025/12/27/pwnagotchi</id><content type="html" xml:base="http://localhost:4000/2025/12/27/pwnagotchi.html"><![CDATA[<p>If you grew up in the late ’90s or early 2000s, chances are you remember Tamagotchis—the small handheld digital pets from Bandai that demanded constant attention through feeding, games, and care via three tiny buttons.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-01-09T14:15:48+11:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Ritchie Caruso</title><subtitle>A simple Jekyll site</subtitle><entry><title type="html">Account Creation Automation</title><link href="http://localhost:4000/2026/01/09/account-creation-automation.html" rel="alternate" type="text/html" title="Account Creation Automation" /><published>2026-01-09T14:01:57+11:00</published><updated>2026-01-09T14:01:57+11:00</updated><id>http://localhost:4000/2026/01/09/account-creation-automation</id><content type="html" xml:base="http://localhost:4000/2026/01/09/account-creation-automation.html"><![CDATA[<h1 id="automating-account-creation-without-an-api-a-practical-guide-with-pyautogui">Automating Account Creation Without an API: A Practical Guide with PyAutoGUI</h1>
+
+<p>Anyone who’s ever had to create dozens (or hundreds) of accounts in a legacy system knows the pain:</p>
+
+<ul>
+  <li>Open the app</li>
+  <li>Click the same fields</li>
+  <li>Copy values from a spreadsheet</li>
+  <li>Paste, submit, repeat</li>
+</ul>
+
+<p>When there’s <strong>no API</strong>, no import feature, and no automation hooks, this kind of work quickly becomes a time sink.</p>
+
+<p>In this post, I’ll walk through how to automate a tedious UI-driven task—<strong>account creation in software without API access</strong>—using Python, <code class="language-plaintext highlighter-rouge">pyautogui</code>, and clipboard automation.</p>
+
+<blockquote>
+  <p>⚠️ <strong>Important note</strong>
+Only automate software you are authorized to use this way. Always follow company policy, license agreements, and local laws.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="why-ui-automation">Why UI Automation?</h2>
+
+<p>UI automation is not always the <em>best</em> solution—but sometimes it’s the <strong>only</strong> solution.</p>
+
+<p>Typical scenarios:</p>
+
+<ul>
+  <li>Internal tools built years ago</li>
+  <li>Vendor software with no integration options</li>
+  <li>Temporary migration or backfill tasks</li>
+  <li>One-time or occasional bulk operations</li>
+</ul>
+
+<p>When rewriting the system or negotiating API access isn’t realistic, UI automation can save hours of repetitive work.</p>
+
+<hr />
+
+<h2 id="the-approach">The Approach</h2>
+
+<p>At a high level, the automation looks like this:</p>
+
+<ol>
+  <li>Read account data from a spreadsheet</li>
+  <li>Copy values to the clipboard</li>
+  <li>Click specific screen coordinates</li>
+  <li>Paste data into form fields</li>
+  <li>Submit and move to the next record</li>
+</ol>
+
+<p>We’ll use:</p>
+
+<ul>
+  <li><strong><code class="language-plaintext highlighter-rouge">pyautogui</code></strong> → mouse &amp; keyboard control</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">pyperclip</code></strong> → reliable clipboard access (often mistakenly called <em>pyclipper</em>)</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">pandas</code></strong> → spreadsheet parsing</li>
+</ul>
+
+<hr />
+
+<h2 id="installing-dependencies">Installing Dependencies</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install </span>pyautogui pyperclip pandas openpyxl
+</code></pre></div></div>
+
+<blockquote>
+  <p>On macOS and Windows, you may need to grant accessibility or input permissions for automation to work.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="preparing-the-spreadsheet">Preparing the Spreadsheet</h2>
+
+<p>Assume a simple Excel file (<code class="language-plaintext highlighter-rouge">accounts.xlsx</code>) like this:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>username</th>
+      <th>email</th>
+      <th>role</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>jdoe</td>
+      <td><a href="mailto:jdoe@example.com">jdoe@example.com</a></td>
+      <td>admin</td>
+    </tr>
+    <tr>
+      <td>asmith</td>
+      <td><a href="mailto:asmith@example.com">asmith@example.com</a></td>
+      <td>user</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="capturing-screen-coordinates">Capturing Screen Coordinates</h2>
+
+<p>Before writing code, you need to know <strong>where to click</strong>.</p>
+
+<p>Run this snippet and hover your mouse over each input field:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">pyautogui</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">pyautogui</span><span class="p">.</span><span class="nf">position</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p>Write down the coordinates for:</p>
+
+<ul>
+  <li>Username field</li>
+  <li>Email field</li>
+  <li>Role dropdown</li>
+  <li>Submit button</li>
+</ul>
+
+<p>Example:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">USERNAME_FIELD</span> <span class="o">=</span> <span class="p">(</span><span class="mi">420</span><span class="p">,</span> <span class="mi">310</span><span class="p">)</span>
+<span class="n">EMAIL_FIELD</span>    <span class="o">=</span> <span class="p">(</span><span class="mi">420</span><span class="p">,</span> <span class="mi">360</span><span class="p">)</span>
+<span class="n">ROLE_FIELD</span>     <span class="o">=</span> <span class="p">(</span><span class="mi">420</span><span class="p">,</span> <span class="mi">410</span><span class="p">)</span>
+<span class="n">SUBMIT_BUTTON</span>  <span class="o">=</span> <span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">480</span><span class="p">)</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="the-automation-script">The Automation Script</h2>
+
+<p>Here’s a simplified but realistic example:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">time</span>
+<span class="kn">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="n">pyautogui</span>
+<span class="kn">import</span> <span class="n">pyperclip</span>
+
+<span class="c1"># Safety: move mouse to top-left corner to abort
+</span><span class="n">pyautogui</span><span class="p">.</span><span class="n">FAILSAFE</span> <span class="o">=</span> <span class="bp">True</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">read_excel</span><span class="p">(</span><span class="sh">"</span><span class="s">accounts.xlsx</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">USERNAME_FIELD</span> <span class="o">=</span> <span class="p">(</span><span class="mi">420</span><span class="p">,</span> <span class="mi">310</span><span class="p">)</span>
+<span class="n">EMAIL_FIELD</span>    <span class="o">=</span> <span class="p">(</span><span class="mi">420</span><span class="p">,</span> <span class="mi">360</span><span class="p">)</span>
+<span class="n">ROLE_FIELD</span>     <span class="o">=</span> <span class="p">(</span><span class="mi">420</span><span class="p">,</span> <span class="mi">410</span><span class="p">)</span>
+<span class="n">SUBMIT_BUTTON</span>  <span class="o">=</span> <span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">480</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">click_and_paste</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+    <span class="n">pyautogui</span><span class="p">.</span><span class="nf">click</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
+    <span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
+    <span class="n">pyperclip</span><span class="p">.</span><span class="nf">copy</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
+    <span class="n">pyautogui</span><span class="p">.</span><span class="nf">hotkey</span><span class="p">(</span><span class="sh">"</span><span class="s">ctrl</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">v</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>  <span class="c1"># Time to switch to the target application
+</span>
+<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">.</span><span class="nf">iterrows</span><span class="p">():</span>
+    <span class="nf">click_and_paste</span><span class="p">(</span><span class="n">USERNAME_FIELD</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="sh">"</span><span class="s">username</span><span class="sh">"</span><span class="p">])</span>
+    <span class="nf">click_and_paste</span><span class="p">(</span><span class="n">EMAIL_FIELD</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="sh">"</span><span class="s">email</span><span class="sh">"</span><span class="p">])</span>
+    <span class="nf">click_and_paste</span><span class="p">(</span><span class="n">ROLE_FIELD</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="sh">"</span><span class="s">role</span><span class="sh">"</span><span class="p">])</span>
+
+    <span class="n">pyautogui</span><span class="p">.</span><span class="nf">click</span><span class="p">(</span><span class="n">SUBMIT_BUTTON</span><span class="p">)</span>
+    <span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mf">1.5</span><span class="p">)</span>  <span class="c1"># Wait for form submission
+</span></code></pre></div></div>
+
+<hr />
+
+<h2 id="why-use-the-clipboard">Why Use the Clipboard?</h2>
+
+<p>You <em>could</em> type characters one by one, but clipboard pasting is:</p>
+
+<ul>
+  <li>Faster</li>
+  <li>More reliable for long strings</li>
+  <li>Safer for special characters (emails, IDs)</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">pyperclip</code> ensures what you paste is exactly what you copied—no dropped keystrokes.</p>
+
+<hr />
+
+<h2 id="making-it-robust">Making It Robust</h2>
+
+<p>To avoid fragile scripts:</p>
+
+<h3 id="add-delays">Add Delays</h3>
+
+<p>UI response times vary. Always assume the app is slower than your code.</p>
+
+<h3 id="use-failsafes">Use Failsafes</h3>
+
+<p><code class="language-plaintext highlighter-rouge">pyautogui.FAILSAFE = True</code> lets you abort by slamming the mouse into the top-left corner.</p>
+
+<h3 id="test-with-dummy-data">Test With Dummy Data</h3>
+
+<p>Never start with production accounts.</p>
+
+<h3 id="lock-your-screen-layout">Lock Your Screen Layout</h3>
+
+<ul>
+  <li>Same resolution</li>
+  <li>Same window position</li>
+  <li>Same zoom level</li>
+</ul>
+
+<p>UI automation depends on consistency.</p>
+
+<hr />
+
+<h2 id="limitations-be-honest">Limitations (Be Honest)</h2>
+
+<p>UI automation is powerful—but not perfect:</p>
+
+<ul>
+  <li>Breaks if the UI layout changes</li>
+  <li>Sensitive to screen resolution</li>
+  <li>Harder to debug than APIs</li>
+  <li>Not suitable for high-frequency automation</li>
+</ul>
+
+<p>Think of it as <strong>a practical workaround</strong>, not a long-term architecture.</p>
+
+<hr />
+
+<h2 id="final-thoughts">Final Thoughts</h2>
+
+<p>When APIs aren’t available, UI automation can turn hours of mind-numbing repetition into a few minutes of setup and execution.</p>
+
+<p>Tools like <code class="language-plaintext highlighter-rouge">pyautogui</code> and clipboard-based workflows give developers a way to:</p>
+
+<ul>
+  <li>Reduce human error</li>
+  <li>Save time</li>
+  <li>Automate responsibly</li>
+</ul>
+
+<p>If you treat UI automation as a <strong>last-mile solution</strong>—used carefully and ethically—it can be a huge productivity win.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Automating Account Creation Without an API: A Practical Guide with PyAutoGUI]]></summary></entry><entry><title type="html">Password Sync App</title><link href="http://localhost:4000/2026/01/09/password-sync-app.html" rel="alternate" type="text/html" title="Password Sync App" /><published>2026-01-09T14:01:57+11:00</published><updated>2026-01-09T14:01:57+11:00</updated><id>http://localhost:4000/2026/01/09/password-sync-app</id><content type="html" xml:base="http://localhost:4000/2026/01/09/password-sync-app.html"><![CDATA[<h1 id="verifying-password-sync-between-two-active-directory-domains-with-powershell">Verifying Password Sync Between Two Active Directory Domains with PowerShell</h1>
+
+<p>In multi-domain or hybrid Active Directory environments, one common operational question comes up again and again:</p>
+
+<blockquote>
+  <p><strong>“Are passwords actually syncing between these two domains?”</strong></p>
+</blockquote>
+
+<p>Whether you’re using trust relationships, synchronization tools, or identity management solutions, a quick and reliable way to validate password synchronization is by comparing the <strong><code class="language-plaintext highlighter-rouge">PasswordLastSet</code></strong> timestamp for the same user across domains.</p>
+
+<p>This post walks through how to write a <strong>PowerShell script</strong> that checks the password last set date and time between two domains and determines whether they are in sync.</p>
+
+<hr />
+
+<h2 id="why-passwordlastset">Why <code class="language-plaintext highlighter-rouge">PasswordLastSet</code>?</h2>
+
+<p>Active Directory stores the time a user’s password was last changed in the attribute:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">PasswordLastSet</span><span class="w">
+</span></code></pre></div></div>
+
+<p>If passwords are syncing correctly:</p>
+
+<ul>
+  <li>The timestamps should be <strong>identical</strong> or</li>
+  <li>Within an <strong>acceptable time window</strong> (seconds or minutes, depending on your sync process)</li>
+</ul>
+
+<p>If they differ significantly, it’s a strong indicator of a sync issue.</p>
+
+<hr />
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<p>Before you begin, ensure:</p>
+
+<ul>
+  <li>You have the <strong>ActiveDirectory PowerShell module</strong> installed</li>
+  <li>You have <strong>read access</strong> to both domains</li>
+  <li>DNS and trust relationships are correctly configured</li>
+  <li>You know the <strong>domain controllers</strong> or domain names for both environments</li>
+</ul>
+
+<p>Import the module:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Import-Module</span><span class="w"> </span><span class="nx">ActiveDirectory</span><span class="w">
+</span></code></pre></div></div>
+
+<hr />
+
+<h2 id="defining-the-domains">Defining the Domains</h2>
+
+<p>For clarity, explicitly define the two domains you’re comparing.</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$DomainA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"corp.domainA.local"</span><span class="w">
+</span><span class="nv">$DomainB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"corp.domainB.local"</span><span class="w">
+</span></code></pre></div></div>
+
+<p>You can also specify particular domain controllers if needed:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$DC_A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"dc1.domainA.local"</span><span class="w">
+</span><span class="nv">$DC_B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"dc1.domainB.local"</span><span class="w">
+</span></code></pre></div></div>
+
+<hr />
+
+<h2 id="fetching-the-passwordlastset-value">Fetching the PasswordLastSet Value</h2>
+
+<p>The following function retrieves the password last set timestamp for a given user in a specific domain:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">function</span><span class="w"> </span><span class="nf">Get-PasswordLastSet</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="kr">param</span><span class="w"> </span><span class="p">(</span><span class="w">
+        </span><span class="p">[</span><span class="n">string</span><span class="p">]</span><span class="nv">$Username</span><span class="p">,</span><span class="w">
+        </span><span class="p">[</span><span class="n">string</span><span class="p">]</span><span class="nv">$Server</span><span class="w">
+    </span><span class="p">)</span><span class="w">
+
+    </span><span class="n">Get-ADUser</span><span class="w"> </span><span class="nt">-Identity</span><span class="w"> </span><span class="nv">$Username</span><span class="w"> </span><span class="se">`
+</span><span class="w">               </span><span class="nt">-Server</span><span class="w"> </span><span class="nv">$Server</span><span class="w"> </span><span class="se">`
+</span><span class="w">               </span><span class="nt">-Properties</span><span class="w"> </span><span class="nx">PasswordLastSet</span><span class="w"> </span><span class="o">|</span><span class="w">
+    </span><span class="n">Select-Object</span><span class="w"> </span><span class="nt">-ExpandProperty</span><span class="w"> </span><span class="nx">PasswordLastSet</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<hr />
+
+<h2 id="comparing-password-timestamps-between-domains">Comparing Password Timestamps Between Domains</h2>
+
+<p>Now let’s put it together.</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$Username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"jdoe"</span><span class="w">
+
+</span><span class="nv">$PwdSetA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Get-PasswordLastSet</span><span class="w"> </span><span class="nt">-Username</span><span class="w"> </span><span class="nv">$Username</span><span class="w"> </span><span class="nt">-Server</span><span class="w"> </span><span class="nv">$DomainA</span><span class="w">
+</span><span class="nv">$PwdSetB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Get-PasswordLastSet</span><span class="w"> </span><span class="nt">-Username</span><span class="w"> </span><span class="nv">$Username</span><span class="w"> </span><span class="nt">-Server</span><span class="w"> </span><span class="nv">$DomainB</span><span class="w">
+
+</span><span class="n">Write-Host</span><span class="w"> </span><span class="s2">"Domain A PasswordLastSet: </span><span class="nv">$PwdSetA</span><span class="s2">"</span><span class="w">
+</span><span class="n">Write-Host</span><span class="w"> </span><span class="s2">"Domain B PasswordLastSet: </span><span class="nv">$PwdSetB</span><span class="s2">"</span><span class="w">
+</span></code></pre></div></div>
+
+<hr />
+
+<h2 id="handling-time-differences-gracefully">Handling Time Differences Gracefully</h2>
+
+<p>Exact timestamp matches aren’t always realistic. A small delay may be expected.</p>
+
+<p>Here’s how to calculate the difference:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$TimeDifference</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nv">$PwdSetA</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nv">$PwdSetB</span><span class="p">)</span><span class="o">.</span><span class="nf">Duration</span><span class="p">()</span><span class="w">
+
+</span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="nv">$TimeDifference</span><span class="o">.</span><span class="nf">TotalMinutes</span><span class="w"> </span><span class="o">-le</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">Write-Host</span><span class="w"> </span><span class="s2">"✅ Passwords appear to be in sync"</span><span class="w">
+</span><span class="p">}</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">Write-Host</span><span class="w"> </span><span class="s2">"❌ Passwords are NOT in sync"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>You can adjust the threshold based on your environment’s sync behavior.</p>
+
+<hr />
+
+<h2 id="checking-multiple-users-at-once">Checking Multiple Users at Once</h2>
+
+<p>To scale this check, you can loop through a list of users:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$Users</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">@(</span><span class="s2">"jdoe"</span><span class="p">,</span><span class="w"> </span><span class="s2">"asmith"</span><span class="p">,</span><span class="w"> </span><span class="s2">"mbrown"</span><span class="p">)</span><span class="w">
+
+</span><span class="kr">foreach</span><span class="w"> </span><span class="p">(</span><span class="nv">$User</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nv">$Users</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nv">$A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Get-PasswordLastSet</span><span class="w"> </span><span class="nt">-Username</span><span class="w"> </span><span class="nv">$User</span><span class="w"> </span><span class="nt">-Server</span><span class="w"> </span><span class="nv">$DomainA</span><span class="w">
+    </span><span class="nv">$B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Get-PasswordLastSet</span><span class="w"> </span><span class="nt">-Username</span><span class="w"> </span><span class="nv">$User</span><span class="w"> </span><span class="nt">-Server</span><span class="w"> </span><span class="nv">$DomainB</span><span class="w">
+
+    </span><span class="nv">$Diff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nv">$A</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nv">$B</span><span class="p">)</span><span class="o">.</span><span class="nf">Duration</span><span class="p">()</span><span class="w">
+
+    </span><span class="p">[</span><span class="n">PSCustomObject</span><span class="p">]@{</span><span class="w">
+        </span><span class="nx">User</span><span class="w">              </span><span class="o">=</span><span class="w"> </span><span class="nv">$User</span><span class="w">
+        </span><span class="nx">DomainA_LastSet</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="nv">$A</span><span class="w">
+        </span><span class="nx">DomainB_LastSet</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="nv">$B</span><span class="w">
+        </span><span class="nx">DifferenceMinutes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">math</span><span class="p">]</span><span class="err">::</span><span class="nx">Round</span><span class="err">(</span><span class="nv">$Diff</span><span class="err">.</span><span class="nx">TotalMinutes</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="err">)</span><span class="w">
+        </span><span class="nx">InSync</span><span class="w">            </span><span class="o">=</span><span class="w"> </span><span class="err">(</span><span class="nv">$Diff</span><span class="err">.</span><span class="nx">TotalMinutes</span><span class="w"> </span><span class="err">-</span><span class="nx">le</span><span class="w"> </span><span class="mi">5</span><span class="err">)</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>This produces clean, report-ready output.</p>
+
+<hr />
+
+<h2 id="common-gotchas">Common Gotchas</h2>
+
+<h3 id="time-synchronization">Time Synchronization</h3>
+
+<p>If domain controllers aren’t time-synced (NTP issues), your results may be misleading.</p>
+
+<h3 id="password-writeback-delays">Password Writeback Delays</h3>
+
+<p>Some sync solutions update attributes asynchronously—short mismatches may be normal.</p>
+
+<h3 id="replication-latency">Replication Latency</h3>
+
+<p>If you query different DCs, replication delays can cause temporary differences.</p>
+
+<hr />
+
+<h2 id="when-this-approach-works-best">When This Approach Works Best</h2>
+
+<p>This method is ideal for:</p>
+
+<ul>
+  <li>Troubleshooting password sync issues</li>
+  <li>Validating migrations</li>
+  <li>Spot-checking identity synchronization</li>
+  <li>Operational monitoring scripts</li>
+</ul>
+
+<p>It’s not a replacement for full identity monitoring—but it’s an excellent <strong>first diagnostic step</strong>.</p>
+
+<hr />
+
+<h2 id="final-thoughts">Final Thoughts</h2>
+
+<p>PowerShell makes it easy to validate password synchronization using native Active Directory attributes. By comparing <code class="language-plaintext highlighter-rouge">PasswordLastSet</code> across domains, you gain a quick, reliable signal that helps confirm whether your identity infrastructure is behaving as expected.</p>
+
+<p>Sometimes the simplest checks uncover the biggest problems.</p>
+
+<hr />]]></content><author><name></name></author><summary type="html"><![CDATA[Verifying Password Sync Between Two Active Directory Domains with PowerShell]]></summary></entry><entry><title type="html">Rgb Stage</title><link href="http://localhost:4000/2025/12/28/rgb-stage.html" rel="alternate" type="text/html" title="Rgb Stage" /><published>2025-12-28T16:24:46+11:00</published><updated>2025-12-28T16:24:46+11:00</updated><id>http://localhost:4000/2025/12/28/rgb-stage</id><content type="html" xml:base="http://localhost:4000/2025/12/28/rgb-stage.html"><![CDATA[]]></content><author><name></name></author><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Homelab Build</title><link href="http://localhost:4000/2025/12/28/homelab-build.html" rel="alternate" type="text/html" title="Homelab Build" /><published>2025-12-28T16:24:23+11:00</published><updated>2025-12-28T16:24:23+11:00</updated><id>http://localhost:4000/2025/12/28/homelab-build</id><content type="html" xml:base="http://localhost:4000/2025/12/28/homelab-build.html"><![CDATA[]]></content><author><name></name></author><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Home Network</title><link href="http://localhost:4000/2025/12/28/home-network.html" rel="alternate" type="text/html" title="Home Network" /><published>2025-12-28T16:24:16+11:00</published><updated>2025-12-28T16:24:16+11:00</updated><id>http://localhost:4000/2025/12/28/home-network</id><content type="html" xml:base="http://localhost:4000/2025/12/28/home-network.html"><![CDATA[]]></content><author><name></name></author><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Tamagotchi for Hackers: Building a Pwnagotchi</title><link href="http://localhost:4000/2025/12/27/pwnagotchi.html" rel="alternate" type="text/html" title="Tamagotchi for Hackers: Building a Pwnagotchi" /><published>2025-12-27T00:00:00+11:00</published><updated>2025-12-27T00:00:00+11:00</updated><id>http://localhost:4000/2025/12/27/pwnagotchi</id><content type="html" xml:base="http://localhost:4000/2025/12/27/pwnagotchi.html"><![CDATA[<p>If you grew up in the late ’90s or early 2000s, chances are you remember Tamagotchis—the small handheld digital pets from Bandai that demanded constant attention through feeding, games, and care via three tiny buttons.</p>
 
 <p>Recently, I stumbled across a fantastic open-source project called Pwnagotchi.</p>
 

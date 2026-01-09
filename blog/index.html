@@ -49,23 +49,23 @@ This fallback lists `site.posts` so posts appear without pagination. Install the
 </div>
 
 {% if paginator and paginator.total_pages > 1 %}
-<div class="pagination">
+<div class="pagination" style="display: flex; gap: 1rem; justify-content: center; align-items: center; margin: 2rem 0;">
   {% if paginator.previous_page %}
     {% if paginator.previous_page == 1 %}
-    <a class="prev" href="{{ '/blog/' | relative_url }}">&larr; Newer</a>
+    <a class="prev" href="{{ '/blog/' | relative_url }}" style="padding: 0.75rem 1.5rem; background: var(--accent, #0066cc); color: white; text-decoration: none; border-radius: 4px; font-weight: 500;">&larr; Newer</a>
     {% else %}
-    <a class="prev" href="{{ paginator.previous_page_path | relative_url }}">&larr; Newer</a>
+    <a class="prev" href="{{ paginator.previous_page_path | relative_url }}" style="padding: 0.75rem 1.5rem; background: var(--accent, #0066cc); color: white; text-decoration: none; border-radius: 4px; font-weight: 500;">&larr; Newer</a>
     {% endif %}
   {% else %}
-  <span class="page disabled">&larr; Newer</span>
+  <span class="page disabled" style="padding: 0.75rem 1.5rem; background: var(--bg-secondary, #f5f5f5); color: var(--text-muted, #999); border-radius: 4px; font-weight: 500;">&larr; Newer</span>
   {% endif %}
 
-  <span class="page current">Page {{ paginator.page }} of {{ paginator.total_pages }}</span>
+  <span class="page current" style="padding: 0.75rem 1.5rem; color: var(--text, #000);">Page {{ paginator.page }} of {{ paginator.total_pages }}</span>
 
   {% if paginator.next_page %}
-  <a class="next" href="{{ paginator.next_page_path | relative_url }}">Older &rarr;</a>
+  <a class="next" href="{{ paginator.next_page_path | relative_url }}" style="padding: 0.75rem 1.5rem; background: var(--accent, #0066cc); color: white; text-decoration: none; border-radius: 4px; font-weight: 500;">Older &rarr;</a>
   {% else %}
-  <span class="page disabled">Older &rarr;</span>
+  <span class="page disabled" style="padding: 0.75rem 1.5rem; background: var(--bg-secondary, #f5f5f5); color: var(--text-muted, #999); border-radius: 4px; font-weight: 500;">Older &rarr;</span>
   {% endif %}
 </div>
 {% endif %}
