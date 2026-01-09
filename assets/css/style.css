@@ -279,6 +279,7 @@ html.dark .read-more:hover { background: rgba(255,255,255,0.06); }
 
 html.dark .pagination .page, html.dark .pagination a { border-color: #3a3a3a; }
 html.dark .pagination .current { background:#2a2a2a; }
+html.dark .pagination .page.disabled { background: #3a3a3a !important; color: #888 !important; }
 
 
 

@@ -22,4 +22,36 @@ permalink: /projects/
     <h3><a href="{{ '/2023/11/10/nas-build.html' | relative_url }}">Home NAS Server Build</a></h3>
     <p>Built a custom NAS server from scratch using Unraid, featuring 8x2TB drives in RAID configuration, Docker containers, support for VMs, Photoprism, Pi-hole and more.</p>
   </div>
+  
+  <div class="project-card">
+    <img src="{{ '/assets/images/placeholder.webp' | relative_url }}" alt="Project 4">
+    <h3><a href="#">Project Title</a></h3>
+    <p>Project description coming soon.</p>
+  </div>
+  <div class="project-card">
+    <img src="{{ '/assets/images/placeholder.webp' | relative_url }}" alt="Project 5">
+    <h3><a href="#">Project Title</a></h3>
+    <p>Project description coming soon.</p>
+  </div>
+  <div class="project-card">
+    <img src="{{ '/assets/images/placeholder.webp' | relative_url }}" alt="Project 6">
+    <h3><a href="#">Project Title</a></h3>
+    <p>Project description coming soon.</p>
+  </div>
+  
+  <div class="project-card">
+    <img src="{{ '/assets/images/placeholder.webp' | relative_url }}" alt="Project 7">
+    <h3><a href="#">Project Title</a></h3>
+    <p>Project description coming soon.</p>
+  </div>
+  <div class="project-card">
+    <img src="{{ '/assets/images/placeholder.webp' | relative_url }}" alt="Project 8">
+    <h3><a href="#">Project Title</a></h3>
+    <p>Project description coming soon.</p>
+  </div>
+  <div class="project-card">
+    <img src="{{ '/assets/images/placeholder.webp' | relative_url }}" alt="Project 9">
+    <h3><a href="#">Project Title</a></h3>
+    <p>Project description coming soon.</p>
+  </div>
 </div>
