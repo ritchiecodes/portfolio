@@ -143,10 +143,7 @@ personality.deauth = false
 ui.web.enabled = true
 ui.web.auth = true
 ui.web.username = "USERNAME"
-ui.web.password = "
-Below are the key settings I recommend enabling or modifying:
-
-PASSWORD"
+ui.web.password = "PASSWORD"
 ```
 
 Disabling deauthentication is especially important to avoid disrupting nearby networks and potential legal issues.
