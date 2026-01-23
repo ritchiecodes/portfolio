@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Automating Legacy Workflows Without API Access</title>
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Automating Legacy Workflows Without API Access | Ritchie Caruso</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Automating Legacy Workflows Without API Access" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Anyone who has ever had to manually create dozens—or hundreds—of accounts in a legacy system knows how painful the process can be:" />
+<meta property="og:description" content="Anyone who has ever had to manually create dozens—or hundreds—of accounts in a legacy system knows how painful the process can be:" />
+<link rel="canonical" href="http://localhost:4000/2026/01/23/account-creation-automation.html" />
+<meta property="og:url" content="http://localhost:4000/2026/01/23/account-creation-automation.html" />
+<meta property="og:site_name" content="Ritchie Caruso" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-01-23T21:27:25+11:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Automating Legacy Workflows Without API Access" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-01-23T21:27:25+11:00","datePublished":"2026-01-23T21:27:25+11:00","description":"Anyone who has ever had to manually create dozens—or hundreds—of accounts in a legacy system knows how painful the process can be:","headline":"Automating Legacy Workflows Without API Access","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2026/01/23/account-creation-automation.html"},"url":"http://localhost:4000/2026/01/23/account-creation-automation.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Ritchie Caruso" />
+    <link rel="icon" type="image/png" href="/assets/images/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg" />
+    <link rel="shortcut icon" href="/assets/images/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Ritchie" />
+    <link rel="manifest" href="/assets/images/site.webmanifest" />
+    <link rel="stylesheet" href="/assets/css/style.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-title"><a href="/">Ritchie Caruso</a></div>
+      <button id="hamburger" class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="site-right">
+        <nav class="site-nav">
+          <a href="/" >Home</a>
+          <a href="/about/" >About</a>
+          <a href="/projects/" >Projects</a>
+          <a href="/blog/" class="active">Blog</a>
+          <a href="/contact/" >Contact</a>
+        </nav>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" aria-pressed="false">
+          <span class="knob" aria-hidden="true"></span>
+        </button>
+      </div>
+    </header>
+
+    <main class="site-main post-main">
+      <article class="post">
+        <h1 class="post-title">Automating Legacy Workflows Without API Access</h1>
+        <div class="post-meta">January 23, 2026</div>
+        
+        <div class="post-tags" aria-label="Tags">
+          
+          <a class="tag-badge" href="/tags/#automation">automation</a>
+          
+          <a class="tag-badge" href="/tags/#python">python</a>
+          
+        </div>
+        
+        
+        <div class="post-hero-image">
+          <img src="/assets/images/account-automation/automation-with-python.webp" alt="Automating Legacy Workflows Without API Access">
+        </div>
+        
+        <div class="post-content">
+          <p>Anyone who has ever had to manually create dozens—or hundreds—of accounts in a legacy system knows how painful the process can be:</p>
+
+<ul>
+  <li>Open the application</li>
+  <li>Click the same fields</li>
+  <li>Copy values from a spreadsheet</li>
+  <li>Paste, submit, repeat</li>
+</ul>
+
+<p>When there’s <strong>no API</strong>, no bulk import feature, and no automation hooks, this kind of work quickly turns into a massive time sink.</p>
+
+<p>I encountered this exact challenge in a previous role at a large organisation. While we had strong automation around Active Directory provisioning, many third-party applications offered no programmatic way to create or manage user accounts. Each request required manual intervention through a GUI.</p>
+
+<p>I wasn’t willing to spend hours every week performing repetitive clicks when a more efficient solution was possible.</p>
+
+<p>Enter <strong>Python</strong>.</p>
+
+<p>Python’s reputation for automation and data handling is well earned, and in this post I’ll walk through how to automate a UI-driven task—<strong>account creation in software without API access</strong>—using <code class="language-plaintext highlighter-rouge">pyautogui</code> and a few supporting libraries.</p>
+
+<blockquote>
+  <p>⚠️ <strong>Important</strong>
+Only automate systems you are authorised to use in this way. Always follow company policies, vendor license agreements, and local laws.</p>
+</blockquote>
+
+<p><br /></p>
+
+<h2 id="why-ui-automation">Why UI Automation?</h2>
+
+<p>UI automation is rarely the <em>ideal</em> solution—but sometimes it’s the <strong>only</strong> viable one.</p>
+
+<p>Common scenarios include:</p>
+
+<ul>
+  <li>Internal tools built years ago with no integration options</li>
+  <li>Vendor software that exposes no APIs</li>
+  <li>Temporary migrations or backfill operations</li>
+  <li>One-off or low-frequency bulk tasks</li>
+</ul>
+
+<p>When rewriting the application or negotiating API access isn’t realistic, UI automation can save hours of repetitive work and significantly reduce human error.</p>
+
+<p><br /></p>
+
+<h2 id="high-level-approach">High-Level Approach</h2>
+
+<p>At a high level, the automation workflow looks like this:</p>
+
+<ol>
+  <li>Read account data from a spreadsheet</li>
+  <li>Copy values to the clipboard</li>
+  <li>Click predefined screen locations</li>
+  <li>Paste data into form fields</li>
+  <li>Submit the form and move to the next account</li>
+</ol>
+
+<p>To achieve this, we’ll use:</p>
+
+<ul>
+  <li><strong><code class="language-plaintext highlighter-rouge">pyautogui</code></strong> – Mouse and keyboard automation</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">pyperclip</code></strong> – Reliable clipboard interaction</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">pandas</code></strong> – Spreadsheet parsing</li>
+</ul>
+
+<p><br /></p>
+
+<h2 id="installing-dependencies">Installing Dependencies</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install </span>pyautogui pyperclip pandas openpyxl
+</code></pre></div></div>
+
+<blockquote>
+  <p>Note: You may need to grant accessibility or input permissions for automation to work—particularly on macOS. These examples were developed and tested on Windows.</p>
+</blockquote>
+
+<p><br /></p>
+
+<h2 id="preparing-the-spreadsheet">Preparing the Spreadsheet</h2>
+
+<p>Assume a simple Excel file (<code class="language-plaintext highlighter-rouge">accounts.xlsx</code>) with the following structure:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>username</th>
+      <th>email</th>
+      <th>role</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>jdoe</td>
+      <td><a href="mailto:jdoe@example.com">jdoe@example.com</a></td>
+      <td>admin</td>
+    </tr>
+    <tr>
+      <td>asmith</td>
+      <td><a href="mailto:asmith@example.com">asmith@example.com</a></td>
+      <td>user</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>This file acts as the source of truth for the automation.</p>
+
+<p><br /></p>
+
+<h2 id="capturing-screen-coordinates">Capturing Screen Coordinates</h2>
+
+<p>Before writing any automation code, you need to identify <strong>where the script should click</strong>.</p>
+
+<p>Run the following snippet and hover your mouse over each input field:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">pyautogui</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">pyautogui</span><span class="p">.</span><span class="nf">position</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p>Record the screen coordinates for each interaction. This step typically involves some trial and error.</p>
+
+<blockquote>
+  <p>⚠️ Screen resolution matters. Coordinates captured at 1920×1080 will not align correctly on a 4K display.</p>
+</blockquote>
+
+<h3 id="example-coordinates">Example Coordinates</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">USERNAME_FIELD</span> <span class="o">=</span> <span class="p">(</span><span class="mi">420</span><span class="p">,</span> <span class="mi">310</span><span class="p">)</span>
+<span class="n">EMAIL_FIELD</span>    <span class="o">=</span> <span class="p">(</span><span class="mi">420</span><span class="p">,</span> <span class="mi">360</span><span class="p">)</span>
+<span class="n">ROLE_FIELD</span>     <span class="o">=</span> <span class="p">(</span><span class="mi">420</span><span class="p">,</span> <span class="mi">410</span><span class="p">)</span>
+<span class="n">SUBMIT_BUTTON</span>  <span class="o">=</span> <span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">480</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h2 id="the-automation-script">The Automation Script</h2>
+
+<p>Below is a simplified example based on a real script I used in production:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">pyautogui</span>
+<span class="kn">import</span> <span class="n">pyperclip</span>
+<span class="kn">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+
+<span class="c1"># Emergency stop: move mouse to top-left corner
+</span><span class="n">pyautogui</span><span class="p">.</span><span class="n">FAILSAFE</span> <span class="o">=</span> <span class="bp">True</span>
+
+<span class="c1"># Load spreadsheet
+</span><span class="n">file_path</span> <span class="o">=</span> <span class="sh">'</span><span class="s">bulkaccount.xlsx</span><span class="sh">'</span>
+<span class="n">sheet_name</span> <span class="o">=</span> <span class="sh">'</span><span class="s">Sheet1</span><span class="sh">'</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">read_excel</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="n">sheet_name</span><span class="p">)</span>
+
+<span class="c1"># Loop through non-empty usernames
+</span><span class="k">for</span> <span class="n">username</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="sh">'</span><span class="s">username</span><span class="sh">'</span><span class="p">].</span><span class="nf">dropna</span><span class="p">():</span>
+
+    <span class="n">pyperclip</span><span class="p">.</span><span class="nf">copy</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="n">username</span><span class="p">))</span>
+
+    <span class="c1"># ---- UI AUTOMATION ----
+</span>    <span class="c1"># Open "New Account"
+</span>    <span class="n">pyautogui</span><span class="p">.</span><span class="nf">click</span><span class="p">(</span><span class="mi">750</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+    <span class="n">pyautogui</span><span class="p">.</span><span class="nf">moveTo</span><span class="p">(</span><span class="mi">1700</span><span class="p">,</span> <span class="mi">280</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">pyautogui</span><span class="p">.</span><span class="nf">click</span><span class="p">(</span><span class="mi">1700</span><span class="p">,</span> <span class="mi">280</span><span class="p">)</span>
+
+    <span class="n">pyautogui</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+
+    <span class="c1"># Paste username
+</span>    <span class="n">pyautogui</span><span class="p">.</span><span class="nf">hotkey</span><span class="p">(</span><span class="sh">'</span><span class="s">ctrl</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">v</span><span class="sh">'</span><span class="p">)</span>
+
+    <span class="n">pyautogui</span><span class="p">.</span><span class="nf">moveTo</span><span class="p">(</span><span class="mi">1250</span><span class="p">,</span> <span class="mi">430</span><span class="p">)</span>
+    <span class="n">pyautogui</span><span class="p">.</span><span class="nf">click</span><span class="p">(</span><span class="mi">1250</span><span class="p">,</span> <span class="mi">430</span><span class="p">)</span>
+
+    <span class="n">pyautogui</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+    <span class="c1"># Submit account creation
+</span>    <span class="n">pyautogui</span><span class="p">.</span><span class="nf">moveTo</span><span class="p">(</span><span class="mi">1050</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">pyautogui</span><span class="p">.</span><span class="nf">doubleClick</span><span class="p">(</span><span class="mi">1050</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span>
+
+    <span class="n">pyautogui</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">✅ Finished all usernames</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>While my production script included additional logic for error handling and multiple fields, this example demonstrates the core mechanics required to automate most UI-based workflows.</p>
+
+<p><br /></p>
+
+<h2 id="making-ui-automation-more-robust">Making UI Automation More Robust</h2>
+
+<p>UI automation can be fragile if not handled carefully. The following practices help improve reliability:</p>
+
+<h3 id="add-delays">Add Delays</h3>
+
+<p>UI response times vary. Always assume the application is slower than your code—especially with web-based interfaces.</p>
+
+<h3 id="use-failsafes">Use Failsafes</h3>
+
+<p>Setting <code class="language-plaintext highlighter-rouge">pyautogui.FAILSAFE = True</code> allows you to abort the script instantly by moving the mouse to the top-left corner of the screen.</p>
+
+<h3 id="test-with-dummy-data">Test With Dummy Data</h3>
+
+<p>Never start with production accounts. Validate the entire workflow using test or non-existent accounts first.</p>
+
+<h3 id="lock-down-your-environment">Lock Down Your Environment</h3>
+
+<p>Consistency is critical:</p>
+
+<ul>
+  <li>Same screen resolution</li>
+  <li>Same window position</li>
+  <li>Same zoom level</li>
+</ul>
+
+<p>Any deviation can break coordinate-based automation.</p>
+
+<p><br /></p>
+
+<h2 id="limitations-of-ui-automation">Limitations of UI Automation</h2>
+
+<p>While powerful, UI automation has clear drawbacks:</p>
+
+<ul>
+  <li>Breaks if the UI layout changes</li>
+  <li>Highly sensitive to screen resolution and scaling</li>
+  <li>More difficult to debug than API-based solutions</li>
+  <li>Unsuitable for high-frequency or real-time automation</li>
+</ul>
+
+<p>Treat it as a <strong>practical workaround</strong>, not a long-term architectural solution.</p>
+
+<p><br /></p>
+
+<h2 id="final-thoughts">Final Thoughts</h2>
+
+<p>When APIs aren’t available, UI automation can transform hours of repetitive work into a one-time scripting effort that runs in minutes.</p>
+
+<p>Tools like <code class="language-plaintext highlighter-rouge">pyautogui</code> allow engineers to:</p>
+
+<ul>
+  <li>Reduce human error</li>
+  <li>Eliminate repetitive tasks</li>
+  <li>Extend automation into legacy or closed systems</li>
+</ul>
+
+<p>Used carefully, ethically, and as a last resort, UI automation can deliver significant productivity gains—even in environments that were never designed to be automated.</p>
+
+        </div>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      &copy; 2026 Ritchie Caruso
+    </footer>
+    <script>
+      (function(){
+        var root = document.documentElement;
+        var toggle = document.getElementById('theme-toggle');
+        if(!toggle) return;
+
+        function applyTheme(theme){
+          if(theme === 'dark') root.classList.add('dark');
+          else root.classList.remove('dark');
+        }
+
+        var stored = localStorage.getItem('theme');
+        if(stored) applyTheme(stored);
+        else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) applyTheme('dark');
+
+        function updateToggleState(){
+          var isDark = root.classList.contains('dark');
+          toggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+        }
+
+        updateToggleState();
+
+        toggle.addEventListener('click', function(){
+          var isDark = root.classList.toggle('dark');
+          localStorage.setItem('theme', isDark ? 'dark' : 'light');
+          updateToggleState();
+        });
+      })();
+
+      // Hamburger menu toggle
+      (function(){
+        var hamburger = document.getElementById('hamburger');
+        var siteRight = document.querySelector('.site-right');
+        if(!hamburger || !siteRight) return;
+
+        hamburger.addEventListener('click', function(){
+          var isExpanded = siteRight.classList.toggle('active');
+          hamburger.classList.toggle('active');
+          hamburger.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e){
+          if(!hamburger.contains(e.target) && !siteRight.contains(e.target)){
+            siteRight.classList.remove('active');
+            hamburger.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+          }
+        });
+
+        // Close menu on window resize above mobile breakpoint
+        var resizeTimer;
+        window.addEventListener('resize', function(){
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(function(){
+            if(window.innerWidth > 768){
+              siteRight.classList.remove('active');
+              hamburger.classList.remove('active');
+              hamburger.setAttribute('aria-expanded', 'false');
+            }
+          }, 250);
+        });
+      })();
+
+      // Copy code button functionality
+      (function(){
+        function wrapCodeBlocks(){
+          var pres = document.querySelectorAll('pre');
+          pres.forEach(function(pre){
+            if(pre.parentElement.classList.contains('code-block-wrapper')) return;
+            
+            var wrapper = document.createElement('div');
+            wrapper.className = 'code-block-wrapper';
+            pre.parentNode.insertBefore(wrapper, pre);
+            wrapper.appendChild(pre);
+            
+            var button = document.createElement('button');
+            button.className = 'copy-code-button';
+            button.textContent = 'Copy';
+            button.setAttribute('aria-label', 'Copy code to clipboard');
+            
+            button.addEventListener('click', function(){
+              var code = pre.querySelector('code') || pre;
+              var text = code.textContent;
+              
+              navigator.clipboard.writeText(text).then(function(){
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
+                setTimeout(function(){
+                  button.textContent = 'Copy';
+                  button.classList.remove('copied');
+                }, 2000);
+              }).catch(function(err){
+                console.error('Failed to copy:', err);
+              });
+            });
+            
+            wrapper.appendChild(button);
+          });
+        }
+        
+        if(document.readyState === 'loading'){
+          document.addEventListener('DOMContentLoaded', wrapCodeBlocks);
+        } else {
+          wrapCodeBlocks();
+        }
+      })();
+    </script>
+  </body>
+</html>

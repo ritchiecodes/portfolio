@@ -1,63 +1,67 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-01-09T14:15:48+11:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Ritchie Caruso</title><subtitle>A simple Jekyll site</subtitle><entry><title type="html">Account Creation Automation</title><link href="http://localhost:4000/2026/01/09/account-creation-automation.html" rel="alternate" type="text/html" title="Account Creation Automation" /><published>2026-01-09T14:01:57+11:00</published><updated>2026-01-09T14:01:57+11:00</updated><id>http://localhost:4000/2026/01/09/account-creation-automation</id><content type="html" xml:base="http://localhost:4000/2026/01/09/account-creation-automation.html"><![CDATA[<h1 id="automating-account-creation-without-an-api-a-practical-guide-with-pyautogui">Automating Account Creation Without an API: A Practical Guide with PyAutoGUI</h1>
-
-<p>Anyone who’s ever had to create dozens (or hundreds) of accounts in a legacy system knows the pain:</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-01-23T21:27:25+11:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Ritchie Caruso</title><subtitle>A simple Jekyll site</subtitle><entry><title type="html">Automating Legacy Workflows Without API Access</title><link href="http://localhost:4000/2026/01/23/account-creation-automation.html" rel="alternate" type="text/html" title="Automating Legacy Workflows Without API Access" /><published>2026-01-23T21:27:25+11:00</published><updated>2026-01-23T21:27:25+11:00</updated><id>http://localhost:4000/2026/01/23/account-creation-automation</id><content type="html" xml:base="http://localhost:4000/2026/01/23/account-creation-automation.html"><![CDATA[<p>Anyone who has ever had to manually create dozens—or hundreds—of accounts in a legacy system knows how painful the process can be:</p>
 
 <ul>
-  <li>Open the app</li>
+  <li>Open the application</li>
   <li>Click the same fields</li>
   <li>Copy values from a spreadsheet</li>
   <li>Paste, submit, repeat</li>
 </ul>
 
-<p>When there’s <strong>no API</strong>, no import feature, and no automation hooks, this kind of work quickly becomes a time sink.</p>
+<p>When there’s <strong>no API</strong>, no bulk import feature, and no automation hooks, this kind of work quickly turns into a massive time sink.</p>
 
-<p>In this post, I’ll walk through how to automate a tedious UI-driven task—<strong>account creation in software without API access</strong>—using Python, <code class="language-plaintext highlighter-rouge">pyautogui</code>, and clipboard automation.</p>
+<p>I encountered this exact challenge in a previous role at a large organisation. While we had strong automation around Active Directory provisioning, many third-party applications offered no programmatic way to create or manage user accounts. Each request required manual intervention through a GUI.</p>
+
+<p>I wasn’t willing to spend hours every week performing repetitive clicks when a more efficient solution was possible.</p>
+
+<p>Enter <strong>Python</strong>.</p>
+
+<p>Python’s reputation for automation and data handling is well earned, and in this post I’ll walk through how to automate a UI-driven task—<strong>account creation in software without API access</strong>—using <code class="language-plaintext highlighter-rouge">pyautogui</code> and a few supporting libraries.</p>
 
 <blockquote>
-  <p>⚠️ <strong>Important note</strong>
-Only automate software you are authorized to use this way. Always follow company policy, license agreements, and local laws.</p>
+  <p>⚠️ <strong>Important</strong>
+Only automate systems you are authorised to use in this way. Always follow company policies, vendor license agreements, and local laws.</p>
 </blockquote>
 
-<hr />
+<p><br /></p>
 
 <h2 id="why-ui-automation">Why UI Automation?</h2>
 
-<p>UI automation is not always the <em>best</em> solution—but sometimes it’s the <strong>only</strong> solution.</p>
+<p>UI automation is rarely the <em>ideal</em> solution—but sometimes it’s the <strong>only</strong> viable one.</p>
 
-<p>Typical scenarios:</p>
+<p>Common scenarios include:</p>
 
 <ul>
-  <li>Internal tools built years ago</li>
-  <li>Vendor software with no integration options</li>
-  <li>Temporary migration or backfill tasks</li>
-  <li>One-time or occasional bulk operations</li>
+  <li>Internal tools built years ago with no integration options</li>
+  <li>Vendor software that exposes no APIs</li>
+  <li>Temporary migrations or backfill operations</li>
+  <li>One-off or low-frequency bulk tasks</li>
 </ul>
 
-<p>When rewriting the system or negotiating API access isn’t realistic, UI automation can save hours of repetitive work.</p>
+<p>When rewriting the application or negotiating API access isn’t realistic, UI automation can save hours of repetitive work and significantly reduce human error.</p>
 
-<hr />
+<p><br /></p>
 
-<h2 id="the-approach">The Approach</h2>
+<h2 id="high-level-approach">High-Level Approach</h2>
 
-<p>At a high level, the automation looks like this:</p>
+<p>At a high level, the automation workflow looks like this:</p>
 
 <ol>
   <li>Read account data from a spreadsheet</li>
   <li>Copy values to the clipboard</li>
-  <li>Click specific screen coordinates</li>
+  <li>Click predefined screen locations</li>
   <li>Paste data into form fields</li>
-  <li>Submit and move to the next record</li>
+  <li>Submit the form and move to the next account</li>
 </ol>
 
-<p>We’ll use:</p>
+<p>To achieve this, we’ll use:</p>
 
 <ul>
-  <li><strong><code class="language-plaintext highlighter-rouge">pyautogui</code></strong> → mouse &amp; keyboard control</li>
-  <li><strong><code class="language-plaintext highlighter-rouge">pyperclip</code></strong> → reliable clipboard access (often mistakenly called <em>pyclipper</em>)</li>
-  <li><strong><code class="language-plaintext highlighter-rouge">pandas</code></strong> → spreadsheet parsing</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">pyautogui</code></strong> – Mouse and keyboard automation</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">pyperclip</code></strong> – Reliable clipboard interaction</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">pandas</code></strong> – Spreadsheet parsing</li>
 </ul>
 
-<hr />
+<p><br /></p>
 
 <h2 id="installing-dependencies">Installing Dependencies</h2>
 
@@ -65,14 +69,14 @@ Only automate software you are authorized to use this way. Always follow company
 </code></pre></div></div>
 
 <blockquote>
-  <p>On macOS and Windows, you may need to grant accessibility or input permissions for automation to work.</p>
+  <p>Note: You may need to grant accessibility or input permissions for automation to work—particularly on macOS. These examples were developed and tested on Windows.</p>
 </blockquote>
 
-<hr />
+<p><br /></p>
 
 <h2 id="preparing-the-spreadsheet">Preparing the Spreadsheet</h2>
 
-<p>Assume a simple Excel file (<code class="language-plaintext highlighter-rouge">accounts.xlsx</code>) like this:</p>
+<p>Assume a simple Excel file (<code class="language-plaintext highlighter-rouge">accounts.xlsx</code>) with the following structure:</p>
 
 <table>
   <thead>
@@ -96,28 +100,27 @@ Only automate software you are authorized to use this way. Always follow company
   </tbody>
 </table>
 
-<hr />
+<p>This file acts as the source of truth for the automation.</p>
+
+<p><br /></p>
 
 <h2 id="capturing-screen-coordinates">Capturing Screen Coordinates</h2>
 
-<p>Before writing code, you need to know <strong>where to click</strong>.</p>
+<p>Before writing any automation code, you need to identify <strong>where the script should click</strong>.</p>
 
-<p>Run this snippet and hover your mouse over each input field:</p>
+<p>Run the following snippet and hover your mouse over each input field:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">pyautogui</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">pyautogui</span><span class="p">.</span><span class="nf">position</span><span class="p">())</span>
 </code></pre></div></div>
 
-<p>Write down the coordinates for:</p>
+<p>Record the screen coordinates for each interaction. This step typically involves some trial and error.</p>
 
-<ul>
-  <li>Username field</li>
-  <li>Email field</li>
-  <li>Role dropdown</li>
-  <li>Submit button</li>
-</ul>
+<blockquote>
+  <p>⚠️ Screen resolution matters. Coordinates captured at 1920×1080 will not align correctly on a 4K display.</p>
+</blockquote>
 
-<p>Example:</p>
+<h3 id="example-coordinates">Example Coordinates</h3>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">USERNAME_FIELD</span> <span class="o">=</span> <span class="p">(</span><span class="mi">420</span><span class="p">,</span> <span class="mi">310</span><span class="p">)</span>
 <span class="n">EMAIL_FIELD</span>    <span class="o">=</span> <span class="p">(</span><span class="mi">420</span><span class="p">,</span> <span class="mi">360</span><span class="p">)</span>
@@ -125,116 +128,116 @@ Only automate software you are authorized to use this way. Always follow company
 <span class="n">SUBMIT_BUTTON</span>  <span class="o">=</span> <span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">480</span><span class="p">)</span>
 </code></pre></div></div>
 
-<hr />
+<p><br /></p>
 
 <h2 id="the-automation-script">The Automation Script</h2>
 
-<p>Here’s a simplified but realistic example:</p>
+<p>Below is a simplified example based on a real script I used in production:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">time</span>
-<span class="kn">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
-<span class="kn">import</span> <span class="n">pyautogui</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">pyautogui</span>
 <span class="kn">import</span> <span class="n">pyperclip</span>
+<span class="kn">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
 
-<span class="c1"># Safety: move mouse to top-left corner to abort
+<span class="c1"># Emergency stop: move mouse to top-left corner
 </span><span class="n">pyautogui</span><span class="p">.</span><span class="n">FAILSAFE</span> <span class="o">=</span> <span class="bp">True</span>
 
-<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">read_excel</span><span class="p">(</span><span class="sh">"</span><span class="s">accounts.xlsx</span><span class="sh">"</span><span class="p">)</span>
+<span class="c1"># Load spreadsheet
+</span><span class="n">file_path</span> <span class="o">=</span> <span class="sh">'</span><span class="s">bulkaccount.xlsx</span><span class="sh">'</span>
+<span class="n">sheet_name</span> <span class="o">=</span> <span class="sh">'</span><span class="s">Sheet1</span><span class="sh">'</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">read_excel</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="n">sheet_name</span><span class="p">)</span>
 
-<span class="n">USERNAME_FIELD</span> <span class="o">=</span> <span class="p">(</span><span class="mi">420</span><span class="p">,</span> <span class="mi">310</span><span class="p">)</span>
-<span class="n">EMAIL_FIELD</span>    <span class="o">=</span> <span class="p">(</span><span class="mi">420</span><span class="p">,</span> <span class="mi">360</span><span class="p">)</span>
-<span class="n">ROLE_FIELD</span>     <span class="o">=</span> <span class="p">(</span><span class="mi">420</span><span class="p">,</span> <span class="mi">410</span><span class="p">)</span>
-<span class="n">SUBMIT_BUTTON</span>  <span class="o">=</span> <span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">480</span><span class="p">)</span>
+<span class="c1"># Loop through non-empty usernames
+</span><span class="k">for</span> <span class="n">username</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="sh">'</span><span class="s">username</span><span class="sh">'</span><span class="p">].</span><span class="nf">dropna</span><span class="p">():</span>
 
-<span class="k">def</span> <span class="nf">click_and_paste</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
-    <span class="n">pyautogui</span><span class="p">.</span><span class="nf">click</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
-    <span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
-    <span class="n">pyperclip</span><span class="p">.</span><span class="nf">copy</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
-    <span class="n">pyautogui</span><span class="p">.</span><span class="nf">hotkey</span><span class="p">(</span><span class="sh">"</span><span class="s">ctrl</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">v</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">pyperclip</span><span class="p">.</span><span class="nf">copy</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="n">username</span><span class="p">))</span>
 
-<span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>  <span class="c1"># Time to switch to the target application
-</span>
-<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">.</span><span class="nf">iterrows</span><span class="p">():</span>
-    <span class="nf">click_and_paste</span><span class="p">(</span><span class="n">USERNAME_FIELD</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="sh">"</span><span class="s">username</span><span class="sh">"</span><span class="p">])</span>
-    <span class="nf">click_and_paste</span><span class="p">(</span><span class="n">EMAIL_FIELD</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="sh">"</span><span class="s">email</span><span class="sh">"</span><span class="p">])</span>
-    <span class="nf">click_and_paste</span><span class="p">(</span><span class="n">ROLE_FIELD</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="sh">"</span><span class="s">role</span><span class="sh">"</span><span class="p">])</span>
+    <span class="c1"># ---- UI AUTOMATION ----
+</span>    <span class="c1"># Open "New Account"
+</span>    <span class="n">pyautogui</span><span class="p">.</span><span class="nf">click</span><span class="p">(</span><span class="mi">750</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+    <span class="n">pyautogui</span><span class="p">.</span><span class="nf">moveTo</span><span class="p">(</span><span class="mi">1700</span><span class="p">,</span> <span class="mi">280</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">pyautogui</span><span class="p">.</span><span class="nf">click</span><span class="p">(</span><span class="mi">1700</span><span class="p">,</span> <span class="mi">280</span><span class="p">)</span>
 
-    <span class="n">pyautogui</span><span class="p">.</span><span class="nf">click</span><span class="p">(</span><span class="n">SUBMIT_BUTTON</span><span class="p">)</span>
-    <span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mf">1.5</span><span class="p">)</span>  <span class="c1"># Wait for form submission
-</span></code></pre></div></div>
+    <span class="n">pyautogui</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
 
-<hr />
+    <span class="c1"># Paste username
+</span>    <span class="n">pyautogui</span><span class="p">.</span><span class="nf">hotkey</span><span class="p">(</span><span class="sh">'</span><span class="s">ctrl</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">v</span><span class="sh">'</span><span class="p">)</span>
 
-<h2 id="why-use-the-clipboard">Why Use the Clipboard?</h2>
+    <span class="n">pyautogui</span><span class="p">.</span><span class="nf">moveTo</span><span class="p">(</span><span class="mi">1250</span><span class="p">,</span> <span class="mi">430</span><span class="p">)</span>
+    <span class="n">pyautogui</span><span class="p">.</span><span class="nf">click</span><span class="p">(</span><span class="mi">1250</span><span class="p">,</span> <span class="mi">430</span><span class="p">)</span>
 
-<p>You <em>could</em> type characters one by one, but clipboard pasting is:</p>
+    <span class="n">pyautogui</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 
-<ul>
-  <li>Faster</li>
-  <li>More reliable for long strings</li>
-  <li>Safer for special characters (emails, IDs)</li>
-</ul>
+    <span class="c1"># Submit account creation
+</span>    <span class="n">pyautogui</span><span class="p">.</span><span class="nf">moveTo</span><span class="p">(</span><span class="mi">1050</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">pyautogui</span><span class="p">.</span><span class="nf">doubleClick</span><span class="p">(</span><span class="mi">1050</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span>
 
-<p><code class="language-plaintext highlighter-rouge">pyperclip</code> ensures what you paste is exactly what you copied—no dropped keystrokes.</p>
+    <span class="n">pyautogui</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 
-<hr />
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">✅ Finished all usernames</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
 
-<h2 id="making-it-robust">Making It Robust</h2>
+<p>While my production script included additional logic for error handling and multiple fields, this example demonstrates the core mechanics required to automate most UI-based workflows.</p>
 
-<p>To avoid fragile scripts:</p>
+<p><br /></p>
+
+<h2 id="making-ui-automation-more-robust">Making UI Automation More Robust</h2>
+
+<p>UI automation can be fragile if not handled carefully. The following practices help improve reliability:</p>
 
 <h3 id="add-delays">Add Delays</h3>
 
-<p>UI response times vary. Always assume the app is slower than your code.</p>
+<p>UI response times vary. Always assume the application is slower than your code—especially with web-based interfaces.</p>
 
 <h3 id="use-failsafes">Use Failsafes</h3>
 
-<p><code class="language-plaintext highlighter-rouge">pyautogui.FAILSAFE = True</code> lets you abort by slamming the mouse into the top-left corner.</p>
+<p>Setting <code class="language-plaintext highlighter-rouge">pyautogui.FAILSAFE = True</code> allows you to abort the script instantly by moving the mouse to the top-left corner of the screen.</p>
 
 <h3 id="test-with-dummy-data">Test With Dummy Data</h3>
 
-<p>Never start with production accounts.</p>
+<p>Never start with production accounts. Validate the entire workflow using test or non-existent accounts first.</p>
 
-<h3 id="lock-your-screen-layout">Lock Your Screen Layout</h3>
+<h3 id="lock-down-your-environment">Lock Down Your Environment</h3>
+
+<p>Consistency is critical:</p>
 
 <ul>
-  <li>Same resolution</li>
+  <li>Same screen resolution</li>
   <li>Same window position</li>
   <li>Same zoom level</li>
 </ul>
 
-<p>UI automation depends on consistency.</p>
+<p>Any deviation can break coordinate-based automation.</p>
 
-<hr />
+<p><br /></p>
 
-<h2 id="limitations-be-honest">Limitations (Be Honest)</h2>
+<h2 id="limitations-of-ui-automation">Limitations of UI Automation</h2>
 
-<p>UI automation is powerful—but not perfect:</p>
+<p>While powerful, UI automation has clear drawbacks:</p>
 
 <ul>
   <li>Breaks if the UI layout changes</li>
-  <li>Sensitive to screen resolution</li>
-  <li>Harder to debug than APIs</li>
-  <li>Not suitable for high-frequency automation</li>
+  <li>Highly sensitive to screen resolution and scaling</li>
+  <li>More difficult to debug than API-based solutions</li>
+  <li>Unsuitable for high-frequency or real-time automation</li>
 </ul>
 
-<p>Think of it as <strong>a practical workaround</strong>, not a long-term architecture.</p>
+<p>Treat it as a <strong>practical workaround</strong>, not a long-term architectural solution.</p>
 
-<hr />
+<p><br /></p>
 
 <h2 id="final-thoughts">Final Thoughts</h2>
 
-<p>When APIs aren’t available, UI automation can turn hours of mind-numbing repetition into a few minutes of setup and execution.</p>
+<p>When APIs aren’t available, UI automation can transform hours of repetitive work into a one-time scripting effort that runs in minutes.</p>
 
-<p>Tools like <code class="language-plaintext highlighter-rouge">pyautogui</code> and clipboard-based workflows give developers a way to:</p>
+<p>Tools like <code class="language-plaintext highlighter-rouge">pyautogui</code> allow engineers to:</p>
 
 <ul>
   <li>Reduce human error</li>
-  <li>Save time</li>
-  <li>Automate responsibly</li>
+  <li>Eliminate repetitive tasks</li>
+  <li>Extend automation into legacy or closed systems</li>
 </ul>
 
-<p>If you treat UI automation as a <strong>last-mile solution</strong>—used carefully and ethically—it can be a huge productivity win.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Automating Account Creation Without an API: A Practical Guide with PyAutoGUI]]></summary></entry><entry><title type="html">Password Sync App</title><link href="http://localhost:4000/2026/01/09/password-sync-app.html" rel="alternate" type="text/html" title="Password Sync App" /><published>2026-01-09T14:01:57+11:00</published><updated>2026-01-09T14:01:57+11:00</updated><id>http://localhost:4000/2026/01/09/password-sync-app</id><content type="html" xml:base="http://localhost:4000/2026/01/09/password-sync-app.html"><![CDATA[<h1 id="verifying-password-sync-between-two-active-directory-domains-with-powershell">Verifying Password Sync Between Two Active Directory Domains with PowerShell</h1>
+<p>Used carefully, ethically, and as a last resort, UI automation can deliver significant productivity gains—even in environments that were never designed to be automated.</p>]]></content><author><name></name></author><category term="automation" /><category term="python" /><summary type="html"><![CDATA[Anyone who has ever had to manually create dozens—or hundreds—of accounts in a legacy system knows how painful the process can be:]]></summary></entry><entry><title type="html">Password Sync App</title><link href="http://localhost:4000/2026/01/22/password-sync-app.html" rel="alternate" type="text/html" title="Password Sync App" /><published>2026-01-22T17:10:57+11:00</published><updated>2026-01-22T17:10:57+11:00</updated><id>http://localhost:4000/2026/01/22/password-sync-app</id><content type="html" xml:base="http://localhost:4000/2026/01/22/password-sync-app.html"><![CDATA[<h1 id="verifying-password-sync-between-two-active-directory-domains-with-powershell">Verifying Password Sync Between Two Active Directory Domains with PowerShell</h1>
 
 <p>In multi-domain or hybrid Active Directory environments, one common operational question comes up again and again:</p>
 
@@ -416,7 +419,7 @@ Only automate software you are authorized to use this way. Always follow company
 
 <p>Sometimes the simplest checks uncover the biggest problems.</p>
 
-<hr />]]></content><author><name></name></author><summary type="html"><![CDATA[Verifying Password Sync Between Two Active Directory Domains with PowerShell]]></summary></entry><entry><title type="html">Rgb Stage</title><link href="http://localhost:4000/2025/12/28/rgb-stage.html" rel="alternate" type="text/html" title="Rgb Stage" /><published>2025-12-28T16:24:46+11:00</published><updated>2025-12-28T16:24:46+11:00</updated><id>http://localhost:4000/2025/12/28/rgb-stage</id><content type="html" xml:base="http://localhost:4000/2025/12/28/rgb-stage.html"><![CDATA[]]></content><author><name></name></author><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Homelab Build</title><link href="http://localhost:4000/2025/12/28/homelab-build.html" rel="alternate" type="text/html" title="Homelab Build" /><published>2025-12-28T16:24:23+11:00</published><updated>2025-12-28T16:24:23+11:00</updated><id>http://localhost:4000/2025/12/28/homelab-build</id><content type="html" xml:base="http://localhost:4000/2025/12/28/homelab-build.html"><![CDATA[]]></content><author><name></name></author><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Home Network</title><link href="http://localhost:4000/2025/12/28/home-network.html" rel="alternate" type="text/html" title="Home Network" /><published>2025-12-28T16:24:16+11:00</published><updated>2025-12-28T16:24:16+11:00</updated><id>http://localhost:4000/2025/12/28/home-network</id><content type="html" xml:base="http://localhost:4000/2025/12/28/home-network.html"><![CDATA[]]></content><author><name></name></author><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Tamagotchi for Hackers: Building a Pwnagotchi</title><link href="http://localhost:4000/2025/12/27/pwnagotchi.html" rel="alternate" type="text/html" title="Tamagotchi for Hackers: Building a Pwnagotchi" /><published>2025-12-27T00:00:00+11:00</published><updated>2025-12-27T00:00:00+11:00</updated><id>http://localhost:4000/2025/12/27/pwnagotchi</id><content type="html" xml:base="http://localhost:4000/2025/12/27/pwnagotchi.html"><![CDATA[<p>If you grew up in the late ’90s or early 2000s, chances are you remember Tamagotchis—the small handheld digital pets from Bandai that demanded constant attention through feeding, games, and care via three tiny buttons.</p>
+<hr />]]></content><author><name></name></author><summary type="html"><![CDATA[Verifying Password Sync Between Two Active Directory Domains with PowerShell]]></summary></entry><entry><title type="html">Rgb Stage</title><link href="http://localhost:4000/2026/01/22/rgb-stage.html" rel="alternate" type="text/html" title="Rgb Stage" /><published>2026-01-22T17:10:57+11:00</published><updated>2026-01-22T17:10:57+11:00</updated><id>http://localhost:4000/2026/01/22/rgb-stage</id><content type="html" xml:base="http://localhost:4000/2026/01/22/rgb-stage.html"><![CDATA[]]></content><author><name></name></author><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Home Network</title><link href="http://localhost:4000/2026/01/22/home-network.html" rel="alternate" type="text/html" title="Home Network" /><published>2026-01-22T17:10:57+11:00</published><updated>2026-01-22T17:10:57+11:00</updated><id>http://localhost:4000/2026/01/22/home-network</id><content type="html" xml:base="http://localhost:4000/2026/01/22/home-network.html"><![CDATA[]]></content><author><name></name></author><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Homelab Build</title><link href="http://localhost:4000/2026/01/22/homelab-build.html" rel="alternate" type="text/html" title="Homelab Build" /><published>2026-01-22T17:10:57+11:00</published><updated>2026-01-22T17:10:57+11:00</updated><id>http://localhost:4000/2026/01/22/homelab-build</id><content type="html" xml:base="http://localhost:4000/2026/01/22/homelab-build.html"><![CDATA[]]></content><author><name></name></author><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Ansible Playbooks</title><link href="http://localhost:4000/2026/01/22/ansible-playbooks.html" rel="alternate" type="text/html" title="Ansible Playbooks" /><published>2026-01-22T17:10:56+11:00</published><updated>2026-01-22T17:10:56+11:00</updated><id>http://localhost:4000/2026/01/22/ansible-playbooks</id><content type="html" xml:base="http://localhost:4000/2026/01/22/ansible-playbooks.html"><![CDATA[]]></content><author><name></name></author><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Tamagotchi for Hackers: Building a Pwnagotchi</title><link href="http://localhost:4000/2025/12/27/pwnagotchi.html" rel="alternate" type="text/html" title="Tamagotchi for Hackers: Building a Pwnagotchi" /><published>2025-12-27T00:00:00+11:00</published><updated>2025-12-27T00:00:00+11:00</updated><id>http://localhost:4000/2025/12/27/pwnagotchi</id><content type="html" xml:base="http://localhost:4000/2025/12/27/pwnagotchi.html"><![CDATA[<p>If you grew up in the late ’90s or early 2000s, chances are you remember Tamagotchis—the small handheld digital pets from Bandai that demanded constant attention through feeding, games, and care via three tiny buttons.</p>
 
 <p>Recently, I stumbled across a fantastic open-source project called Pwnagotchi.</p>
 
@@ -575,11 +578,8 @@ Below are the key settings I recommend enabling or modifying:</p>
 <span class="n">ui</span><span class="p">.</span><span class="n">web</span><span class="p">.</span><span class="n">enabled</span> <span class="o">=</span><span class="w"> </span><span class="kc">true</span>
 <span class="n">ui</span><span class="p">.</span><span class="n">web</span><span class="p">.</span><span class="n">auth</span> <span class="o">=</span><span class="w"> </span><span class="kc">true</span>
 <span class="n">ui</span><span class="p">.</span><span class="n">web</span><span class="p">.</span><span class="n">username</span> <span class="o">=</span><span class="w"> </span><span class="s">"USERNAME"</span>
-<span class="n">ui</span><span class="p">.</span><span class="n">web</span><span class="p">.</span><span class="n">password</span> <span class="o">=</span><span class="w"> </span><span class="s">"</span><span class="err">
-</span><span class="n">Below</span> <span class="n">are</span> <span class="n">the</span> <span class="n">key</span> <span class="n">settings</span> <span class="n">I</span> <span class="n">recommend</span> <span class="n">enabling</span> <span class="n">or</span> <span class="n">modifying</span><span class="err">:</span>
-
-<span class="n">PASSWORD</span><span class="s">"</span><span class="err">
-</span></code></pre></div></div>
+<span class="n">ui</span><span class="p">.</span><span class="n">web</span><span class="p">.</span><span class="n">password</span> <span class="o">=</span><span class="w"> </span><span class="s">"PASSWORD"</span>
+</code></pre></div></div>
 
 <p>Disabling deauthentication is especially important to avoid disrupting nearby networks and potential legal issues.</p>
 
