@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-01-23T21:27:25+11:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Ritchie Caruso</title><subtitle>A simple Jekyll site</subtitle><entry><title type="html">Automating Legacy Workflows Without API Access</title><link href="http://localhost:4000/2026/01/23/account-creation-automation.html" rel="alternate" type="text/html" title="Automating Legacy Workflows Without API Access" /><published>2026-01-23T21:27:25+11:00</published><updated>2026-01-23T21:27:25+11:00</updated><id>http://localhost:4000/2026/01/23/account-creation-automation</id><content type="html" xml:base="http://localhost:4000/2026/01/23/account-creation-automation.html"><![CDATA[<p>Anyone who has ever had to manually create dozens—or hundreds—of accounts in a legacy system knows how painful the process can be:</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://ritchiecaruso.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ritchiecaruso.com/" rel="alternate" type="text/html" /><updated>2026-01-23T21:37:52+11:00</updated><id>https://ritchiecaruso.com/feed.xml</id><title type="html">Ritchie Caruso</title><subtitle>A simple Jekyll site</subtitle><entry><title type="html">Automating Legacy Workflows Without API Access</title><link href="https://ritchiecaruso.com/2026/01/23/account-creation-automation.html" rel="alternate" type="text/html" title="Automating Legacy Workflows Without API Access" /><published>2026-01-23T00:00:00+11:00</published><updated>2026-01-23T00:00:00+11:00</updated><id>https://ritchiecaruso.com/2026/01/23/account-creation-automation</id><content type="html" xml:base="https://ritchiecaruso.com/2026/01/23/account-creation-automation.html"><![CDATA[<p>Anyone who has ever had to manually create dozens—or hundreds—of accounts in a legacy system knows how painful the process can be:</p>
 
 <ul>
   <li>Open the application</li>
@@ -237,189 +237,7 @@ Only automate systems you are authorised to use in this way. Always follow compa
   <li>Extend automation into legacy or closed systems</li>
 </ul>
 
-<p>Used carefully, ethically, and as a last resort, UI automation can deliver significant productivity gains—even in environments that were never designed to be automated.</p>]]></content><author><name></name></author><category term="automation" /><category term="python" /><summary type="html"><![CDATA[Anyone who has ever had to manually create dozens—or hundreds—of accounts in a legacy system knows how painful the process can be:]]></summary></entry><entry><title type="html">Password Sync App</title><link href="http://localhost:4000/2026/01/22/password-sync-app.html" rel="alternate" type="text/html" title="Password Sync App" /><published>2026-01-22T17:10:57+11:00</published><updated>2026-01-22T17:10:57+11:00</updated><id>http://localhost:4000/2026/01/22/password-sync-app</id><content type="html" xml:base="http://localhost:4000/2026/01/22/password-sync-app.html"><![CDATA[<h1 id="verifying-password-sync-between-two-active-directory-domains-with-powershell">Verifying Password Sync Between Two Active Directory Domains with PowerShell</h1>
-
-<p>In multi-domain or hybrid Active Directory environments, one common operational question comes up again and again:</p>
-
-<blockquote>
-  <p><strong>“Are passwords actually syncing between these two domains?”</strong></p>
-</blockquote>
-
-<p>Whether you’re using trust relationships, synchronization tools, or identity management solutions, a quick and reliable way to validate password synchronization is by comparing the <strong><code class="language-plaintext highlighter-rouge">PasswordLastSet</code></strong> timestamp for the same user across domains.</p>
-
-<p>This post walks through how to write a <strong>PowerShell script</strong> that checks the password last set date and time between two domains and determines whether they are in sync.</p>
-
-<hr />
-
-<h2 id="why-passwordlastset">Why <code class="language-plaintext highlighter-rouge">PasswordLastSet</code>?</h2>
-
-<p>Active Directory stores the time a user’s password was last changed in the attribute:</p>
-
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">PasswordLastSet</span><span class="w">
-</span></code></pre></div></div>
-
-<p>If passwords are syncing correctly:</p>
-
-<ul>
-  <li>The timestamps should be <strong>identical</strong> or</li>
-  <li>Within an <strong>acceptable time window</strong> (seconds or minutes, depending on your sync process)</li>
-</ul>
-
-<p>If they differ significantly, it’s a strong indicator of a sync issue.</p>
-
-<hr />
-
-<h2 id="prerequisites">Prerequisites</h2>
-
-<p>Before you begin, ensure:</p>
-
-<ul>
-  <li>You have the <strong>ActiveDirectory PowerShell module</strong> installed</li>
-  <li>You have <strong>read access</strong> to both domains</li>
-  <li>DNS and trust relationships are correctly configured</li>
-  <li>You know the <strong>domain controllers</strong> or domain names for both environments</li>
-</ul>
-
-<p>Import the module:</p>
-
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Import-Module</span><span class="w"> </span><span class="nx">ActiveDirectory</span><span class="w">
-</span></code></pre></div></div>
-
-<hr />
-
-<h2 id="defining-the-domains">Defining the Domains</h2>
-
-<p>For clarity, explicitly define the two domains you’re comparing.</p>
-
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$DomainA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"corp.domainA.local"</span><span class="w">
-</span><span class="nv">$DomainB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"corp.domainB.local"</span><span class="w">
-</span></code></pre></div></div>
-
-<p>You can also specify particular domain controllers if needed:</p>
-
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$DC_A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"dc1.domainA.local"</span><span class="w">
-</span><span class="nv">$DC_B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"dc1.domainB.local"</span><span class="w">
-</span></code></pre></div></div>
-
-<hr />
-
-<h2 id="fetching-the-passwordlastset-value">Fetching the PasswordLastSet Value</h2>
-
-<p>The following function retrieves the password last set timestamp for a given user in a specific domain:</p>
-
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">function</span><span class="w"> </span><span class="nf">Get-PasswordLastSet</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="kr">param</span><span class="w"> </span><span class="p">(</span><span class="w">
-        </span><span class="p">[</span><span class="n">string</span><span class="p">]</span><span class="nv">$Username</span><span class="p">,</span><span class="w">
-        </span><span class="p">[</span><span class="n">string</span><span class="p">]</span><span class="nv">$Server</span><span class="w">
-    </span><span class="p">)</span><span class="w">
-
-    </span><span class="n">Get-ADUser</span><span class="w"> </span><span class="nt">-Identity</span><span class="w"> </span><span class="nv">$Username</span><span class="w"> </span><span class="se">`
-</span><span class="w">               </span><span class="nt">-Server</span><span class="w"> </span><span class="nv">$Server</span><span class="w"> </span><span class="se">`
-</span><span class="w">               </span><span class="nt">-Properties</span><span class="w"> </span><span class="nx">PasswordLastSet</span><span class="w"> </span><span class="o">|</span><span class="w">
-    </span><span class="n">Select-Object</span><span class="w"> </span><span class="nt">-ExpandProperty</span><span class="w"> </span><span class="nx">PasswordLastSet</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
-
-<hr />
-
-<h2 id="comparing-password-timestamps-between-domains">Comparing Password Timestamps Between Domains</h2>
-
-<p>Now let’s put it together.</p>
-
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$Username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"jdoe"</span><span class="w">
-
-</span><span class="nv">$PwdSetA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Get-PasswordLastSet</span><span class="w"> </span><span class="nt">-Username</span><span class="w"> </span><span class="nv">$Username</span><span class="w"> </span><span class="nt">-Server</span><span class="w"> </span><span class="nv">$DomainA</span><span class="w">
-</span><span class="nv">$PwdSetB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Get-PasswordLastSet</span><span class="w"> </span><span class="nt">-Username</span><span class="w"> </span><span class="nv">$Username</span><span class="w"> </span><span class="nt">-Server</span><span class="w"> </span><span class="nv">$DomainB</span><span class="w">
-
-</span><span class="n">Write-Host</span><span class="w"> </span><span class="s2">"Domain A PasswordLastSet: </span><span class="nv">$PwdSetA</span><span class="s2">"</span><span class="w">
-</span><span class="n">Write-Host</span><span class="w"> </span><span class="s2">"Domain B PasswordLastSet: </span><span class="nv">$PwdSetB</span><span class="s2">"</span><span class="w">
-</span></code></pre></div></div>
-
-<hr />
-
-<h2 id="handling-time-differences-gracefully">Handling Time Differences Gracefully</h2>
-
-<p>Exact timestamp matches aren’t always realistic. A small delay may be expected.</p>
-
-<p>Here’s how to calculate the difference:</p>
-
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$TimeDifference</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nv">$PwdSetA</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nv">$PwdSetB</span><span class="p">)</span><span class="o">.</span><span class="nf">Duration</span><span class="p">()</span><span class="w">
-
-</span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="nv">$TimeDifference</span><span class="o">.</span><span class="nf">TotalMinutes</span><span class="w"> </span><span class="o">-le</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="n">Write-Host</span><span class="w"> </span><span class="s2">"✅ Passwords appear to be in sync"</span><span class="w">
-</span><span class="p">}</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="n">Write-Host</span><span class="w"> </span><span class="s2">"❌ Passwords are NOT in sync"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
-
-<p>You can adjust the threshold based on your environment’s sync behavior.</p>
-
-<hr />
-
-<h2 id="checking-multiple-users-at-once">Checking Multiple Users at Once</h2>
-
-<p>To scale this check, you can loop through a list of users:</p>
-
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$Users</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">@(</span><span class="s2">"jdoe"</span><span class="p">,</span><span class="w"> </span><span class="s2">"asmith"</span><span class="p">,</span><span class="w"> </span><span class="s2">"mbrown"</span><span class="p">)</span><span class="w">
-
-</span><span class="kr">foreach</span><span class="w"> </span><span class="p">(</span><span class="nv">$User</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nv">$Users</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nv">$A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Get-PasswordLastSet</span><span class="w"> </span><span class="nt">-Username</span><span class="w"> </span><span class="nv">$User</span><span class="w"> </span><span class="nt">-Server</span><span class="w"> </span><span class="nv">$DomainA</span><span class="w">
-    </span><span class="nv">$B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Get-PasswordLastSet</span><span class="w"> </span><span class="nt">-Username</span><span class="w"> </span><span class="nv">$User</span><span class="w"> </span><span class="nt">-Server</span><span class="w"> </span><span class="nv">$DomainB</span><span class="w">
-
-    </span><span class="nv">$Diff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nv">$A</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nv">$B</span><span class="p">)</span><span class="o">.</span><span class="nf">Duration</span><span class="p">()</span><span class="w">
-
-    </span><span class="p">[</span><span class="n">PSCustomObject</span><span class="p">]@{</span><span class="w">
-        </span><span class="nx">User</span><span class="w">              </span><span class="o">=</span><span class="w"> </span><span class="nv">$User</span><span class="w">
-        </span><span class="nx">DomainA_LastSet</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="nv">$A</span><span class="w">
-        </span><span class="nx">DomainB_LastSet</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="nv">$B</span><span class="w">
-        </span><span class="nx">DifferenceMinutes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">math</span><span class="p">]</span><span class="err">::</span><span class="nx">Round</span><span class="err">(</span><span class="nv">$Diff</span><span class="err">.</span><span class="nx">TotalMinutes</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="err">)</span><span class="w">
-        </span><span class="nx">InSync</span><span class="w">            </span><span class="o">=</span><span class="w"> </span><span class="err">(</span><span class="nv">$Diff</span><span class="err">.</span><span class="nx">TotalMinutes</span><span class="w"> </span><span class="err">-</span><span class="nx">le</span><span class="w"> </span><span class="mi">5</span><span class="err">)</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
-
-<p>This produces clean, report-ready output.</p>
-
-<hr />
-
-<h2 id="common-gotchas">Common Gotchas</h2>
-
-<h3 id="time-synchronization">Time Synchronization</h3>
-
-<p>If domain controllers aren’t time-synced (NTP issues), your results may be misleading.</p>
-
-<h3 id="password-writeback-delays">Password Writeback Delays</h3>
-
-<p>Some sync solutions update attributes asynchronously—short mismatches may be normal.</p>
-
-<h3 id="replication-latency">Replication Latency</h3>
-
-<p>If you query different DCs, replication delays can cause temporary differences.</p>
-
-<hr />
-
-<h2 id="when-this-approach-works-best">When This Approach Works Best</h2>
-
-<p>This method is ideal for:</p>
-
-<ul>
-  <li>Troubleshooting password sync issues</li>
-  <li>Validating migrations</li>
-  <li>Spot-checking identity synchronization</li>
-  <li>Operational monitoring scripts</li>
-</ul>
-
-<p>It’s not a replacement for full identity monitoring—but it’s an excellent <strong>first diagnostic step</strong>.</p>
-
-<hr />
-
-<h2 id="final-thoughts">Final Thoughts</h2>
-
-<p>PowerShell makes it easy to validate password synchronization using native Active Directory attributes. By comparing <code class="language-plaintext highlighter-rouge">PasswordLastSet</code> across domains, you gain a quick, reliable signal that helps confirm whether your identity infrastructure is behaving as expected.</p>
-
-<p>Sometimes the simplest checks uncover the biggest problems.</p>
-
-<hr />]]></content><author><name></name></author><summary type="html"><![CDATA[Verifying Password Sync Between Two Active Directory Domains with PowerShell]]></summary></entry><entry><title type="html">Rgb Stage</title><link href="http://localhost:4000/2026/01/22/rgb-stage.html" rel="alternate" type="text/html" title="Rgb Stage" /><published>2026-01-22T17:10:57+11:00</published><updated>2026-01-22T17:10:57+11:00</updated><id>http://localhost:4000/2026/01/22/rgb-stage</id><content type="html" xml:base="http://localhost:4000/2026/01/22/rgb-stage.html"><![CDATA[]]></content><author><name></name></author><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Home Network</title><link href="http://localhost:4000/2026/01/22/home-network.html" rel="alternate" type="text/html" title="Home Network" /><published>2026-01-22T17:10:57+11:00</published><updated>2026-01-22T17:10:57+11:00</updated><id>http://localhost:4000/2026/01/22/home-network</id><content type="html" xml:base="http://localhost:4000/2026/01/22/home-network.html"><![CDATA[]]></content><author><name></name></author><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Homelab Build</title><link href="http://localhost:4000/2026/01/22/homelab-build.html" rel="alternate" type="text/html" title="Homelab Build" /><published>2026-01-22T17:10:57+11:00</published><updated>2026-01-22T17:10:57+11:00</updated><id>http://localhost:4000/2026/01/22/homelab-build</id><content type="html" xml:base="http://localhost:4000/2026/01/22/homelab-build.html"><![CDATA[]]></content><author><name></name></author><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Ansible Playbooks</title><link href="http://localhost:4000/2026/01/22/ansible-playbooks.html" rel="alternate" type="text/html" title="Ansible Playbooks" /><published>2026-01-22T17:10:56+11:00</published><updated>2026-01-22T17:10:56+11:00</updated><id>http://localhost:4000/2026/01/22/ansible-playbooks</id><content type="html" xml:base="http://localhost:4000/2026/01/22/ansible-playbooks.html"><![CDATA[]]></content><author><name></name></author><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Tamagotchi for Hackers: Building a Pwnagotchi</title><link href="http://localhost:4000/2025/12/27/pwnagotchi.html" rel="alternate" type="text/html" title="Tamagotchi for Hackers: Building a Pwnagotchi" /><published>2025-12-27T00:00:00+11:00</published><updated>2025-12-27T00:00:00+11:00</updated><id>http://localhost:4000/2025/12/27/pwnagotchi</id><content type="html" xml:base="http://localhost:4000/2025/12/27/pwnagotchi.html"><![CDATA[<p>If you grew up in the late ’90s or early 2000s, chances are you remember Tamagotchis—the small handheld digital pets from Bandai that demanded constant attention through feeding, games, and care via three tiny buttons.</p>
+<p>Used carefully, ethically, and as a last resort, UI automation can deliver significant productivity gains—even in environments that were never designed to be automated.</p>]]></content><author><name></name></author><category term="automation" /><category term="python" /><summary type="html"><![CDATA[Anyone who has ever had to manually create dozens—or hundreds—of accounts in a legacy system knows how painful the process can be:]]></summary></entry><entry><title type="html">Tamagotchi for Hackers: Building a Pwnagotchi</title><link href="https://ritchiecaruso.com/2025/12/27/pwnagotchi.html" rel="alternate" type="text/html" title="Tamagotchi for Hackers: Building a Pwnagotchi" /><published>2025-12-27T00:00:00+11:00</published><updated>2025-12-27T00:00:00+11:00</updated><id>https://ritchiecaruso.com/2025/12/27/pwnagotchi</id><content type="html" xml:base="https://ritchiecaruso.com/2025/12/27/pwnagotchi.html"><![CDATA[<p>If you grew up in the late ’90s or early 2000s, chances are you remember Tamagotchis—the small handheld digital pets from Bandai that demanded constant attention through feeding, games, and care via three tiny buttons.</p>
 
 <p>Recently, I stumbled across a fantastic open-source project called Pwnagotchi.</p>
 
@@ -636,7 +454,7 @@ bettercap.password = "PASSWORD"
 
 <p>The Pwnagotchi is a fun, educational project that blends nostalgia with practical cybersecurity concepts. It’s an excellent way to learn more about wireless security, Linux, and embedded devices.</p>
 
-<p>If you’re interested in hardware hacking, wireless security, or just enjoy nostalgic tech projects, building a Pwnagotchi is absolutely worth your time.</p>]]></content><author><name></name></author><category term="cybersecurity" /><category term="raspberry pi" /><category term="hacking" /><category term="wifi" /><category term="electronics" /><summary type="html"><![CDATA[If you grew up in the late ’90s or early 2000s, chances are you remember Tamagotchis—the small handheld digital pets from Bandai that demanded constant attention through feeding, games, and care via three tiny buttons.]]></summary></entry><entry><title type="html">Transform a Cheap 3D Printer into a High End Machine with Klipper</title><link href="http://localhost:4000/2025/11/08/klipper.html" rel="alternate" type="text/html" title="Transform a Cheap 3D Printer into a High End Machine with Klipper" /><published>2025-11-08T00:00:00+11:00</published><updated>2025-11-08T00:00:00+11:00</updated><id>http://localhost:4000/2025/11/08/klipper</id><content type="html" xml:base="http://localhost:4000/2025/11/08/klipper.html"><![CDATA[<p>I love the endless creative posiblities of 3D Printing but the most prohibitive part of the hobby is the cost. Sure, you can get affordable 3D printers but they lack many desirable features of the higher end models.</p>
+<p>If you’re interested in hardware hacking, wireless security, or just enjoy nostalgic tech projects, building a Pwnagotchi is absolutely worth your time.</p>]]></content><author><name></name></author><category term="cybersecurity" /><category term="raspberry pi" /><category term="hacking" /><category term="wifi" /><category term="electronics" /><summary type="html"><![CDATA[If you grew up in the late ’90s or early 2000s, chances are you remember Tamagotchis—the small handheld digital pets from Bandai that demanded constant attention through feeding, games, and care via three tiny buttons.]]></summary></entry><entry><title type="html">Transform a Cheap 3D Printer into a High End Machine with Klipper</title><link href="https://ritchiecaruso.com/2025/11/08/klipper.html" rel="alternate" type="text/html" title="Transform a Cheap 3D Printer into a High End Machine with Klipper" /><published>2025-11-08T00:00:00+11:00</published><updated>2025-11-08T00:00:00+11:00</updated><id>https://ritchiecaruso.com/2025/11/08/klipper</id><content type="html" xml:base="https://ritchiecaruso.com/2025/11/08/klipper.html"><![CDATA[<p>I love the endless creative posiblities of 3D Printing but the most prohibitive part of the hobby is the cost. Sure, you can get affordable 3D printers but they lack many desirable features of the higher end models.</p>
 
 <p>This is where the fantastic open source software Klipper comes into the picture. I learnt about Klipper from a colleague who has been 3D Printing for a long time, this nifty piece of software and firmware can transform your printer with features such as printing over wi-fi, finer control of configuration and increased print speeds.</p>
 
@@ -864,7 +682,7 @@ The software has a lot of customisation options and takes a bit of getting used 
 
 <p>Installing Klipper on your 3D Printer can transform a capable entry-level printer into a <strong>high-performance, highly tunable machine</strong>. While setup requires a bit of care and research, the payoff in print quality, speed, and control is substantial.</p>
 
-<p>For makers, educators, and printing enthusiasts looking to push their hardware further, Klipper is well worth the upgrade.</p>]]></content><author><name></name></author><category term="3d printing" /><category term="fdm printer" /><category term="raspberry pi" /><category term="electronics" /><summary type="html"><![CDATA[I love the endless creative posiblities of 3D Printing but the most prohibitive part of the hobby is the cost. Sure, you can get affordable 3D printers but they lack many desirable features of the higher end models.]]></summary></entry><entry><title type="html">How Bad Actors Can Hide Outlook &amp;amp; Exchange Inbox Rules</title><link href="http://localhost:4000/2025/10/20/hidden-outlook-rules.html" rel="alternate" type="text/html" title="How Bad Actors Can Hide Outlook &amp;amp; Exchange Inbox Rules" /><published>2025-10-20T00:00:00+11:00</published><updated>2025-10-20T00:00:00+11:00</updated><id>http://localhost:4000/2025/10/20/hidden-outlook-rules</id><content type="html" xml:base="http://localhost:4000/2025/10/20/hidden-outlook-rules.html"><![CDATA[<p>It was a typical Monday morning. I sat down at my desk, ready to start the day, when I received a Microsoft Teams message from our cybersecurity department. Over the weekend, a breach had occurred that impacted several users.</p>
+<p>For makers, educators, and printing enthusiasts looking to push their hardware further, Klipper is well worth the upgrade.</p>]]></content><author><name></name></author><category term="3d printing" /><category term="fdm printer" /><category term="raspberry pi" /><category term="electronics" /><summary type="html"><![CDATA[I love the endless creative posiblities of 3D Printing but the most prohibitive part of the hobby is the cost. Sure, you can get affordable 3D printers but they lack many desirable features of the higher end models.]]></summary></entry><entry><title type="html">How Bad Actors Can Hide Outlook &amp;amp; Exchange Inbox Rules</title><link href="https://ritchiecaruso.com/2025/10/20/hidden-outlook-rules.html" rel="alternate" type="text/html" title="How Bad Actors Can Hide Outlook &amp;amp; Exchange Inbox Rules" /><published>2025-10-20T00:00:00+11:00</published><updated>2025-10-20T00:00:00+11:00</updated><id>https://ritchiecaruso.com/2025/10/20/hidden-outlook-rules</id><content type="html" xml:base="https://ritchiecaruso.com/2025/10/20/hidden-outlook-rules.html"><![CDATA[<p>It was a typical Monday morning. I sat down at my desk, ready to start the day, when I received a Microsoft Teams message from our cybersecurity department. Over the weekend, a breach had occurred that impacted several users.</p>
 
 <p>Without going into sensitive detail, the attacker had gained access to user accounts and distributed a phishing campaign via a SharePoint file.</p>
 
@@ -1110,7 +928,7 @@ The software has a lot of customisation options and takes a bit of getting used 
 
 <p>What began as a routine Monday quickly turned into a deep investigation, remediation effort, and a reminder that mailbox persistence techniques can be subtle yet highly effective.</p>
 
-<p>Stay vigilant — and don’t rely on the Rules GUI alone.</p>]]></content><author><name></name></author><category term="cybersecurity" /><category term="microsoft" /><category term="exchange" /><category term="outlook" /><category term="incident-response" /><summary type="html"><![CDATA[It was a typical Monday morning. I sat down at my desk, ready to start the day, when I received a Microsoft Teams message from our cybersecurity department. Over the weekend, a breach had occurred that impacted several users.]]></summary></entry><entry><title type="html">Why Build a Home Server in a Cloud-First World?</title><link href="http://localhost:4000/2023/11/10/nas-build.html" rel="alternate" type="text/html" title="Why Build a Home Server in a Cloud-First World?" /><published>2023-11-10T00:00:00+11:00</published><updated>2023-11-10T00:00:00+11:00</updated><id>http://localhost:4000/2023/11/10/nas-build</id><content type="html" xml:base="http://localhost:4000/2023/11/10/nas-build.html"><![CDATA[<p>Cloud computing is everywhere. It’s fast, convenient, and generally affordable. So why would anyone bother building their own server to store data and files?</p>
+<p>Stay vigilant — and don’t rely on the Rules GUI alone.</p>]]></content><author><name></name></author><category term="cybersecurity" /><category term="microsoft" /><category term="exchange" /><category term="outlook" /><category term="incident-response" /><summary type="html"><![CDATA[It was a typical Monday morning. I sat down at my desk, ready to start the day, when I received a Microsoft Teams message from our cybersecurity department. Over the weekend, a breach had occurred that impacted several users.]]></summary></entry><entry><title type="html">Why Build a Home Server in a Cloud-First World?</title><link href="https://ritchiecaruso.com/2023/11/10/nas-build.html" rel="alternate" type="text/html" title="Why Build a Home Server in a Cloud-First World?" /><published>2023-11-10T00:00:00+11:00</published><updated>2023-11-10T00:00:00+11:00</updated><id>https://ritchiecaruso.com/2023/11/10/nas-build</id><content type="html" xml:base="https://ritchiecaruso.com/2023/11/10/nas-build.html"><![CDATA[<p>Cloud computing is everywhere. It’s fast, convenient, and generally affordable. So why would anyone bother building their own server to store data and files?</p>
 
 <p>For me, the answer came down to a few key reasons:</p>
 
