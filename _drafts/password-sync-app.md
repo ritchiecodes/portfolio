@@ -1,14 +1,29 @@
-# Verifying Password Sync Between Two Active Directory Domains with PowerShell
+---
+layout: post
+title: "Domain Migration Password Tool"
+tags: [active-directory, system-admin]
+thumbnail: /assets/images/account-automation/automation-with-python.webp
+---
 
-In multi-domain or hybrid Active Directory environments, one common operational question comes up again and again:
+Many of us have experienced it before, a branch or company needs to be migrated into your domain or maybe even seperating a bunch of companies under one domain into their own. Whatever the reason may be, it comes with a large set of challenges that can be difficult to navigate.
+
+In my case, the company I worked for were under an AD forest that was shared between multiple organisations. Despite having control of our domain, at times we were still at the mercy of any policies or changes made by the host organisation.
+
+So, it was time for us to migrate everyone and everything onto our own servers, completely segregated from the other domains. This had a number of benefits, we would have more control over our own resources and not have to worry about someone external wreaking havoc due to a change we were not notified about.
+
+The issue, our organisation managed over 10,000 users, 6,000 computers (not including servers) and runs 24 hours a day, 7 days a week. This process wasn't something that could be done over a weekend. The migration was set to be done over a period of at least 12 months.
+
+I'm not going to go over the entire migration process today, as that would probably be the length of a Harry Potter book. Instead, I will show you a neat little tool I created with Powershell to assist our Help Desk team as they navigated user login issues throughout the year long migration.
+
+During an Active Directory domain migration or even a Multi-Domain setup, one common operational question comes up again and again:
 
 > **“Are passwords actually syncing between these two domains?”**
 
-Whether you’re using trust relationships, synchronization tools, or identity management solutions, a quick and reliable way to validate password synchronization is by comparing the **`PasswordLastSet`** timestamp for the same user across domains.
+Whether you’re using trust relationships, synchronization tools, or identity management solutions, I found that a quick and reliable way to validate password synchronization is by comparing the **`PasswordLastSet`** timestamp for the same user across domains.
 
-This post walks through how to write a **PowerShell script** that checks the password last set date and time between two domains and determines whether they are in sync.
+Today, I will walk through a simple **PowerShell script** I created that checks the password last set date and time between two domains to determine whether they are in sync.
 
----
+<br>
 
 ## Why `PasswordLastSet`?
 
@@ -21,11 +36,11 @@ PasswordLastSet
 If passwords are syncing correctly:
 
 * The timestamps should be **identical** or
-* Within an **acceptable time window** (seconds or minutes, depending on your sync process)
+* Within an **acceptable time window** (dependent on your enivronments sync process)
 
 If they differ significantly, it’s a strong indicator of a sync issue.
 
----
+<br>
 
 ## Prerequisites
 
@@ -33,7 +48,6 @@ Before you begin, ensure:
 
 * You have the **ActiveDirectory PowerShell module** installed
 * You have **read access** to both domains
-* DNS and trust relationships are correctly configured
 * You know the **domain controllers** or domain names for both environments
 
 Import the module:
@@ -42,7 +56,7 @@ Import the module:
 Import-Module ActiveDirectory
 ```
 
----
+<br>
 
 ## Defining the Domains
 
@@ -53,14 +67,7 @@ $DomainA = "corp.domainA.local"
 $DomainB = "corp.domainB.local"
 ```
 
-You can also specify particular domain controllers if needed:
-
-```powershell
-$DC_A = "dc1.domainA.local"
-$DC_B = "dc1.domainB.local"
-```
-
----
+<br>
 
 ## Fetching the PasswordLastSet Value
 
@@ -87,7 +94,7 @@ function Get-PasswordLastSet {
 Now let’s put it together.
 
 ```powershell
-$Username = "jdoe"
+$Username = Read-Host "Enter Username"
 
 $PwdSetA = Get-PasswordLastSet -Username $Username -Server $DomainA
 $PwdSetB = Get-PasswordLastSet -Username $Username -Server $DomainB
@@ -95,26 +102,6 @@ $PwdSetB = Get-PasswordLastSet -Username $Username -Server $DomainB
 Write-Host "Domain A PasswordLastSet: $PwdSetA"
 Write-Host "Domain B PasswordLastSet: $PwdSetB"
 ```
-
----
-
-## Handling Time Differences Gracefully
-
-Exact timestamp matches aren’t always realistic. A small delay may be expected.
-
-Here’s how to calculate the difference:
-
-```powershell
-$TimeDifference = ($PwdSetA - $PwdSetB).Duration()
-
-if ($TimeDifference.TotalMinutes -le 5) {
-    Write-Host "✅ Passwords appear to be in sync"
-} else {
-    Write-Host "❌ Passwords are NOT in sync"
-}
-```
-
-You can adjust the threshold based on your environment’s sync behavior.
 
 ---
 
@@ -129,55 +116,17 @@ foreach ($User in $Users) {
     $A = Get-PasswordLastSet -Username $User -Server $DomainA
     $B = Get-PasswordLastSet -Username $User -Server $DomainB
 
-    $Diff = ($A - $B).Duration()
-
     [PSCustomObject]@{
         User              = $User
         DomainA_LastSet   = $A
         DomainB_LastSet   = $B
-        DifferenceMinutes = [math]::Round($Diff.TotalMinutes, 2)
-        InSync            = ($Diff.TotalMinutes -le 5)
     }
 }
 ```
 
-This produces clean, report-ready output.
+This produces a clean, report-ready output.
 
----
-
-## Common Gotchas
-
-### Time Synchronization
-
-If domain controllers aren’t time-synced (NTP issues), your results may be misleading.
-
-### Password Writeback Delays
-
-Some sync solutions update attributes asynchronously—short mismatches may be normal.
-
-### Replication Latency
-
-If you query different DCs, replication delays can cause temporary differences.
-
----
-
-## When This Approach Works Best
-
-This method is ideal for:
-
-* Troubleshooting password sync issues
-* Validating migrations
-* Spot-checking identity synchronization
-* Operational monitoring scripts
-
-It’s not a replacement for full identity monitoring—but it’s an excellent **first diagnostic step**.
-
----
 
 ## Final Thoughts
 
-PowerShell makes it easy to validate password synchronization using native Active Directory attributes. By comparing `PasswordLastSet` across domains, you gain a quick, reliable signal that helps confirm whether your identity infrastructure is behaving as expected.
-
-Sometimes the simplest checks uncover the biggest problems.
-
----
+PowerShell makes it easy to validate password synchronization using native Active Directory attributes. By comparing `PasswordLastSet` across domains, you gain a quick, reliable signal that can confirm the potential reason for login issues.
