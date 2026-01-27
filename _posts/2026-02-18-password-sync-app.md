@@ -3,6 +3,7 @@ layout: post
 title: "Domain Migration Password Tool"
 tags: [active-directory, system-admin]
 thumbnail: /assets/images/password-sync-app/password-sync-app.png
+date: 2026-02-18
 ---
 
 Many of us have experienced it before, a branch or company needs to be migrated into your domain or maybe even seperating a bunch of companies under one domain into their own. Whatever the reason may be, it comes with a large set of challenges that can be difficult to navigate.

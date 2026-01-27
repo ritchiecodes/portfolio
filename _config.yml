@@ -25,6 +25,6 @@ exclude:
   - .jekyll-metadata
 
 # If posts are dated in the future relative to build time, disable publishing them during build
-future: true
+future: false
 # Set site timezone (IANA timezone for Melbourne, Australia)
 timezone: "Australia/Melbourne"
