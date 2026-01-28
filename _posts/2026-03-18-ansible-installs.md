@@ -1,6 +1,14 @@
-Nice example 👍 — I’ll turn this into a clear, beginner-friendly **tech blog post** that explains *what Ansible playbooks are*, *how they work*, and *how this specific playbook installs apps on Linux*.
-
 ---
+layout: post
+title: "Automating Installations with Ansible Playbooks"
+tags: [system-admin, ansible, automation]
+thumbnail: /assets/images/ansible-installs/ansible.webp
+date: 2026-03-18
+---
+
+Installing software, connecting remote shares, setting up ssh keys, these are all the things that make reinstalling an operating system time consuming. When it comes to reinstalling an operating system like Linux, there are many steps to getting the system configured the way you like.
+
+Over the coming weeks, I will be sharing how I have personally automated many of these steps with **Ansible**. Today, we will take a look at automating software installation, including installing apps not found in standard repositories.
 
 # Installing Applications on Linux with Ansible Playbooks
 
@@ -12,9 +20,8 @@ In this post, we’ll walk through how to use **Ansible playbooks** to install a
 * `snap`
 * a custom APT repository (Google Chrome)
 
-All examples are taken from a real-world playbook.
-
----
+All examples are taken from a real-world playbook that I created so I could spin up a new linux environment without the pains of configuring everything from scratch. Please Note: This playbook was setup to be used with **Parrot OS** but will work with most debian based systems.
+<br>
 
 ## What Is an Ansible Playbook?
 
@@ -26,7 +33,7 @@ An Ansible playbook is a **YAML file** that describes:
 
 Instead of manually running `apt install`, `snap install`, and repository commands, Ansible automates everything in a **repeatable and idempotent** way (running it twice won’t break anything).
 
----
+<br>
 
 ## Basic Playbook Structure
 
@@ -44,7 +51,7 @@ Every playbook has a few core components:
 
 Let’s break down the example step by step.
 
----
+<br>
 
 ## Installing Packages with APT
 
@@ -64,7 +71,7 @@ This first play installs development and desktop tools on **Parrot OS** (or any 
 * `connection: local` → no SSH needed
 * `become: true` → run with sudo
 
----
+<br>
 
 ### Updating the APT Cache
 
@@ -78,7 +85,7 @@ This first play installs development and desktop tools on **Parrot OS** (or any 
 This ensures package lists are up to date.
 `cache_valid_time` avoids unnecessary updates if the cache is still fresh.
 
----
+<br>
 
 ### Installing Multiple APT Packages
 
@@ -88,13 +95,10 @@ This ensures package lists are up to date.
         name:
           - snapd
           - freecad
-          - mbpfan
-          - rsync
           - docker.io
           - git
           - timeshift
           - ruby-full
-          - build-essential
           - vlc
           - cifs-utils
         state: present
@@ -106,11 +110,11 @@ Why this is powerful:
 * Ansible only installs what’s missing
 * No need to worry about already-installed software
 
----
+<br>
 
 ## Installing Applications with Snap
 
-Snap packages are distro-agnostic and great for desktop apps.
+Many popular applications are not available from the apt repo, Snap packages are distro-agnostic and features many user submitted apps.
 
 ```yaml
 # SNAP INSTALLS
@@ -131,7 +135,7 @@ Snap packages are distro-agnostic and great for desktop apps.
 * Ansible automatically handles `snap install` for you
 * Works as long as `snapd` is installed (handled earlier)
 
----
+<br>
 
 ## Installing Software from a Custom APT Repository (Google Chrome)
 
@@ -144,7 +148,7 @@ Some applications aren’t available in default repositories. This second play i
   connection: local
 ```
 
----
+<br>
 
 ### Create the Keyrings Directory
 
@@ -158,7 +162,7 @@ Some applications aren’t available in default repositories. This second play i
 
 Modern Debian systems use keyrings instead of the old `apt-key` command.
 
----
+<br>
 
 ### Download the Google Signing Key
 
@@ -172,7 +176,7 @@ Modern Debian systems use keyrings instead of the old `apt-key` command.
 
 This ensures packages from Google can be verified.
 
----
+<br>
 
 ### Add the Chrome Repository
 
@@ -188,7 +192,7 @@ This ensures packages from Google can be verified.
 
 This tells APT *where* to fetch Chrome from and *which key* to trust.
 
----
+<br>
 
 ### Install Google Chrome
 
@@ -202,7 +206,7 @@ This tells APT *where* to fetch Chrome from and *which key* to trust.
 
 Once the repository exists, Chrome installs like any other package.
 
----
+<br>
 
 ## Running the Playbook
 
@@ -215,12 +219,16 @@ setup.yml
 Run it with:
 
 ```bash
-ansible-playbook setup.yml
+ansible-playbook setup.yml --ask-become-pass
 ```
+`--ask-become-pass` will prompt for sudo password. This allows the script to run as sudo which is required to install apps.
 
 That’s it. Ansible handles the rest.
 
----
+Whenever I decide to install new software, instead of heading straight to the terminal, I will add the installation instructions to my **Ansible Playbook** and run that instead. This ensures that in future, my playbooks will be up to date with all the software I require.
+
+
+<br>
 
 ## Why Use Ansible for App Installation?
 
@@ -230,14 +238,14 @@ That’s it. Ansible handles the rest.
 ✅ No manual clicking or remembering commands
 ✅ Scales from one laptop to hundreds of machines
 
----
+<br>
 
 ## Final Thoughts
 
 This playbook is a great foundation for a **personal workstation setup** or **dev environment bootstrap**. You can easily extend it by adding:
 
 * Flatpak installs
-* Conditional OS checks
+* Conditional OS checks (if you plan to run this on different flavours of Linux)
 * Roles for cleaner organization
 
-Once you start using Ansible for installs, going back to manual setup feels… painful 😄
+In the next Ansible post, we will go through setting up remote smb shares to auto connect on boot, this saves time having to manually setup smb shares and can having everything running within minutes.
