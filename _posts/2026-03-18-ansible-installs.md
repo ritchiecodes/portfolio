@@ -2,7 +2,7 @@
 layout: post
 title: "Automating Installations with Ansible Playbooks"
 tags: [system-admin, ansible, automation]
-thumbnail: /assets/images/ansible-installs/ansible.webp
+thumbnail: /assets/images/ansible-installs/Ansible.webp
 date: 2026-03-18
 ---
 
