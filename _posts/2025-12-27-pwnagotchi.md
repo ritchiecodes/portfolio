@@ -198,6 +198,6 @@ While my Wi-Fi password proved too strong to crack (as it should), the device wo
 <figure> <img src="/assets/images/pwnagotchi/pwnagotchi.webp" alt="Completed Pwnagotchi" width="600"> <figcaption>Completed Pwnagotchi</figcaption> </figure>
 ## Final Thoughts
 
-The Pwnagotchi is a fun, educational project that blends nostalgia with practical cybersecurity concepts. It’s an excellent way to learn more about wireless security, Linux, and embedded devices.
+Building a Pwnagotchi was a good excuse to get hands on with wireless security, Linux, and embedded hardware all in one weekend project, with a bit of Tamagotchi-style nostalgia thrown in.
 
-If you’re interested in hardware hacking, wireless security, or just enjoy nostalgic tech projects, building a Pwnagotchi is absolutely worth your time.
+If hardware hacking or wireless security interests you, it's a cheap and fairly quick build.

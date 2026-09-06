@@ -203,7 +203,7 @@ Treat it as a **practical workaround**, not a long-term architectural solution.
 
 ## Final Thoughts
 
-When APIs aren’t available, UI automation can transform hours of repetitive work into a one-time scripting effort that runs in minutes.
+When there's no API to work with, UI automation is the next best option. Build the script once, and it handles in minutes what used to take hours by hand.
 
 Tools like `pyautogui` allow engineers to:
 

@@ -242,7 +242,7 @@ Whenever I decide to install new software, instead of heading straight to the te
 
 ## Final Thoughts
 
-This playbook is a great foundation for a **personal workstation setup** or **dev environment bootstrap**. You can easily extend it by adding:
+This playbook covers the basics of a **personal workstation setup** or **dev environment bootstrap**, but there's room to build on it:
 
 * Flatpak installs
 * Conditional OS checks (if you plan to run this on different flavours of Linux)
