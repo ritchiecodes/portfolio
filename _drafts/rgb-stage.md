@@ -5,9 +5,9 @@ tags: [3d printing, electronics, diy, rgb]
 thumbnail: /assets/images/rgb-stage/banner.webp
 ---
 
-I've been looking for a way to display some of my figurine collection that's a bit more interesting than just putting them on a shelf. A proper display stage with lighting felt like the right answer — and since I have a 3D printer, making one from scratch was an obvious choice.
+I've been looking for a way to display some of my figurine collection that's a bit more interesting than just putting them on a shelf. A proper display stage with lighting felt like the right answer, and since I have a 3D printer, making one from scratch was an obvious choice.
 
-The goal: a compact 3D printed stage that can sit on a desk or shelf, with RGB LEDs wired inside and controlled by a small remote. No soldering to a microcontroller, no code — just a clean, self-contained display piece.
+The goal: a compact 3D printed stage that can sit on a desk or shelf, with RGB LEDs wired inside and controlled by a small remote. No soldering to a microcontroller, no code, just a clean, self-contained display piece.
 
 <br>
 
@@ -38,13 +38,13 @@ I modelled the stage in [your CAD tool], printed in [filament colour/material]. 
 * USB cable (for power input)
 * Diffuser panel (cut from white acrylic or thick white PETG)
 
-The LED strip I used comes as a kit with the IR receiver and remote already paired — no additional wiring to a separate controller needed. Power goes in through USB, which keeps it clean and easy to run from a USB port on a monitor or desk hub.
+The LED strip I used comes as a kit with the IR receiver and remote already paired, no additional wiring to a separate controller needed. Power goes in through USB, which keeps it clean and easy to run from a USB port on a monitor or desk hub.
 
 <br>
 
 ## Printing
 
-[add print settings — layer height, infill, supports, etc.]
+[add print settings: layer height, infill, supports, etc.]
 
 The trickiest part of the print was the diffuser channel along the front face. I printed this section slowly to keep the walls consistent, as any variation shows up clearly when the LEDs are lit.
 
@@ -63,7 +63,7 @@ The trickiest part of the print was the diffuser channel along the front face. I
 4. Slot the diffuser panel into the front face opening
 5. Run the USB cable out through the rear cutout
 
-The whole assembly takes about 20 minutes once the print is done. No soldering required — the LED strip connectors are plug-and-play.
+The whole assembly takes about 20 minutes once the print is done. No soldering required. The LED strip connectors are plug-and-play.
 
 <figure>
   <img src="/assets/images/rgb-stage/assembly.webp" alt="LED strip installed inside stage" width="500">
@@ -85,6 +85,6 @@ The remote gives full control over colour, brightness, and a handful of effects 
 
 ## Final Thoughts
 
-This was a fun weekend project that sits at the intersection of 3D printing and basic electronics — no programming or specialist skills required. If you have a printer and a collection of figures gathering dust on a shelf, a display stage like this is an easy way to give them a proper home.
+This was a fun weekend project that sits at the intersection of 3D printing and basic electronics, no programming or specialist skills required. If you have a printer and a collection of figures gathering dust on a shelf, a display stage like this is an easy way to give them a proper home.
 
 The design files are available [link to files].

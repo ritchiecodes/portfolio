@@ -5,7 +5,7 @@ tags: [homelab, proxmox, system-admin, virtualisation]
 thumbnail: /assets/images/homelab-build/banner.webp
 ---
 
-Running services at home — whether it's a media server, network tools, or a place to test things without touching production — is a lot more useful with dedicated hardware. For a while I'd been making do with a spare PC sitting in the corner, but moving to a proper hypervisor opened up a lot more possibilities.
+Running services at home, whether it's a media server, network tools, or a place to test things without touching production, is a lot more useful with dedicated hardware. For a while I'd been making do with a spare PC sitting in the corner, but moving to a proper hypervisor opened up a lot more possibilities.
 
 I built this lab using older components I already had, which kept the cost down to nearly nothing. The result is a machine running **Proxmox VE** that hosts several virtual machines and containers.
 
@@ -25,7 +25,7 @@ I built this lab using older components I already had, which kept the cost down 
 | PSU | |
 | NIC | |
 
-The hardware is modest but more than adequate for running a handful of VMs and LXC containers simultaneously. Using parts I had on hand meant I wasn't constrained by a budget — whatever was available is what went in.
+The hardware is modest but more than adequate for running a handful of VMs and LXC containers simultaneously. Using parts I had on hand meant I wasn't constrained by a budget, whatever was available is what went in.
 
 <br>
 
@@ -34,9 +34,9 @@ The hardware is modest but more than adequate for running a handful of VMs and L
 **Proxmox VE** is a free, open-source hypervisor built on Debian. It supports both **KVM virtual machines** and **LXC containers**, has a clean web UI, and is widely used in the homelab community.
 
 The main alternatives are:
-* **VMware ESXi** — feature-rich but licensing has become increasingly restrictive
-* **Unraid** — great for NAS-primary builds; less flexible for VMs
-* **TrueNAS Scale** — better if storage is the primary use case
+* **VMware ESXi**: feature-rich but licensing has become increasingly restrictive
+* **Unraid**: great for NAS-primary builds; less flexible for VMs
+* **TrueNAS Scale**: better if storage is the primary use case
 
 For a general-purpose homelab, Proxmox is hard to beat. The community is large, documentation is good, and it's genuinely free.
 
@@ -56,7 +56,7 @@ After reboot, the web UI is accessible at:
 https://[your-ip]:8006
 ```
 
-> ⚠️ Proxmox uses a self-signed certificate by default. Your browser will warn you — this is expected. Accept the exception to proceed.
+> ⚠️ Proxmox uses a self-signed certificate by default. Your browser will warn you, this is expected. Accept the exception to proceed.
 
 <br>
 

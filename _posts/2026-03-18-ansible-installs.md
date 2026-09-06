@@ -6,13 +6,13 @@ thumbnail: /assets/images/ansible-installs/Ansible.webp
 date: 2026-03-18
 ---
 
-Installing software, connecting remote shares, setting up ssh keys, these are all the things that make reinstalling an operating system time consuming. When it comes to reinstalling an operating system like Linux, there are many steps to getting the system configured the way you like.
+Installing software, connecting remote shares, setting up ssh keys, these are all the things that make reinstalling an operating system time consuming. Getting a Linux system configured the way you like takes a lot of steps.
 
 Over the coming weeks, I will be sharing how I have personally automated many of these steps with **Ansible**. Today, we will take a look at automating software installation, including installing apps not found in standard repositories.
 
 # Installing Applications on Linux with Ansible Playbooks
 
-Managing software on Linux machines can get repetitive fast — especially when you’re reinstalling an OS, setting up a new laptop, or configuring multiple systems. **Ansible** solves this problem by letting you describe your system setup *once* and re-apply it anytime.
+Managing software on Linux machines can get repetitive fast, especially when you’re reinstalling an OS, setting up a new laptop, or configuring multiple systems. **Ansible** solves this problem by letting you describe your system setup *once* and re-apply it anytime.
 
 In this post, we’ll walk through how to use **Ansible playbooks** to install applications on a Linux system using:
 

@@ -5,7 +5,7 @@ tags: [system-admin, backup, linux, automation]
 thumbnail: /assets/images/restic-backups/banner.webp
 ---
 
-Backups are one of those things everyone knows they should have but few people actually set up properly. **Restic** is the tool that finally made me do it — it's fast, encrypted by default, cross-platform, and dead simple to automate.
+Backups are one of those things everyone knows they should have but few people actually set up properly. **Restic** is the tool that finally made me do it. It's fast, encrypted by default, cross-platform, and dead simple to automate.
 
 This post walks through everything you need to get a solid backup setup running: initialising a repository, backing up locally and over SFTP, checking and restoring snapshots, pruning old data, and wiring it all together into an automated script.
 
@@ -38,7 +38,7 @@ restic version
 
 ## Initialising a Repository
 
-A restic repository is where your backups are stored. It can live on a local disk, a network share, or a remote server. All repositories are encrypted — you'll set a password on initialisation that's required for every operation.
+A restic repository is where your backups are stored. It can live on a local disk, a network share, or a remote server. All repositories are encrypted. You'll set a password on initialisation that's required for every operation.
 
 ### Local Repository
 
@@ -54,7 +54,7 @@ To back up over SFTP, restic uses SSH under the hood. Make sure you have SSH key
 restic init --repo sftp:user@hostname:/path/to/repo
 ```
 
-Restic will prompt for a new repository password. Store this somewhere safe — **without it, your backups cannot be restored.**
+Restic will prompt for a new repository password. Store this somewhere safe. **Without it, your backups cannot be restored.**
 
 <br>
 
@@ -110,13 +110,13 @@ __pycache__
 .DS_Store
 ```
 
-Restic is **incremental** — only data that has changed since the last snapshot is uploaded. First backups take longest; subsequent ones are typically fast.
+Restic is **incremental**: only data that has changed since the last snapshot is uploaded. First backups take longest; subsequent ones are typically fast.
 
 <br>
 
 ## Backing Up Over SFTP
 
-SFTP backups work identically to local ones once the repository is initialised — just point the `RESTIC_REPOSITORY` variable at your SFTP path.
+SFTP backups work identically to local ones once the repository is initialised, just point the `RESTIC_REPOSITORY` variable at your SFTP path.
 
 A few things that make SFTP backups reliable:
 
@@ -232,7 +232,7 @@ This keeps:
 * One per month for the last 12 months
 * One per year for the last 2 years
 
-`forget` on its own only removes snapshot references — the actual data remains in the repository until you run `prune`.
+`forget` on its own only removes snapshot references. The actual data remains in the repository until you run `prune`.
 
 ### Prune Unreferenced Data
 
@@ -344,9 +344,9 @@ Add:
 
 ## A Foolproof Solution: Combining Restic with Rsync
 
-Restic handles versioned, encrypted snapshots well — but for a truly belt-and-braces setup, it's worth also mirroring your restic repository to a second remote location using **rsync**. This gives you two independent copies: one on your primary backup target and one offsite, without needing to run a full restic backup twice.
+Restic handles versioned, encrypted snapshots well, but for a truly belt-and-braces setup, it's worth also mirroring your restic repository to a second remote location using **rsync**. This gives you two independent copies: one on your primary backup target and one offsite, without needing to run a full restic backup twice.
 
-The idea is simple: restic writes its encrypted repository to a local or primary remote location, then rsync copies that entire repository directory to a second destination. Because restic's repository is just a directory of files, rsync can sync it efficiently — only transferring what has changed since the last sync.
+The idea is simple: restic writes its encrypted repository to a local or primary remote location, then rsync copies that entire repository directory to a second destination. Because restic's repository is just a directory of files, rsync can sync it efficiently, only transferring what has changed since the last sync.
 
 ### Rsync to a Remote Server Over SSH
 
@@ -355,12 +355,12 @@ rsync -avz --delete /mnt/backup/myrepo/ user@offsite-server:/backup/myrepo/
 ```
 
 Key flags:
-* `-a` — archive mode: preserves permissions, timestamps, and symlinks
-* `-v` — verbose output
-* `-z` — compress data during transfer
-* `--delete` — removes files from the destination that no longer exist in the source, keeping the mirror in sync
+* `-a`: archive mode, preserves permissions, timestamps, and symlinks
+* `-v`: verbose output
+* `-z`: compress data during transfer
+* `--delete`: removes files from the destination that no longer exist in the source, keeping the mirror in sync
 
-> ⚠️ The trailing slash on the source path (`myrepo/`) is important — it tells rsync to sync the *contents* of the directory rather than the directory itself.
+> ⚠️ The trailing slash on the source path (`myrepo/`) is important, it tells rsync to sync the *contents* of the directory rather than the directory itself.
 
 ### Rsync Automation Script
 
@@ -399,7 +399,7 @@ Save it to `/usr/local/bin/rsync-backup.sh` and make it executable:
 chmod +x /usr/local/bin/rsync-backup.sh
 ```
 
-Schedule it shortly after the restic script — for example, if restic runs at 2am, run rsync at 3am to give the backup time to complete:
+Schedule it shortly after the restic script, for example if restic runs at 2am, run rsync at 3am to give the backup time to complete:
 
 ```
 0 2 * * * /usr/local/bin/restic-backup.sh
@@ -408,7 +408,7 @@ Schedule it shortly after the restic script — for example, if restic runs at 2
 
 ### Why This Works
 
-The result is a **3-2-1 backup strategy** — the gold standard for data protection:
+The result is a **3-2-1 backup strategy**, the gold standard for data protection:
 
 * **3** copies of your data
 * **2** different storage media or locations
@@ -422,4 +422,4 @@ Restic provides the versioning, encryption, and deduplication. Rsync provides th
 
 Restic removes most of the friction that comes with setting up backups. Encryption is automatic, deduplication means you're not storing redundant data, and the retention policy system gives you fine-grained control over how long snapshots are kept without the repository growing unbounded.
 
-Pair it with rsync to an offsite location and you have a resilient, automated backup setup that follows best practices — all without paying for a managed backup service.
+Pair it with rsync to an offsite location and you have a resilient, automated backup setup that follows best practices, all without paying for a managed backup service.

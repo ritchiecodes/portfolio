@@ -5,11 +5,11 @@ tags: [cybersecurity, raspberry pi, hacking, wifi, electronics]
 thumbnail: /assets/images/pwnagotchi/pwnagotchi-banner.webp
 ---
 
-If you grew up in the late ’90s or early 2000s, chances are you remember Tamagotchis—the small handheld digital pets from Bandai that demanded constant attention through feeding, games, and care via three tiny buttons.
+If you grew up in the late ’90s or early 2000s, chances are you remember Tamagotchis: the small handheld digital pets from Bandai that demanded constant attention through feeding, games, and care via three tiny buttons.
 
 Recently, I stumbled across a fantastic open-source project called Pwnagotchi. 
 
-As the name suggests, it’s a playful nod to Tamagotchis—but with a cybersecurity twist. Instead of feeding a digital pet, you’re training a small device to passively observe and learn from Wi-Fi environments.
+As the name suggests, it’s a playful nod to Tamagotchis, but with a cybersecurity twist. Instead of feeding a digital pet, you’re training a small device to passively observe and learn from Wi-Fi environments.
 
 As someone with a background in cybersecurity and a growing interest in electronics, this felt like the perfect project to take on.
 
@@ -98,10 +98,7 @@ Initial configuration is handled via an interactive wizard:
 sudo pwnagotchi --wizard
 ```
 
-Once complete, the device is technically ready—b
-Below are the key settings I recommend enabling or modifying:
-
-ut a few important security and usability settings should be configured first.
+Once complete, the device is technically ready, but a few important security and usability settings should be configured first.
 
 ## Web UI and Configuration
 

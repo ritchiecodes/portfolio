@@ -9,7 +9,7 @@ title: Home
   </a>
   <div class="bio-text">
     <h1>Hi, I'm Ritchie</h1>
-    <p>I'm an ICT professional who loves making things. I automate workflows, build gizmos, and experiment in my homelab—constantly exploring how technology works by breaking it (legally, of course) and rebuilding it to be faster, better and more secure.</p>
+    <p>I'm an ICT professional who loves making things. I automate workflows, build gizmos, and experiment in my homelab. I'm constantly exploring how technology works by breaking it (legally, of course) and rebuilding it to be faster, better and more secure.</p>
   </div>
 </div>
 
@@ -22,12 +22,12 @@ title: Home
   <div class="project-card">
     <img src="{{ '/assets/images/hidden-rules/hidden-rule-banner.webp' | relative_url }}" alt="Hidden Outlook Rules">
     <h3><a href="{{ '/2025/10/20/hidden-outlook-rules.html' | relative_url }}">Hidden Outlook Rules Attack</a></h3>
-    <p>Deep dive into how attackers hide malicious Outlook inbox rules from the GUI, and how to detect and remove them at scale across an organization.</p>
+    <p>How attackers hide malicious Outlook inbox rules from the GUI, and how to detect and remove them at scale across an organization.</p>
   </div>
   <div class="project-card">
     <img src="{{ '/assets/images/pwnagotchi/pwnagotchi-banner.webp' | relative_url }}" alt="Pwnagotchi Build">
     <h3><a href="{{ '/2025/12/27/pwnagotchi.html' | relative_url }}">Building a Pwnagotchi</a></h3>
-    <p>Built a Tamagotchi-inspired Wi-Fi hacking device using a Raspberry Pi Zero 2 W, e-ink display, battery and custom 3D printed case—featuring automatic handshake capture.</p>
+    <p>Built a Tamagotchi-inspired Wi-Fi hacking device using a Raspberry Pi Zero 2 W, e-ink display, battery and custom 3D printed case, with automatic handshake capture.</p>
   </div>
   <div class="project-card">
     <img src="{{ '/assets/images/nas-blog/bench-test.webp' | relative_url }}" alt="NAS Server Build">

@@ -17,13 +17,13 @@ My task that morning was straightforward:
 
 After working through this process with several users, I noticed a strange pattern: **none of them had received any emails since Friday**.
 
-At first glance, this didn’t seem alarming — it *was* the weekend — but something felt off. I sent a test email to one of the accounts. It never appeared in the inbox.
+At first glance, this didn’t seem alarming (it *was* the weekend) but something felt off. I sent a test email to one of the accounts. It never appeared in the inbox.
 
 After searching Outlook, I discovered the message had arrived successfully, but it was sitting in the **Archive** folder, along with every other email received since Friday.
 
 At this point, it became clear that an inbox rule was involved. However, when I checked the Outlook *Rules and Alerts* interface, **no rules were visible**.
 
-After further research, I found multiple reports describing similar behaviour. That’s when I learned about a little-known — but highly effective — technique that allows attackers to **hide Outlook/Exchange inbox rules from the Rules GUI entirely**.
+After further research, I found multiple reports describing similar behaviour. That’s when I learned about a little-known but highly effective technique that allows attackers to **hide Outlook/Exchange inbox rules from the Rules GUI entirely**.
 
 In this post, I’ll walk through:
 
@@ -45,9 +45,9 @@ In this post, I’ll walk through:
   <figcaption>Hidden Rule Attack Steps</figcaption>
 </figure>
 
-In our environment, external email forwarding was blocked. Instead of forwarding messages, the attacker created a rule that silently moved emails out of sight — buying time before the user realised their account had been compromised.
+In our environment, external email forwarding was blocked. Instead of forwarding messages, the attacker created a rule that silently moved emails out of sight, buying time before the user realised their account had been compromised.
 
-These actions are well suited to scripting and automation—particularly the creation of the malicious rule and the subsequent steps to conceal it from Outlook clients.
+These actions are well suited to scripting and automation, particularly the creation of the malicious rule and the subsequent steps to conceal it from Outlook clients.
 
 For simplicity, we’ll assume the attacker has already **completed steps 1 and 2**:
 
@@ -58,7 +58,7 @@ For simplicity, we’ll assume the attacker has already **completed steps 1 and 
 
 ### Step 3: Create a Malicious Inbox Rule
 
-The attacker creates an inbox rule that forwards or moves emails — for example, to the attackers email.
+The attacker creates an inbox rule that forwards or moves emails, for example to the attacker’s own email address.
 
 <figure>
   <img 
@@ -273,7 +273,7 @@ As a result of this incident, we now:
 
 What began as a routine Monday quickly turned into a deep investigation, remediation effort, and a reminder that mailbox persistence techniques can be subtle yet highly effective.
 
-Stay vigilant — and don’t rely on the Rules GUI alone.
+Stay vigilant, and don’t rely on the Rules GUI alone.
 
 
 

@@ -7,8 +7,8 @@ permalink: /about/
 <div class="bio-section">
   <div class="bio-text">
     <h1>About Me</h1>
-    <p>I work in ICT with a broad technical skill set spanning operating systems, programming, automation, infrastructure, networking and security. I enjoy learning through hands-on experimentation, whether that's configuring systems, writing scripts, or working with small-scale hardware projects, always with an eye toward performance, reliability, and security.</p>
-    <p>Much of my experience comes from both professional work and practical exploration in my homelab, where I implement projects, refine workflows, and deepen my understanding of how infrastructure and networks interact. I approach technology with a mindset of continuous improvement and resilience.</p>
+    <p>I work in ICT and have picked up a broad set of skills across operating systems, programming, automation, networking, and security. I learn best by getting hands-on: building things, breaking them, and figuring out why.</p>
+    <p>A lot of what I know comes from building things in my homelab alongside day-to-day work. I like figuring out how infrastructure and networks actually behave, not just how they're supposed to.</p>
   </div>
   <img src="{{ '/assets/images/profile-pic.png' | relative_url }}" alt="Ritchie Caruso" class="profile-pic-static">
 </div>

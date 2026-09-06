@@ -7,7 +7,7 @@ thumbnail: /assets/images/ansible-git/banner.webp
 
 If you've been following this Ansible series, you've already automated [software installation](/2026/03/18/ansible-installs) and [SMB share mounting](/ansible-smb). Today we're covering something every developer needs sorted immediately after a fresh install: git configuration and SSH keys.
 
-Setting up git and generating SSH keys is quick to do manually — but when you factor in copying keys to GitHub, configuring your SSH config file, and getting your global git settings right, it adds up. This playbook handles all of it in one run.
+Setting up git and generating SSH keys is quick to do manually, but when you factor in copying keys to GitHub, configuring your SSH config file, and getting your global git settings right, it adds up. This playbook handles all of it in one run.
 
 <br>
 

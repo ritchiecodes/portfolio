@@ -7,7 +7,7 @@ thumbnail: /assets/images/ansible-smb/banner.webp
 
 In the [previous Ansible post](/2026/03/18/ansible-installs), we covered automating software installation on a fresh Linux system. Today we're tackling another time-consuming part of any reinstall: getting your network shares back up and running.
 
-Manually mounting SMB shares every time you rebuild a machine — or worse, having to remember the exact `mount` command syntax — is exactly the kind of repetitive task Ansible was made for. This playbook will install the necessary dependencies, store your credentials securely, create mount points, and configure shares to auto-mount on boot.
+Manually mounting SMB shares every time you rebuild a machine (or worse, having to remember the exact `mount` command syntax) is exactly the kind of repetitive task Ansible was made for. This playbook will install the necessary dependencies, store your credentials securely, create mount points, and configure shares to auto-mount on boot.
 
 <br>
 
@@ -23,7 +23,7 @@ This playbook assumes:
 
 ## Storing Credentials Securely
 
-Hardcoding credentials into a playbook is a bad idea — especially if you're committing your playbooks to version control. Instead, we'll create a credentials file with restricted permissions.
+Hardcoding credentials into a playbook is a bad idea, especially if you're committing your playbooks to version control. Instead, we'll create a credentials file with restricted permissions.
 
 ```yaml
 - name: Create SMB credentials file
@@ -133,7 +133,7 @@ smb_shares:
     path: /mnt/nas/documents
 ```
 
-Ansible will loop over all entries and handle each one — no need to duplicate tasks.
+Ansible will loop over all entries and handle each one, no need to duplicate tasks.
 
 <br>
 
@@ -151,4 +151,4 @@ After it completes, your shares will be mounted immediately and will reconnect a
 
 This is one of those setups that takes a frustrating amount of time to do manually but runs in under a minute once it's in a playbook. Combined with the software install playbook from the previous post, you're well on your way to a fully automated Linux setup that can be reproduced on any machine with a single command.
 
-In the next Ansible post, we'll look at automating git configuration and SSH key setup — so you're ready to push code the moment a fresh install is done.
+In the next Ansible post, we'll look at automating git configuration and SSH key setup, so you're ready to push code the moment a fresh install is done.

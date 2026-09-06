@@ -5,7 +5,7 @@ tags: [automation, python]
 thumbnail: /assets/images/account-automation/automation-with-python.webp
 ---
 
-Anyone who has ever had to manually create dozens—or hundreds—of accounts in a legacy system knows how painful the process can be:
+Anyone who has ever had to manually create dozens, or hundreds, of accounts in a legacy system knows how painful the process can be:
 
 * Open the application
 * Click the same fields
@@ -20,7 +20,7 @@ I wasn’t willing to spend hours every week performing repetitive clicks when a
 
 Enter **Python**.
 
-Python’s reputation for automation and data handling is well earned, and in this post I’ll walk through how to automate a UI-driven task—**account creation in software without API access**—using `pyautogui` and a few supporting libraries.
+Python’s reputation for automation and data handling is well earned, and in this post I’ll walk through how to automate a UI-driven task, **account creation in software without API access**, using `pyautogui` and a few supporting libraries.
 
 > ⚠️ **Important**
 > Only automate systems you are authorised to use in this way. Always follow company policies, vendor license agreements, and local laws.
@@ -29,7 +29,7 @@ Python’s reputation for automation and data handling is well earned, and in th
 
 ## Why UI Automation?
 
-UI automation is rarely the *ideal* solution—but sometimes it’s the **only** viable one.
+UI automation is rarely the *ideal* solution, but sometimes it’s the **only** viable one.
 
 Common scenarios include:
 
@@ -54,9 +54,9 @@ At a high level, the automation workflow looks like this:
 
 To achieve this, we’ll use:
 
-* **`pyautogui`** – Mouse and keyboard automation
-* **`pyperclip`** – Reliable clipboard interaction
-* **`pandas`** – Spreadsheet parsing
+* **`pyautogui`**: Mouse and keyboard automation
+* **`pyperclip`**: Reliable clipboard interaction
+* **`pandas`**: Spreadsheet parsing
 
 <br>
 
@@ -66,7 +66,7 @@ To achieve this, we’ll use:
 pip install pyautogui pyperclip pandas openpyxl
 ```
 
-> Note: You may need to grant accessibility or input permissions for automation to work—particularly on macOS. These examples were developed and tested on Windows.
+> Note: You may need to grant accessibility or input permissions for automation to work, particularly on macOS. These examples were developed and tested on Windows.
 
 <br>
 
@@ -166,7 +166,7 @@ UI automation can be fragile if not handled carefully. The following practices h
 
 ### Add Delays
 
-UI response times vary. Always assume the application is slower than your code—especially with web-based interfaces.
+UI response times vary. Always assume the application is slower than your code, especially with web-based interfaces.
 
 ### Use Failsafes
 
@@ -211,4 +211,4 @@ Tools like `pyautogui` allow engineers to:
 * Eliminate repetitive tasks
 * Extend automation into legacy or closed systems
 
-Used carefully, ethically, and as a last resort, UI automation can deliver significant productivity gains—even in environments that were never designed to be automated.
+Used carefully, ethically, and as a last resort, UI automation can deliver significant productivity gains, even in environments that were never designed to be automated.

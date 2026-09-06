@@ -5,7 +5,7 @@ tags: [networking, homelab, system-admin]
 thumbnail: /assets/images/home-network/banner.webp
 ---
 
-My home network had been running on consumer gear for years. It worked, but only just — dead spots in parts of the house, no real management visibility, and everything daisy-chained together in a way that made changes painful. When I started running more services on my homelab, it became clear the network needed a proper upgrade.
+My home network had been running on consumer gear for years. It worked, but only just: dead spots in parts of the house, no real management visibility, and everything daisy-chained together in a way that made changes painful. When I started running more services on my homelab, it became clear the network needed a proper upgrade.
 
 The plan: replace the existing gear with a **TP-Link Omada** setup, run ethernet to the rooms that needed it, and centralise everything through a managed switch.
 
@@ -19,7 +19,7 @@ The plan: replace the existing gear with a **TP-Link Omada** setup, run ethernet
 | Switch | TP-Link 16-port managed switch |
 | Access Points | <!-- fill in AP model --> |
 
-The Omada ecosystem is attractive for a home setup because everything is managed through a single controller — either a hardware controller, a software controller running on a server, or TP-Link's cloud option. I'm running the **software controller** on a VM in my Proxmox setup.
+The Omada ecosystem is attractive for a home setup because everything is managed through a single controller: either a hardware controller, a software controller running on a server, or TP-Link's cloud option. I'm running the **software controller** on a VM in my Proxmox setup.
 
 <br>
 
@@ -29,8 +29,8 @@ Before touching any hardware, I planned where ethernet needed to go:
 
 <!-- Fill in your cable run details -->
 
-* Living room — for the TV and homelab server
-* Office — primary workstation and homelab switch
+* Living room: for the TV and homelab server
+* Office: primary workstation and homelab switch
 * [Add other rooms]
 
 Running ethernet through the walls is the part most people put off, and honestly the most satisfying when it's done. A few things that made the job easier:
@@ -47,7 +47,7 @@ Running ethernet through the walls is the part most people put off, and honestly
 
 ### Router
 
-The Omada ER605 handles routing, firewall, and can terminate a VPN if needed. Setup is straightforward — WAN goes to the ISP modem/ONT, LAN ports connect to the switch.
+The Omada ER605 handles routing, firewall, and can terminate a VPN if needed. Setup is straightforward: WAN goes to the ISP modem/ONT, LAN ports connect to the switch.
 
 ### Switch
 
@@ -70,10 +70,10 @@ The Omada software controller runs as a service and is accessible through a brow
 
 Key things I configured:
 
-* **SSIDs** — separate networks for main devices and IoT
-* **VLANs** — isolating IoT traffic from the main network
-* **DHCP reservations** — fixed IPs for homelab machines and key devices
-* **QoS** — prioritising work traffic during the day
+* **SSIDs**: separate networks for main devices and IoT
+* **VLANs**: isolating IoT traffic from the main network
+* **DHCP reservations**: fixed IPs for homelab machines and key devices
+* **QoS**: prioritising work traffic during the day
 
 The controller also provides per-device traffic stats, which is useful for spotting anything behaving unexpectedly on the network.
 
